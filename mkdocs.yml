@@ -37,6 +37,9 @@ nav:
   - Administrator how-tos:
      - Set up GitHub actions: how-tos/set-up-github-actions.md
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
+  - Tutorials:
+     - Using local AI tools: tutorials/using-local-ai-tools.md
+     - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - FAQ: faq.md
 
 site_url: https://ai4curation.github.io/aidocs/
