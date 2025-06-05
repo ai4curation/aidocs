@@ -1,0 +1,43 @@
+site_name: "AI4Curators - AI Guides"
+site_description: Documentation for AI for curation
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - admonition
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  
+
+nav:
+  - Home: index.md
+  - Curator how-tos:
+     - Instruct the GitHub agent: how-tos/instruct-github-agent.md
+  - Administrator how-tos:
+     - Set up GitHub actions: how-tos/set-up-github-actions.md
+     - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
+  - FAQ: faq.md
+
+site_url: https://ai4curation.github.io/aidocs/
+repo_url: https://github.com/ai4curation/aidocs/
