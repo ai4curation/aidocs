@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://ai4curation.github.io/aidocs/</loc>
+         <lastmod>2025-06-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ai4curation.github.io/aidocs/how-tos/instruct-github-agent/</loc>
+         <lastmod>2025-06-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ai4curation.github.io/aidocs/how-tos/integrate-ai-into-your-kb/</loc>
+         <lastmod>2025-06-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ai4curation.github.io/aidocs/how-tos/set-up-github-actions/</loc>
+         <lastmod>2025-06-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ai4curation.github.io/aidocs/tutorials/ontology-editing-with-ai/</loc>
+         <lastmod>2025-06-05</lastmod>
+    </url>
+</urlset>

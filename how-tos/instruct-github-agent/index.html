@@ -1,0 +1,1252 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for AI for curation">
+      
+      
+      
+        <link rel="canonical" href="https://ai4curation.github.io/aidocs/how-tos/instruct-github-agent/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../set-up-github-actions/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Instruct the GitHub agent - AI4Curators - AI Guides</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-instructors-guide-github-agents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI4Curators - AI Guides" class="md-header__button md-logo" aria-label="AI4Curators - AI Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI4Curators - AI Guides
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Instruct the GitHub agent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ai4curation/aidocs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI4Curators - AI Guides" class="md-nav__button md-logo" aria-label="AI4Curators - AI Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI4Curators - AI Guides
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ai4curation/aidocs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Curator how-tos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Curator how-tos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Instruct the GitHub agent
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instruct the GitHub agent
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graphical-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graphical Overview
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-system-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI system instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-usable-by-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools usable by the AI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompting guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prompting guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start Simple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deep Research
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-pmids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing PMIDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complex-refactoring-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complex refactoring tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuning-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tuning the AI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#magic-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      Magic keywords
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#be-respectful-of-the-user-who-created-the-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Be respectful of the user who created the issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning More
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Learning More">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-experimentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local experimentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeouts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-out-of-credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running out of credits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Administrator how-tos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Administrator how-tos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../set-up-github-actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Set up GitHub actions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrate-ai-into-your-kb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integrate AI into your KB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/using-local-ai-tools.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using local AI tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ontology-editing-with-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ontology editing with AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graphical-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graphical Overview
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-system-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI system instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-usable-by-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools usable by the AI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompting guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prompting guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start Simple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deep Research
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-pmids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing PMIDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complex-refactoring-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complex refactoring tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuning-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tuning the AI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#magic-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      Magic keywords
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#be-respectful-of-the-user-who-created-the-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Be respectful of the user who created the issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning More
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Learning More">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-experimentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local experimentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeouts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-out-of-credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running out of credits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ai-instructors-guide-github-agents">AI Instructors Guide: GitHub Agents</h1>
+<p>This is a guide for instructing the AI agent that lives in GitHub repo. This assumes your AI controller has <a href="set-up-github-actios">set up GitHub actions</a> in your repo.</p>
+<h2 id="how-it-works">How it works</h2>
+<h3 id="graphical-overview">Graphical Overview</h3>
+<p><img alt="img" src="https://ai4curation.github.io/odk-ai/figures/intro.svg" /></p>
+<h2 id="how-to-use-it">How to use it</h2>
+<h3 id="invocation">Invocation</h3>
+<p>The AI agent is invoked by an exact string such as <code>@dragon-ai-agent
+please</code> (check your local repo documentation). Anything that follows as well as other content from the issue/PR is passed to the AI.</p>
+<p>The AI has tools to read the issue/PR, as well as follow up on any
+linked issues/PRs.</p>
+<p>Note: the string <code>please</code> has to follow exactly. This part is
+deterministic, it is not an AI that controls the invocation. The
+choice of "please" is not just about politeness, we need a special
+keyword to avoid accidental invocation.</p>
+<h3 id="authorization">Authorization</h3>
+<p>Note that the agent will <strong>NOT</strong> respond to you if you are not an authorized <em>controller</em>.</p>
+<p>To check if you are authorized, see the file 
+<code>~/.github/ai-controllers.json</code>. </p>
+<p>You can make a PR on this to add yourself (be sure to follow JSON syntax),
+but check with your repo maintainer first for local procedures.</p>
+<h3 id="ai-system-instructions">AI system instructions</h3>
+<p>See the file <code>~/CLAUDE.md</code> in the top level of the repo. Other AI
+applications may use different files -- for example, goose uses
+<code>~/.goosehints</code>, but these will typically be symlinked.</p>
+<p>The instructions are in natural language and should be equally
+readable by humans or AI.</p>
+<p>More advanced users should feel free to make PRs on this file</p>
+<h3 id="tools-usable-by-the-ai">Tools usable by the AI</h3>
+<p>Depending on what AI host runner is used, the configuration file that
+controls which agents are available may be in different places.</p>
+<ul>
+<li>For claude code, this will be in <code>.claude/settings.json</code></li>
+<li>For goose, this will be in <code>.config/goose/config.yaml</code></li>
+</ul>
+<h2 id="prompting-guide">Prompting guide</h2>
+<h3 id="start-simple">Start Simple</h3>
+<p>For a first task, find an issue that is very straightforward, where
+the user has done the bulk of the "thinking" work, and the issue is
+fairly rote and mechanical.</p>
+<p>Go to the issue you want resolved and make a new comment and say</p>
+<div class="highlight"><pre><span></span><code>@dragon-ai-agent please resolve this issue
+</code></pre></div>
+<p>You can also add your own commentary - for example, if the original
+issue isn't completely clear or is missing key information the AI is
+not likely to infer.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>@dragon-ai-agent please resolve this issue, making sure the term has a parent
+</code></pre></div>
+<h3 id="deep-research">Deep Research</h3>
+<p>You can always ask the AI to do a background research on an issue. We
+are exploring the best tools to use for Deep Research, in the interim,
+the AI has access to basic web search tools which are good enough for
+many purposes.</p>
+<p>One usage pattern is to find an issue that depends on a lot of cutting
+edge science and to ask the AI to do background reading on the subject
+(you can ask it to hold off on implementing anything)</p>
+<p>An example:</p>
+<div class="highlight"><pre><span></span><code>@dragon-ai-agent please help us resolve this issue, we are unsure how to proceed,
+please read the latest literature on the topic
+</code></pre></div>
+<h3 id="accessing-pmids">Accessing PMIDs</h3>
+<p>The AI should be able to download and read full text for a subset of
+PMIDs (including those on PMC). Currently we are exploring the best
+tools to use, so be aware there may be some temporary limitations,
+such as not being able to view images.</p>
+<p>THe prompt the AI receives should tell it to use PMIDs as provenance
+(e.g. in definitions, in synonyms), but we are still figuring the best
+way to prompt, and you might need to occasionally give more detailed
+instructions.</p>
+<h3 id="complex-refactoring-tasks">Complex refactoring tasks</h3>
+<p>The AI is capable of writing ad-hoc code to perform certain kinds of
+tasks. This is generally easier when the source of the ontology is in
+obo format. For some more complex tasks, the AI may not have been
+provided with the right tools or software libraries.</p>
+<p>Examples:</p>
+<ul>
+<li>https://github.com/obophenotype/uberon/issues/3548</li>
+</ul>
+<h3 id="tuning-the-ai">Tuning the AI</h3>
+<p>You can make PRs on the <code>CLAUDE.md</code> or equivalent to add new instructions.</p>
+<h3 id="magic-keywords">Magic keywords</h3>
+<p>If your repo admin has set up your agent to use an Claude code, then some keywords
+deterministically trigger more detailed chain of thought thinking:</p>
+<ul>
+<li>"think hard"</li>
+<li>"ultrathink"</li>
+</ul>
+<p>We are stil investigation equivalent behavior in other AI apps.</p>
+<p>See <a href="https://www.anthropic.com/engineering/claude-code-best-practices">this guide</a> for some tips on using Claude.</p>
+<p>Even if there are no deterministic triggers, in general, it can help
+to tell the AI to think longer or harder on tasks that require
+additional effort.</p>
+<h3 id="be-respectful-of-the-user-who-created-the-issue">Be respectful of the user who created the issue</h3>
+<p>Different issue trackers have different user communities - for some,
+requests come in entirely from the curator community, others may have
+broader users.</p>
+<p>While the core curator community who uses the issue tracker should be
+educated in how the tracker is used (including the use of AI), users
+from outside this community may not be aware - and some of these
+people may not like having their request seemingly handled by an AI,
+so use situational awareness in when to invoke AI.</p>
+<h2 id="learning-more">Learning More</h2>
+<h3 id="local-experimentation">Local experimentation</h3>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="timeouts">Timeouts</h3>
+<p>If you ask the AI to do a task that is long running, there is more
+chance that either the action will time out, or the running of the AI
+app within the action will hit a limit.</p>
+<p>If your repo is configured to use cborg.lbl.gov as a proxy, then a
+known issue is timeouts.</p>
+<p>Timeouts might not be obvious - by their nature, they time out before
+providing an update on the issue. The only way to debug is to go to
+the "actions" tab in GitHub and debug from there.</p>
+<p>If you have a task that is likely to be long running - for example, if
+you want the AI to updates 100s of terms - you might want to try
+asking the AI to make an initial PR after doing only a dozen or so,
+and then iterate.</p>
+<h3 id="debugging-actions">Debugging Actions</h3>
+<p>You can go to the "actions" tab in GitHub, and look for the job that
+was triggered by your invocation. Clicking on this will show you a
+full log. There may be a lot of information here - using ChatGPT can
+help you debug. Usually it helps to scroll to the end and see the most
+recent messages to have a clue about what went wrong.</p>
+<h3 id="running-out-of-credits">Running out of credits</h3>
+<p>Different repos may be configured in different ways for recharging
+credits. Typically things will be set up such that a proxy is used
+(e.g. cborg.lbl.gov) with an API key tied to a project code.</p>
+<p>In general you should ask the AI admin for your repo if you see
+messages that credit is too low.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
