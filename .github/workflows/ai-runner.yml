@@ -1,0 +1,176 @@
+name: Dragon AI Agent GitHub Mentions
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  pull_request:
+    types: [opened, edited]
+  pull_request_review_comment:
+    types: [created, edited]
+
+jobs:
+  check-mention:
+    runs-on: ubuntu-latest
+    outputs:
+      qualified_mention: ${{ steps.check.outputs.QUALIFIED_MENTION }}
+      item_type: ${{ steps.check.outputs.item_type }}
+      item_number: ${{ steps.check.outputs.item_number }}
+      prompt: ${{ steps.check.outputs.prompt }}
+      user: ${{ steps.check.outputs.user }}
+      controllers: ${{ steps.check.outputs.controllers }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Check for qualifying mention
+        id: check
+        run: |
+          echo "Starting check for qualifying mention..."
+          
+          # Load the allowed users from the configuration file
+          ALLOWED_USERS=$(cat .github/ai-controllers.json)
+          echo "Loaded authorized users: $ALLOWED_USERS"
+          
+          # Format controllers list for prompt - make sure jq is available
+          CONTROLLERS_LIST=$(echo $ALLOWED_USERS | jq -r 'map("@" + .) | join(", ")' || echo "@cmungall")
+          echo "Controllers list: $CONTROLLERS_LIST"
+          echo "controllers=$CONTROLLERS_LIST" >> $GITHUB_OUTPUT
+          
+          # Get PR or issue number
+          if [[ "${{ github.event_name }}" == *"issue"* ]]; then
+            ITEM_TYPE="issue"
+            ITEM_NUMBER="${{ github.event.issue.number }}"
+          else
+            ITEM_TYPE="pull_request"
+            ITEM_NUMBER="${{ github.event.pull_request.number }}"
+          fi
+          
+          echo "Item type: $ITEM_TYPE, Number: $ITEM_NUMBER"
+          
+          # For issue/PR creation/edit
+          if [ "${{ github.event_name }}" == "issues" ] || [ "${{ github.event_name }}" == "pull_request" ]; then
+            CONTENT="${{ github.event.issue.body || github.event.pull_request.body }}"
+            USER_LOGIN="${{ github.event.issue.user.login || github.event.pull_request.user.login }}"
+          else
+            # For comments
+            CONTENT="${{ github.event.comment.body }}"
+            USER_LOGIN="${{ github.event.comment.user.login }}"
+          fi
+          
+          echo "Content from $USER_LOGIN: ${CONTENT:0:100}..." # Only show first 100 chars for debugging
+          
+          # Check if user is in allowed list (using grep for bash)
+          if echo "$ALLOWED_USERS" | grep -q "\"$USER_LOGIN\"" && [[ "$CONTENT" == *"@dragon-ai-agent please"* ]]; then
+            echo "QUALIFIED_MENTION=true" >> $GITHUB_OUTPUT
+            echo "Found qualifying mention from authorized user: $USER_LOGIN"
+            
+            # Extract prompt (everything after @dragon-ai-agent please)
+            PROMPT=$(echo "$CONTENT" | grep -oP '@dragon-ai-agent please\s+\K.*' || echo "")
+            echo "Extracted prompt: ${PROMPT:0:100}..." # Only show first 100 chars for debugging
+          else
+            echo "QUALIFIED_MENTION=false" >> $GITHUB_OUTPUT
+            if ! echo "$ALLOWED_USERS" | grep -q "\"$USER_LOGIN\""; then
+              echo "User $USER_LOGIN is not an authorized controller"
+            elif [[ "$CONTENT" != *"@dragon-ai-agent please"* ]]; then
+              echo "Content does not contain '@dragon-ai-agent please'"
+            fi
+            echo "Not a qualifying mention, stopping workflow"
+            PROMPT=""
+          fi
+          
+          # Always save outputs, even if we're not proceeding
+          echo "item_type=$ITEM_TYPE" >> $GITHUB_OUTPUT
+          echo "item_number=$ITEM_NUMBER" >> $GITHUB_OUTPUT
+          echo "prompt=$PROMPT" >> $GITHUB_OUTPUT
+          echo "user=$USER_LOGIN" >> $GITHUB_OUTPUT
+
+  respond-to-mention:
+    needs: check-mention
+    if: needs.check-mention.outputs.qualified_mention == 'true'
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Dragon-AI Agent"
+          git config --global user.email "dragon-ai-agent[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+        
+      - name: Set up Anthropic API key
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.PAT_FOR_PR }}  # Using PAT instead of GITHUB_TOKEN
+        run: |
+          echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> $GITHUB_ENV
+          echo "GH_TOKEN=$GH_TOKEN" >> $GITHUB_ENV
+        
+      - name: Run Claude Code in headless mode
+        id: claude-response
+        run: |
+          # Build the prompt for Claude
+          PROMPT="You are @dragon-ai-agent. 
+          You're responding to a request from or relayed by @${{ needs.check-mention.outputs.user }} on GitHub ${{ needs.check-mention.outputs.item_type }} #${{ needs.check-mention.outputs.item_number }}.
+          You only respond to requests from the following authorized controllers: ${{ needs.check-mention.outputs.controllers }}.
+
+          You should use \`gh\` to communicate with the user via the GitHub issue/ticket.
+          If instructed to modify files, you should make changes on a branch and submit a PR, communicating clearly and in
+          detail on the PR.
+
+          Always end by informing the user what you did (or were not able to do) with a message, either on an issue or a PR,
+          as appropriate.
+          
+          The request is: ${{ needs.check-mention.outputs.prompt }}"
+
+          
+          # Run Claude Code with minimal prompt - it can read the GitHub issue/PR directly
+          RESPONSE=$(claude -p "$PROMPT" \
+            --output-format stream-json \
+            --allowedTools "Bash(git:*)" "Bash(gh:*)" "FileSystem(*)" \
+            --verbose)
+            
+          echo "$RESPONSE" > claude_response.txt
+        
+      - name: Post response as comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const responseText = fs.readFileSync('claude_response.txt', 'utf8');
+            
+            const formattedResponse = `## Dragon AI Agent Response
+            
+            *This response was generated for @${{ needs.check-mention.outputs.user }}*
+            
+            \`\`\`json
+            ${responseText}
+            \`\`\`
+            `;
+            
+            const itemType = '${{ needs.check-mention.outputs.item_type }}';
+            const itemNumber = parseInt('${{ needs.check-mention.outputs.item_number }}');
+            
+            // GitHub uses the same comment API for both issues and PRs
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: itemNumber,
+              body: formattedResponse
+            });
