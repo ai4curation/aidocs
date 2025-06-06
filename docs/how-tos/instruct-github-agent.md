@@ -1,6 +1,6 @@
 # AI Instructors Guide: GitHub Agents
 
-This is a guide for instructing the AI agent that lives in GitHub repo. This assumes your AI controller has [set up GitHub actions](set-up-github-actios) in your repo.
+This is a guide for instructing the [AI agent](glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](glossary.md#github-actions)](set-up-github-actions) in your repo.
 
 ## How it works
 
@@ -36,7 +36,7 @@ but check with your repo maintainer first for local procedures.
 ### AI system instructions
 
 See the file `~/CLAUDE.md` in the top level of the repo. Other AI
-applications may use different files -- for example, goose uses
+applications may use different files -- for example, [goose](glossary.md#goose) uses
 `~/.goosehints`, but these will typically be symlinked.
 
 The instructions are in natural language and should be equally
@@ -89,14 +89,14 @@ An example:
     please read the latest literature on the topic
 
 
-### Accessing PMIDs
+### Accessing [PMIDs](glossary.md#pmid-pubmed-id)
 
 The AI should be able to download and read full text for a subset of
 PMIDs (including those on PMC). Currently we are exploring the best
 tools to use, so be aware there may be some temporary limitations,
 such as not being able to view images.
 
-THe prompt the AI receives should tell it to use PMIDs as provenance
+The prompt the AI receives should tell it to use PMIDs as provenance
 (e.g. in definitions, in synonyms), but we are still figuring the best
 way to prompt, and you might need to occasionally give more detailed
 instructions.
@@ -104,8 +104,8 @@ instructions.
 ### Complex refactoring tasks
 
 The AI is capable of writing ad-hoc code to perform certain kinds of
-tasks. This is generally easier when the source of the ontology is in
-obo format. For some more complex tasks, the AI may not have been
+tasks. This is generally easier when the source of the [ontology](glossary.md#ontology) is in
+[obo format](glossary.md#obo-format). For some more complex tasks, the AI may not have been
 provided with the right tools or software libraries.
 
 Examples:
@@ -118,13 +118,13 @@ You can make PRs on the `CLAUDE.md` or equivalent to add new instructions.
 
 ### Magic keywords
 
-If your repo admin has set up your agent to use an Claude code, then some keywords
+If your repo admin has set up your agent to use a Claude code, then some keywords
 deterministically trigger more detailed chain of thought thinking:
 
 - "think hard"
 - "ultrathink"
 
-We are stil investigation equivalent behavior in other AI apps.
+We are still investigating equivalent behavior in other AI apps.
 
 See [this guide](https://www.anthropic.com/engineering/claude-code-best-practices) for some tips on using Claude.
 
@@ -164,7 +164,7 @@ providing an update on the issue. The only way to debug is to go to
 the "actions" tab in GitHub and debug from there.
 
 If you have a task that is likely to be long running - for example, if
-you want the AI to updates 100s of terms - you might want to try
+you want the AI to update 100s of terms - you might want to try
 asking the AI to make an initial PR after doing only a dozen or so,
 and then iterate.
 
