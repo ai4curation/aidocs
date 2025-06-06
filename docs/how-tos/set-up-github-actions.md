@@ -94,7 +94,7 @@ The key names will correspond to what you have in the action.yml above
 
 ## Configure the agent, including default MCPs
 
-Create a folder `.config/goose` with a file `config.yaml`.
+Create a folder `.config/[goose](glossary.md#goose)` with a file `config.yaml`.
 
 Examples:
 
@@ -105,7 +105,7 @@ Here is an example:
 ```yaml
 OPENAI_HOST: https://api.cborg.lbl.gov
 OPENAI_BASE_PATH: v1/chat/completions
-GOOSE_MODEL: anthropic/claude-sonnet
+GOOSE_MODEL: anthropic/[claude-sonnet](glossary.md#claude)
 GOOSE_PROVIDER: openai
 extensions:
   developer:
@@ -160,7 +160,7 @@ extensions:
     type: stdio
 ```
 
-The `extensions` section is the default MCP plugins. 
+The `extensions` section defines the default MCP plugins.
 
 This setup is configured to use Anthropic claude-sonnet via a LiteLLM proxy (CBORG):
 
@@ -171,15 +171,15 @@ GOOSE_MODEL: anthropic/claude-sonnet
 GOOSE_PROVIDER: openai
 ```
 
-You can use a similar setup for your own LiteLLM proxy if you have one. Note if you find this complex, please upvote [this issue](https://github.com/block/goose/issues/2507).
+You can use a similar setup for your own LiteLLM proxy if you have one. Note: if you find this complex, please upvote [this issue](https://github.com/block/goose/issues/2507).
 
-Things are easier if you just want to talk straight to a provider like Anthropic, no proxy, all you need is `GOOSE_MODEL`. But note this likely means you are using a person API key. Be aware that agentic AI usage can be costly.
+Things are easier if you just want to talk straight to a provider like Anthropic, no proxy, all you need is `GOOSE_MODEL`. But note that this likely means you are using a personal API key. Be aware that agentic AI usage can be costly.
 
 ## Set up .goosehints
 
 For many of my repos, I have a `CLAUDE.md` and I symlink `.goosehints` to that, because I am too lazy to write different instructions for different agents. In practice it might be better to tune instructions.
 
-What you put in there depends on your own use case. Do careful evals if you can't, but otherwise do vibe tests and iterate.
+What you put in there depends on your own use case. Do careful evaluations if you can't, but otherwise do vibe tests and iterate.
 
 Some examples here:
 
