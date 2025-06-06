@@ -55,7 +55,7 @@ add_link_if_not_present "docs/index.md" "Knowledge Base (KB)" "knowledge bases" 
 
 # GitHub - external link
 if ! grep -q "\[GitHub\](https://github.com)" "docs/index.md"; then
-  sed -i.bak "s/GitHub repos/\[GitHub\](https:\/\/github.com) repos/1" "docs/index.md" && rm "docs/index.md.bak"
+  tmpfile=$(mktemp) && sed "s/GitHub repos/\[GitHub\](https:\/\/github.com) repos/1" "docs/index.md" > "$tmpfile" && mv "$tmpfile" "docs/index.md"
   echo "Linked 'GitHub' to external site in docs/index.md"
 fi
 
