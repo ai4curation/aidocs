@@ -74,7 +74,7 @@ You can either install directly from this link:
  
 ## Try it out
 
-You can ask to create an ontology, and add axioms to an ontology. This video walks you through the process end-to-end. We will outline the steps below
+You can ask to create an ontology, and add axioms to an ontology. We will outline the steps below. You can also watch this video, which shows an example session.
 
 <iframe 
   width="500" 
@@ -86,5 +86,21 @@ You can ask to create an ontology, and add axioms to an ontology. This video wal
   allowfullscreen>
 </iframe>
 
+## Clone the demo repo
 
+Ask goose to clone [ai4curation/ai-ontology-tutorial](https://github.com/ai4curation/ai-ontology-tutorial). If you have a favorite location on your disk for checked out repos, you can instruct it to place it there.
+
+Or if you like, you can clone the repo using your favorite git client, e.g. Github Desktop.
+
+## Navigate to the repo
+
+In the top of the window for Goose there is a file naviagtor, you can use this to navigate to the repo in which you checked out the demo repo
+
+## Open the ontology in Protege
+
+The demo repo contains one OWL file, `anatomy.ofn`. Open this with Protege. You should see a (highly incomplete!) anatomy ontology, with terms for `digit` and `limb segment`
+
+## Ask goose to summarize the content of the ontology
+
+## TODO
  
