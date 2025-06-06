@@ -24,7 +24,9 @@ Go to the [install page](https://block.github.io/goose/docs/getting-started/inst
 
 ## Set up your [LLM](glossary.md#large-language-model-llm)
 
-Select settings/advanced, and select a Model. We recommend Anthropic/Claude Sonnet. You will need an [API key](glossary.md#api-key). We recommend speaking to your supervisor about getting an API key that is charged to a project you work on.
+Select settings/advanced, and select a Model. We recommend Anthropic/Claude Sonnet; you can try other models, but this tutorial has not been fully tested with other models.
+
+You will need an API key. We recommend speaking to your supervisor about getting an API key that is charged to a project you work on.
 
 ## Try it out
 
@@ -100,7 +102,23 @@ In the top of the window for Goose there is a file navigator, you can use this t
 
 The demo repo contains one OWL file, `anatomy.ofn`. Open this with Protege. You should see a (highly incomplete!) anatomy ontology, with terms for `digit` and `limb segment`
 
-## Ask goose to summarize the content of the ontology
+## Ask goose to query the ontology
 
-## TODO
+Try asking questions like `what are all the subclass axioms in the ontology`?
+
+(remember this is a small test ontology and we don't expect many)
+
+## Adding terms
+
+Now try asking for multiple terms to be added in batch:
+
+`Add terms for fingers, toes, hands, and feet, ensuring part-of relationships between them`
+
+You should be able to see the AI working
+
+## Sync Protege
+
+Switch to your Protege window. Protege will inform you that the file has changed, and ask if you want to see the new content. Say yes.
+
+The Protege screen should show the changes having been made.
  
