@@ -1,32 +1,33 @@
 # Using local AI tools
 
 This tutorial walks through how to use AI tools locally. This is aimed at mostly non-technical editors of
-[OBO](glossary.md#obo-format) ontologies that have adopted standardized ODK workflows. There are some technical steps required but these should be straightforward. This will work best with a Mac or Linux.
+[OBO](../glossary.md#obo-format) ontologies that have adopted standardized ODK workflows. There are some technical steps required but these should be straightforward. This will work best with a Mac or Linux.
 
 ## Background
 
 Most people have by now used web-based chat interfaces such as ChatGPT, or more powerful deep research models (o3, Perplexity Deep Research). These can now take advantage of information online as well as what is already "known" by the model. However, they can't interface with files and tools that you might have locally, e.g.
 
-- your local copy of the [ontology](glossary.md#ontology) edit file, checked out from [GitHub](https://github.com)
+- your local copy of the [ontology](../glossary.md#ontology) edit file, checked out from [GitHub](https://github.com)
 - [Protege](https://protege.stanford.edu/)
 - Reasoners
 - Validation/QC workflows
 
-[Agentic AI](glossary.md#ai-agent) is a paradigm where an AI application can make use of *tools* to achieve some objective. For ontology editing, this might be tools to edit the ontology or run a reasoner or workflow. These tools could include command line tools (e.g what you have available via ODK), or tools made available via the [Model Context Protocol](glossary.md#model-context-protocol-mcp)
+[Agentic AI](../glossary.md#ai-agent) is a paradigm where an AI application can make use of *tools* to achieve some objective. For ontology editing, this might be tools to edit the ontology or run a reasoner or workflow. These tools could include command line tools (e.g what you have available via ODK), or tools made available via the [Model Context Protocol](../glossary.md#model-context-protocol-mcp)
 
 There are a growing number of general-purpose applications that allow for easy plug and play of different tools. Many of these are aimed at developers, and hook into existing Integrated Development Environments (IDEs). These are not ideal for non-technical users.
 
-Two of the main easy-to-use Desktop applications are **[Claude](glossary.md#claude) Desktop** (not to be confused with Claude Code, or the web interface to Claude) and **Goose**. We focus here on [Goose](glossary.md#goose), as it allows for easy configurability
+Two of the main easy-to-use Desktop applications are **[Claude](../glossary.md#claude) Desktop** (not to be confused with Claude Code, or the web interface to Claude) and **Goose**. We focus here on [Goose](../glossary.md#goose), as it allows for easy configurability
 
 ## Install Goose
 
 Go to the [install page](https://block.github.io/goose/docs/getting-started/installation/) for Goose. Choose the Desktop app (more ambitious or technical users may want to also install the CLI app)
 
-## Set up your [LLM](glossary.md#large-language-model-llm)
+## Set up your [LLM](../glossary.md#large-language-model-llm)
 
 Select settings/advanced, and select a Model. We recommend Anthropic/Claude Sonnet; you can try other models, but this tutorial has not been fully tested with other models.
 
 You will need an API key. We recommend speaking to your supervisor about getting an API key that is charged to a project you work on.
+
 
 ## Try it out
 
@@ -121,4 +122,24 @@ You should be able to see the AI working
 Switch to your Protege window. Protege will inform you that the file has changed, and ask if you want to see the new content. Say yes.
 
 The Protege screen should show the changes having been made.
+
+## Adding more complex axioms
+
+Now try asking:
+
+`Add an axiom stating that hands have 5 fingers`
+
+This should end up putting a cardinality axiom into the ontology. It may do this by using an inverse expression, you can ask it to name the inverse property instead (see video).
+
+## Other experiments
+
+I recommend trying experiments on this test repo. Also try experiments like having goose write code that parses the ontology and summarizes the content.
+
+## Putting this into practice
+
+- if you want to start using this with an existing OWL ontology like CL, you need to have `robot` on your path, so that the ontology can be normalized prior to commits
+- if you are using obo format as source, it's a slightly different workflow, see the odk-ai repo for details
+- if your ontology is set up to use [AI agents triggered by github actions](../how-tos/set-up-github-actions.md), then you don't actually need to run any AI tools locally. However, I strongly recommend learning how to do this, as this will empower you to do many more things than are possible with the GitHub agent.
+
+
  

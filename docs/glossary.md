@@ -1,25 +1,49 @@
 # Glossary
 
 ## AI Agent
-A software program that uses artificial intelligence to perform tasks autonomously or semi-autonomously. In the context of this documentation, it often refers to AI assistants integrated into platforms like GitHub to help with development or curation tasks.
+
+An agent is a program that allows AI models to call [tools](#tool) to achieve some objective. 
+
+## CBORG
+
+An AI proxy used by members of Berkeley Lab. CBORG uses [LiteLLM](#litellm) to proxy calls to models.
 
 ## Claude
-A family of large language models (LLMs) developed by Anthropic, known for their capabilities in natural language processing and generation.
+
+A LLM from Anthropic. 
+
+## Claude Code
+
+An [agentic coding tool](#agentic-coding-tool) that lives in a command line terminal. 
+
+The main purpose of Claude Code is to enable developers to interact with and modify code using natural language commands. However, it can also be used to edit and maintain other content.
+
+## Claude Desktop
+
+An agentic desktop application and host environment that allows you to interact with an AI model (Claude) while also accessing local files, running local code, or using [MCPs](#model-context-protocol-mcp)
 
 ## GitHub Actions
 An automation platform provided by GitHub that allows users to automate software workflows, including building, testing, and deploying code directly from their repositories.
 
 ## Goose
-An AI application and host environment that facilitates the configuration and use of Model Context Protocols (MCPs). It supports various AI models and can be used as a desktop or command-line application.
+
+An AI application and host environment that that allows you to interact with an AI model while also accessing local files, running local code, or using [MCPs](#model-context-protocol-mcp)
+
+Goose is actually two separate programs
+
+* A Desktop app (recommended for non-technical tasks)
+* A Terminal / Command Line app, similar to Claude Code.
 
 ## OBO Format
 A standardized file format used for creating and exchanging ontologies, particularly prevalent in the biomedical and life sciences domains. For more details, see the [OBO Flat File Format Specification](http://owlcollab.github.io/oboformat/doc/GO.format.obo-1_4.html).
 
 ## Ontology
-A formal, explicit specification of a shared conceptualization. In practice, it's a structured way of representing knowledge about a specific domain, including concepts, their properties, and the relationships between them.
+A collection of concepts that represent some domain, along with the relationships between them.
 
 ## PMID (PubMed ID)
 A unique numerical identifier assigned to every record in PubMed, the comprehensive database of biomedical literature.
+
+PMIDs are usually written as CURIEs, e.g. PMID:123456
 
 ## API Key
 A unique code or token that is passed to an Application Programming Interface (API) to authenticate the calling application or user. API keys are used to control access to the API, track usage, and manage permissions.
@@ -36,8 +60,20 @@ A lightweight library that provides a unified interface for interacting with var
 ## Model Context Protocol (MCP)
 A specification or standard that defines how AI models and external tools or services should communicate and exchange contextual information. MCP enables AI agents to effectively utilize a diverse set of capabilities by providing a common interface for tool interaction.
 
+The best way to understand the concept of MCPs is to try them out - the Goose desktop app makes this easy.
+
 ## ODK (Ontology Development Kit)
 A suite of tools, best practices, and standardized workflows for creating, maintaining, and quality control for ontologies, particularly those in the OBO (Open Biomedical Ontologies) ecosystem. More information can be found at the [ODK GitHub repository](https://incatools.github.io/ontology-development-kit/).
 
 ## O3 Guidelines
-A set of principles and best practices related to ontology and data management. The specifics can vary, but they generally promote interoperability, consistency, and quality in knowledge representation. Users encountering this term are encouraged to search for specific "O3 Guidelines" relevant to the particular project or community context mentioned.
+The Open Data, Open Code, Open Infrastructure (O3) Guidelines are an actionable set of recommendations centered around management of content (such as ontology or knowledge base content) as interpretable files managed in GitHub.
+
+The O3 guidelines work particularly well for AI coding agents, because they are easily viewed and manipulated by the AI using standard filesystem based tools.
+
+See this figure
+
+![img](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41597-024-03406-w/MediaObjects/41597_2024_3406_Fig1_HTML.png)
+
+from [Hoyt et al](https://www.nature.com/articles/s41597-024-03406-w).
+
+Here the community can be conceived of as containing both humans and AI agents.

@@ -2,6 +2,7 @@ site_name: "AI4Curators - AI Guides"
 site_description: Documentation for AI for curation
 theme:
   name: material
+  custom_dir: docs/overrides  # This tells Material to look in docs/overrides/
   palette:
     primary: indigo
     accent: indigo
@@ -12,7 +13,10 @@ theme:
     - navigation.indexes
     - content.code.copy
 
+extra_css:
+  - stylesheets/extra.css
 markdown_extensions:
+  - meta
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
@@ -39,7 +43,14 @@ nav:
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
   - Tutorials:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
+  - Reference:
+     - Client apps: reference/client-apps.md
+     - Clients:
+        - Claude Desktop: reference/clients/claude-desktop.md
+        - Claude Code: reference/clients/claude-code.md
+        - Goose: reference/clients/goose.md
   - FAQ: faq.md
+  - Glossary: glossary.md
 
 site_url: https://ai4curation.github.io/aidocs/
 repo_url: https://github.com/ai4curation/aidocs/

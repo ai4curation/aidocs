@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% macro star_rating(value, max_stars=5) %}
+  <span class="star-rating">
+    {% for i in range(1, max_stars + 1) %}
+      {% if i <= value %}★{% else %}☆{% endif %}
+    {% endfor %}
+  </span>
+  ({{ value }}/{{ max_stars }})
+{% endmacro %}
+
+{% block content %}
+  {% if page.meta.title %}
+    <div class="metadata-info">
+      <h2>
+        {% if page.meta.logo %}<img src="{{ page.meta.logo }}" alt="{{ page.meta.title }} logo">{% endif %}
+        {{ page.meta.title }}
+      </h2>
+      <a href="{{ page.meta.url }}">Download</a>
+      <p>Models: {{ page.meta.models }}</p>
+      <p>UI: {{ page.meta.ui_type }}</p>
+      {% if page.meta.ease_of_use_for_non_technical %}
+        <p>Ease of use: {{ star_rating(page.meta.ease_of_use_for_non_technical) }}</p>
+      {% endif %}
+      {% if page.meta.documentation_quality %}
+        <p>Documentation: {{ star_rating(page.meta.documentation_quality) }}</p>
+      {% endif %}
+      {% if page.meta.reliability %}
+        <p>Reliability: {{ star_rating(page.meta.reliability) }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

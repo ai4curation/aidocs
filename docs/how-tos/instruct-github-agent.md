@@ -1,6 +1,6 @@
 # AI Instructors Guide: GitHub Agents
 
-This is a guide for instructing the [AI agent](glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](glossary.md#github-actions)](set-up-github-actions) in your repo.
+This is a guide for instructing the [AI agent](../glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](../glossary.md#github-actions)](set-up-github-actions) in your repo.
 
 ## How it works
 
@@ -36,7 +36,7 @@ but check with your repo maintainer first for local procedures.
 ### AI system instructions
 
 See the file `~/CLAUDE.md` in the top level of the repo. Other AI
-applications may use different files -- for example, [goose](glossary.md#goose) uses
+applications may use different files -- for example, [goose](../glossary.md#goose) uses
 `~/.goosehints`, but these will typically be symlinked.
 
 The instructions are in natural language and should be equally
@@ -89,7 +89,7 @@ An example:
     please read the latest literature on the topic
 
 
-### Accessing [PMIDs](glossary.md#pmid-pubmed-id)
+### Accessing [PMIDs](../glossary.md#pmid-pubmed-id)
 
 The AI should be able to download and read full text for a subset of
 PMIDs (including those on PMC). Currently we are exploring the best
@@ -104,8 +104,8 @@ instructions.
 ### Complex refactoring tasks
 
 The AI is capable of writing ad-hoc code to perform certain kinds of
-tasks. This is generally easier when the source of the [ontology](glossary.md#ontology) is in
-[obo format](glossary.md#obo-format). For some more complex tasks, the AI may not have been
+tasks. This is generally easier when the source of the [ontology](../glossary.md#ontology) is in
+[obo format](../glossary.md#obo-format). For some more complex tasks, the AI may not have been
 provided with the right tools or software libraries.
 
 Examples:

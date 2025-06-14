@@ -94,7 +94,7 @@ The key names will correspond to what you have in the action.yml above
 
 ## Configure the agent, including default MCPs
 
-Create a folder `.config/[goose](glossary.md#goose)` with a file `config.yaml`.
+Create a folder `.config/[goose](../glossary.md#goose)` with a file `config.yaml`.
 
 Examples:
 
@@ -105,7 +105,7 @@ Here is an example:
 ```yaml
 OPENAI_HOST: https://api.cborg.lbl.gov
 OPENAI_BASE_PATH: v1/chat/completions
-GOOSE_MODEL: anthropic/[claude-sonnet](glossary.md#claude)
+GOOSE_MODEL: anthropic/[claude-sonnet](../glossary.md#claude)
 GOOSE_PROVIDER: openai
 extensions:
   developer:
