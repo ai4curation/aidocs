@@ -38,6 +38,7 @@ For more substantial changes, you can work locally:
 - **Include examples** and step-by-step instructions
 - **Keep content current** with the latest AI tools and techniques
 - **Use clear, concise language** suitable for both technical and non-technical users
+- **Include URLs** when relevant
 
 ## File Structure
 
