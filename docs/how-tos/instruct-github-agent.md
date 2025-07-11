@@ -144,6 +144,16 @@ from outside this community may not be aware - and some of these
 people may not like having their request seemingly handled by an AI,
 so use situational awareness in when to invoke AI.
 
+## NEW: Invocation via GitHub copilot
+
+Some repos now have been set up configured to use GitHub copilot.
+
+You can now assign an issue OR PR to copilot. Assigning an issue will create a PR. Assigning a PR will trigger a review
+
+see <https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/using-copilot-to-work-on-an-issue>
+
+Note: requires GitHub Pro (free for educational users)
+
 ## Learning More
 
 ### Local experimentation
