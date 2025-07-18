@@ -152,7 +152,26 @@ You can now assign an issue OR PR to Copilot. Assigning an issue will create a P
 
 see <https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/using-copilot-to-work-on-an-issue>
 
-Note: requires GitHub Pro (free for educational users)
+Note: requires GitHub Pro (free for educational users); see next subsection.
+
+### GitHub Copilot Pro coupon through GitHub Education
+
+This section covers getting Education Benefits through GitHub Education for academic users. One of the benefits is a coupon for Copilot Pro.
+
+- Prerequisites:
+  - Your institutional email address needs to be a "verified" email address (https://github.com/settings/emails)
+  - You _may_ need a photo of your institutional ID
+  - You _may_ need to allow location services in your browser for verification
+- Go to: https://github.com/settings/education/benefits
+- Click "Start an application"
+- Select "Teacher"
+- Select your institution from the autocomplete menu
+  - Depending on the requirements for your institution, you may get different instructions for the next steps
+- Select your email address from the dropdown
+- Upload a photo of your institutional ID, if necessary,
+- Click "Submit Application"
+
+Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." (Note: it may take up to 72 hours for the information to propagate through GitHub's system.)
 
 ## Learning More
 
