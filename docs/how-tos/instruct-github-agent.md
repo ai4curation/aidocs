@@ -171,7 +171,7 @@ This section covers getting Education Benefits through GitHub Education for acad
 - Upload a photo of your institutional ID, if necessary,
 - Click "Submit Application"
 
-Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." (Note: it may take up to 72 hours for the information to propagate through GitHub's system.)
+Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." *Important note*: it may take up to 72 hours for the information to propagate through GitHub's system; until your application has been fully approved (i.e. the apprival bar needs to be at 100%), clicking the link will take you to the standard for-pay page.
 
 ## Learning More
 
