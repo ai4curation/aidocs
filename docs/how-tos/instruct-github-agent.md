@@ -144,6 +144,35 @@ from outside this community may not be aware - and some of these
 people may not like having their request seemingly handled by an AI,
 so use situational awareness in when to invoke AI.
 
+## NEW: Invocation via GitHub Copilot
+
+Some repos now have been set up configured to use GitHub Copilot.
+
+You can now assign an issue OR PR to Copilot. Assigning an issue will create a PR. Assigning a PR will trigger a review
+
+see <https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/using-copilot-to-work-on-an-issue>
+
+Note: requires GitHub Pro (free for educational users); see next subsection.
+
+### GitHub Copilot Pro coupon through GitHub Education
+
+This section covers getting Education Benefits through GitHub Education for academic users. One of the benefits is a coupon for Copilot Pro for two years (as of this writing).
+
+- Prerequisites:
+  - Your institutional email address needs to be a "verified" email address (https://github.com/settings/emails)
+  - You _may_ need a photo of your institutional ID
+  - You _may_ need to allow location services in your browser for verification
+- Go to: https://github.com/settings/education/benefits
+- Click "Start an application"
+- Select "Teacher"
+- Select your institution from the autocomplete menu
+  - Depending on the requirements for your institution, you may get different instructions for the next steps
+- Select your email address from the dropdown
+- Upload a photo of your institutional ID, if necessary,
+- Click "Submit Application"
+
+Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." *Important note*: it may take up to 72 hours for the information to propagate through GitHub's system; until your application has been fully approved (i.e. the apprival bar needs to be at 100% and you have gotten an email welcoming you), clicking the link will take you to the standard for-pay page. Be patient in this step.
+
 ## Learning More
 
 ### Local experimentation
