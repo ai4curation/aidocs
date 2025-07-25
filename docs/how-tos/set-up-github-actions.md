@@ -184,3 +184,12 @@ What you put in there depends on your own use case. Do careful evaluations if yo
 Some examples here:
 
 - [CLAUDE.md on Mondo](https://github.com/monarch-initiative/mondo/blob/master/CLAUDE.md)
+
+
+## NEW: enable GitHub copilot to do reviews and PRs
+
+Change two files, as documented here:
+
+https://github.com/obophenotype/uberon/pull/3580
+
+
