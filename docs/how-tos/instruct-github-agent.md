@@ -161,7 +161,7 @@ This section covers getting Education Benefits through GitHub Education for acad
 - Prerequisites:
   - Your institutional email address needs to be a "verified" email address (https://github.com/settings/emails)
   - You _may_ need a photo of your institutional ID
-  - You _may_ need to allow location services in your browser for verification
+  - You _may_ need to allow location services in your browser for verification (in Chrome, be sure to check the 'blocked' list for wayward GitHub blocking)
 - Go to: https://github.com/settings/education/benefits
 - Click "Start an application"
 - Select "Teacher"
