@@ -39,7 +39,7 @@ For more substantial changes, you can work locally:
 - **Keep content current** with the latest AI tools and techniques
 - **Use clear, concise language** suitable for both technical and non-technical users
 - **Include URLs** when relevant
-
+- **Include URLs** when relevant
 ## File Structure
 
 - `docs/` - Main documentation content
