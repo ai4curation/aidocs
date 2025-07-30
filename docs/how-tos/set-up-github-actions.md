@@ -7,6 +7,18 @@ It also assumes you have some familiarity with GitHub actions, and
 have basic QC actions set up. If you are managing an ODK-compliant
 repo this is certainly the case.
 
+## Quick setup with Claude Code
+
+If you have [Claude Code](../reference/clients/claude-code.md) installed, you can use the `install-github-app` command for a streamlined setup process. This command will authenticate you and create a pull request with GitHub Actions configuration:
+
+```bash
+claude install-github-app
+```
+
+This approach automatically handles authentication and creates the necessary GitHub Actions workflow for you. For more details, see the [Claude Code GitHub Actions documentation](https://docs.anthropic.com/en/docs/claude-code/github-actions).
+
+If you prefer manual setup or need more customization, continue with the manual configuration steps below.
+
 ## Set up `ai.yml`
 
 This might look something like this:
