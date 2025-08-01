@@ -18,6 +18,11 @@ There are a growing number of general-purpose applications that allow for easy p
 
 Two of the main easy-to-use Desktop applications are **[Claude](../glossary.md#claude) Desktop** (not to be confused with Claude Code, or the web interface to Claude) and **Goose**. We focus here on [Goose](../glossary.md#goose), as it allows for easy configurability
 
+### OBO Academy Seminar
+Chris Mungall presented "Using AI Coding Apps for Ontology Development" at [OBO Academy](https://oboacademy.github.io/obook/courses/monarch-obo-training/) on June 10, 2025. You can watch the seminar here: 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4nyeGFACPKI?si=Y0mZ3ct0ImpQxA2-" title="Using AI Coding Apps for Ontology Development - OBO Academy Seminar by Chris Mungall" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
 ## Install Goose
 
 Go to the [install page](https://block.github.io/goose/docs/getting-started/installation/) for Goose. Choose the Desktop app (more ambitious or technical users may want to also install the CLI app)
