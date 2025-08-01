@@ -48,6 +48,8 @@ nav:
      - Clients:
         - Claude Desktop: reference/clients/claude-desktop.md
         - Claude Code: reference/clients/claude-code.md
+        - Codex CLI: reference/clients/codex-cli.md
+        - Gemini CLI: reference/clients/gemini-cli.md
         - Goose: reference/clients/goose.md
   - FAQ: faq.md
   - Glossary: glossary.md
