@@ -20,7 +20,7 @@ Two of the main easy-to-use Desktop applications are **[Claude](../glossary.md#c
 
 ### OBO Academy Seminar
 Chris Mungall presented "Using AI Coding Apps for Ontology Development" at [OBO Academy](https://oboacademy.github.io/obook/courses/monarch-obo-training/) on June 10, 2025. You can watch the seminar here: 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4nyeGFACPKI?si=Y0mZ3ct0ImpQxA2-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4nyeGFACPKI?si=Y0mZ3ct0ImpQxA2-" title="Using AI Coding Apps for Ontology Development - OBO Academy Seminar by Chris Mungall" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## Install Goose
