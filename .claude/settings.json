@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(ls:*)",
+      "Bash(uv add:*)",
+      "Bash(uv add:*)",
+      "Bash(python:*)",
+      "Bash(source:*)",
+      "Bash(mkdir:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue:*)",
+      "Bash(mv:*)",
+      "Bash(uv run mkdocs:*)",
+      "Bash(make:*)",
+      "Bash(uv run:*)",
+      "Bash(mkdir:*)",
+      "Bash(uv sync:*)"
+    ],
+    "deny": []
+  }
+}
