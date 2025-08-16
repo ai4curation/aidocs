@@ -178,6 +178,6 @@ jobs:
           # Run Claude with proper permissions
           claude -p "$(cat /tmp/claude-input/claude_prompt.txt)" \
             --output-format stream-json \
-            --allowedTools "Bash(*),FileEdit,Edit,MultiEdit,WebSearch,WebFetch,mcp__ols_mcp__search_all_ontologies,mcp__ols_mcp__get_terms_from_ontology" \
+            --allowedTools "Bash(*),FileEdit,Edit,MultiEdit,WebSearch,WebFetch,Write,mcp__ols_mcp__search_all_ontologies,mcp__ols_mcp__get_terms_from_ontology" \
             --verbose 
           
