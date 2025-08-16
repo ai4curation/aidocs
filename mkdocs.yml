@@ -43,6 +43,7 @@ nav:
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
   - Tutorials:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
+     - Subagents for ontology coding: tutorials/subagents-for-ontology-coding.md
   - Reference:
      - Client apps: reference/client-apps.md
      - Clients:
