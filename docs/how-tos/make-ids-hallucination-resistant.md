@@ -8,9 +8,9 @@ This is a serious problem because these fake identifiers can easily slip through
 
 Large language models frequently hallucinate identifiers like:
 
-- **Ontology term IDs**: GO:0005515, HP:0001250, MONDO:0007739
-- **Gene/protein identifiers**: HGNC:1234, UniProt:P12345
-- **Publication IDs**: PMID:12345678, DOI:10.1000/fake.doi
+- **Ontology term IDs**: GO:9999999, HP:9999999, MONDO:9999999
+- **Gene/protein identifiers**: HGNC:9999999, UniProt:Z99999
+- **Publication IDs**: PMID:99999999, DOI:10.9999/fake.doi
 
 The models are good at following the format patterns (they know GO terms start with "GO:" followed by seven digits), but they often invent IDs that don't exist or pair real IDs with wrong labels.
 
@@ -71,12 +71,12 @@ term:
 ```yaml
 # Example for papers
 publication:
-  pmid: 15215856
-  title: "The Gene Ontology (GO) database and informatics resource"
+  pmid: 10802651
+  title: "Gene Ontology: tool for the unification of biology"
 
 # Would catch mismatches like:
 publication:
-  pmid: 15215856  
+  pmid: 10802651  
   title: "Some other paper title"  # Wrong title for this PMID
 ```
 
