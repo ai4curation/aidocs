@@ -1,5 +1,9 @@
 # Glossary
 
+## Agentic Coding Tool
+
+A coding tool that combines AI capabilities with direct access to development tools and environments, enabling natural language interaction with code bases and automated execution of development tasks.
+
 ## AI Agent
 
 An agent is a program that allows AI models to call [tools](#tool) to achieve some objective. 
@@ -77,3 +81,7 @@ See this figure
 from [Hoyt et al](https://www.nature.com/articles/s41597-024-03406-w).
 
 Here the community can be conceived of as containing both humans and AI agents.
+
+## Tool
+
+In the context of AI agents, a tool refers to a specific function or capability that an AI model can access to perform actions beyond text generation, such as reading files, executing code, making API calls, or interacting with external systems.
