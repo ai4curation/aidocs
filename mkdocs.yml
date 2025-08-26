@@ -38,6 +38,7 @@ nav:
   - Home: index.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
+     - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
   - Administrator how-tos:
      - Set up GitHub actions: how-tos/set-up-github-actions.md
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
@@ -51,7 +52,6 @@ nav:
         - Codex CLI: reference/clients/codex-cli.md
         - Gemini CLI: reference/clients/gemini-cli.md
         - Goose: reference/clients/goose.md
-  - FAQ: faq.md
   - Glossary: glossary.md
 
 site_url: https://ai4curation.github.io/aidocs/

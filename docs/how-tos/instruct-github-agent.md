@@ -1,6 +1,6 @@
 # AI Instructors Guide: GitHub Agents
 
-This is a guide for instructing the [AI agent](../glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](../glossary.md#github-actions)](set-up-github-actions) in your repo.
+This is a guide for instructing the [AI agent](../glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](../glossary.md#github-actions)](set-up-github-actions.md) in your repo.
 
 ## How it works
 
