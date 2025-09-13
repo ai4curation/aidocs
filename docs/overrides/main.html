@@ -19,9 +19,6 @@
       <a href="{{ page.meta.url }}">Download</a>
       <p>Models: {{ page.meta.models }}</p>
       <p>UI: {{ page.meta.ui_type }}</p>
-      {% if page.meta.ease_of_use_for_non_technical %}
-        <p>Ease of use: {{ star_rating(page.meta.ease_of_use_for_non_technical) }}</p>
-      {% endif %}
       {% if page.meta.documentation_quality %}
         <p>Documentation: {{ star_rating(page.meta.documentation_quality) }}</p>
       {% endif %}
