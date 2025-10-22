@@ -36,6 +36,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - FAQ: faq.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
      - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
