@@ -47,6 +47,7 @@ nav:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - Reference:
      - Client apps: reference/client-apps.md
+     - Claude Skills: reference/claude-skills.md
      - Clients:
         - Claude Desktop: reference/clients/claude-desktop.md
         - Claude Code: reference/clients/claude-code.md
