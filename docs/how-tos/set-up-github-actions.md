@@ -7,7 +7,7 @@ It also assumes you have some familiarity with GitHub actions, and
 have basic QC actions set up. If you are managing an ODK-compliant
 repo this is certainly the case.
 
-# IMPORTANT - GitHub repo configuration
+## IMPORTANT - GitHub repo configuration
 When using AI agents, ensure that your `main` repository branch has [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) enabled. Specifically, the `main` branch should have at least these settings configured:
 - Require pull request reviews before merging
 - Require at least one PR reviewer to approve the PR
