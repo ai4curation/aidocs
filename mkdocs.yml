@@ -45,6 +45,7 @@ nav:
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
   - Tutorials:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
+     - Accelerating Ontology Curation with Agentic AI and GitHub: tutorials/accelerating-ontology-curation.md
   - Reference:
      - Client apps: reference/client-apps.md
      - Clients:
