@@ -89,19 +89,58 @@ This pattern only works if you have validation tools that can actually check the
 3. **Label matching**: Compare provided labels against canonical ones
 4. **Consistency checking**: Make sure everything matches up
 
+## Two Key Validation Strategies
+
+There are two complementary approaches to preventing hallucinations in AI-assisted curation:
+
+### Validating Ontology Terms
+
+When AI systems generate ontology terms, you need to verify that:
+
+- The term IDs actually exist in the ontology
+- The labels match the canonical labels in the source ontology
+- Both the ID and label are consistent with each other
+
+This **dual validation approach** (ID + label) makes it much harder for language models to fabricate plausible-looking but fake terms. The model would have to hallucinate both a valid ID and its correct label simultaneously, which is statistically unlikely.
+
+The validation process typically involves:
+
+1. **Schema validation**: Checking that data structures properly reference ontology terms
+2. **Dynamic lookup**: Querying ontology sources in real-time to verify terms exist
+3. **Multi-level caching**: Using in-memory and file-based caches to optimize performance
+4. **Binding validation**: Ensuring nested object fields maintain structural integrity
+
+### Validating Text Excerpts
+
+When AI extracts or generates text excerpts that are supposed to come from published sources, you need to verify that the text actually appears in the cited publication. This prevents:
+
+- Paraphrasing that changes the meaning
+- Fabricated quotes attributed to real papers
+- Misattributions where real text is assigned to wrong papers
+
+This **deterministic matching approach** emphasizes exact textual correspondence rather than fuzzy or AI-based approximation. The key principles:
+
+1. **Substring matching**: Look for exact matches between the excerpt and source material
+2. **Editorial conventions**: Handle legitimate variations like bracketed clarifications `[...]` and ellipsis `...`
+3. **Source fetching**: Retrieve publication content from authoritative APIs (PubMed/PMC)
+4. **Local caching**: Store retrieved publications to minimize repeated API requests
+
+This approach prioritizes accuracy and reproducibility over convenience, making it suitable for rigorous curation where precision matters.
+
 ### Useful APIs for Validation
 
 - **OLS (Ontology Lookup Service)**: EBI's comprehensive API for biomedical ontologies
 - **OAK (Ontology Access Kit)**: Python library that can work with multiple ontology sources
-- **PubMed APIs**: For validating PMIDs and retrieving titles
+- **PubMed/PMC APIs**: For fetching publication content and validating excerpts
 - **Individual ontology APIs**: Many ontologies have their own REST APIs
 
 ### Implementation Notes
 
-- **Cache responses** to avoid hitting APIs repeatedly for the same IDs
+- **Cache responses** to avoid hitting APIs repeatedly for the same IDs or publications
 - **Handle network failures** gracefully - you don't want validation failures to break your workflow
 - **Consider performance** - real-time validation can slow things down, so you might need to batch or background the checks
 - **Plan for errors** - decide how to handle cases where validation fails (reject, flag for review, etc.)
+- **Use deterministic methods** - prefer exact matching over probabilistic approaches for reproducibility
 
 ## Beyond Basic Ontologies
 
@@ -145,9 +184,23 @@ But for most scientific curation workflows involving ontologies, genes, and publ
 ## Getting Started
 
 1. **Pick one identifier type** that's important for your workflow
-2. **Find the authoritative API** for that type  
+2. **Find the authoritative API** for that type
 3. **Modify your prompts** to require both ID and label
 4. **Build simple validation** that checks both pieces
 5. **Expand gradually** to other identifier types
 
 The key is to start simple and build up. You don't need a comprehensive system from day one - even basic validation on your most critical identifier types can make a big difference.
+
+## Implementation Tools
+
+If you're working with LinkML schemas and data, there are ready-to-use validation plugins that implement these concepts:
+
+### For Ontology Term Validation
+
+The [**linkml-term-validator**](https://linkml.io/linkml-term-validator/) plugin validates that LinkML schemas and datasets properly reference external ontology terms. It implements the dual validation (ID + label) approach described above and works with multiple ontology sources through the Ontology Access Kit (OAK). It's particularly useful for preventing AI-generated hallucinations in automated curation workflows.
+
+### For Text Excerpt Validation
+
+The [**linkml-reference-validator**](https://linkml.io/linkml-reference-validator/) plugin validates that text excerpts in datasets accurately match their cited source publications. It fetches references from PubMed/PMC and performs deterministic substring matching to verify quotes. The validator also includes [guidance for validating OBO format files](https://linkml.io/linkml-reference-validator/how-to/validate-obo-files/), making it useful for ontology curation workflows.
+
+Both tools integrate as plugins within LinkML's validation framework, support multi-level caching for performance, and can be used in CI/CD pipelines or programmatically in Python.
