@@ -53,6 +53,7 @@ nav:
         - Claude Code: reference/clients/claude-code.md
         - Codex CLI: reference/clients/codex-cli.md
         - Gemini CLI: reference/clients/gemini-cli.md
+        - GitHub Copilot: reference/clients/github-copilot.md
         - Goose: reference/clients/goose.md
   - Glossary: glossary.md
 
