@@ -36,6 +36,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
   - FAQ: faq.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
