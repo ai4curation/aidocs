@@ -45,6 +45,8 @@ nav:
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
   - Tutorials:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
+     - Batch term addition: tutorials/batch-term-addition.md
+     - Literature-assisted curation: tutorials/literature-assisted-curation.md
   - Reference:
      - Client apps: reference/client-apps.md
      - Claude Skills: reference/claude-skills.md
