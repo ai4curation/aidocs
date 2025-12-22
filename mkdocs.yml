@@ -50,6 +50,7 @@ nav:
      - Client apps: reference/client-apps.md
      - GitHub integrations: reference/github-integrations.md
      - Claude Skills: reference/claude-skills.md
+     - ai-blame: reference/ai-blame.md
      - Clients:
         - Claude Desktop: reference/clients/claude-desktop.md
         - Claude Code: reference/clients/claude-code.md
