@@ -41,6 +41,36 @@
 
 **Agent Activity**: [Search for Copilot activity](https://github.com/EBISPOT/efo/issues?q=author%3Aapp%2Fcopilot)
 
+## Agentic Infrastructure
+
+### ai-blame
+**Repository**: [ai4curation/ai-blame](https://github.com/ai4curation/ai-blame)
+
+Provenance extraction from agent execution traces. Demonstrates line-level attribution for AI-assisted edits.
+
+- [Docs](https://ai4curation.github.io/ai-blame) | [PyPI](https://pypi.org/project/ai-blame/)
+
+### curation-skills
+**Repository**: [ai4curation/curation-skills](https://github.com/ai4curation/curation-skills)
+
+Reusable skill packs for ontology and biocuration tasks. Example of structuring agent behavior for consistency.
+
+- [Skills Article](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+
+### noctua-mcp
+**Repository**: [geneontology/noctua-mcp](https://github.com/geneontology/noctua-mcp)
+
+MCP server for GO-CAM editing — an example of wrapping a domain-specific API for agent access.
+
+- [PyPI](https://pypi.org/project/noctua-mcp/)
+
+### ICBO 2025 AI Tutorial
+**Repository**: [ai4curation/icbo-ai-tutorial](https://github.com/ai4curation/icbo-ai-tutorial)
+
+Tutorial materials for agent-assisted ontology curation workflows, with exercises and social coding patterns.
+
+- [Tutorial Page](https://go.lbl.gov/icbo-2025-ai) | [Recording](https://youtu.be/_9Re39yB7EE) | [Zenodo](https://zenodo.org/records/18653147)
+
 ## Documentation Repositories
 
 ### AI4Curators Documentation
