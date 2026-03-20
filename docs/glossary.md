@@ -4,7 +4,7 @@
 
 The infrastructure and control plane that wraps around an [AI agent](#ai-agent) to manage its execution. An agent harness handles context management, [tool](#tool) orchestration, validation, provenance, error recovery, and human-in-the-loop controls. It does not replace the agent — it governs how the agent operates. Think of it as the difference between writing a container and running Kubernetes.
 
-In a curation context, a harness typically includes: system instructions (e.g. [CLAUDE.md](#claude-code)), validators (e.g. [linkml-term-validator](#linkml-term-validator), [linkml-reference-validator](#linkml-reference-validator)), provenance tools (e.g. [ai-blame](#ai-blame)), [MCP](#model-context-protocol-mcp) servers for domain-specific tool access, and [GitHub Actions](#github-actions) for lifecycle automation.
+In a curation context, a harness typically includes: system instructions (e.g. `CLAUDE.md`), validators (e.g. [linkml-term-validator](#linkml-term-validator), [linkml-reference-validator](#linkml-reference-validator)), provenance tools (e.g. [ai-blame](#ai-blame)), [MCP](#model-context-protocol-mcp) servers for domain-specific tool access, and [GitHub Actions](#github-actions) for lifecycle automation.
 
 See also: [Build your agentic harness](how-tos/build-agentic-harness.md)
 
