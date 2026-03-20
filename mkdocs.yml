@@ -41,6 +41,7 @@ nav:
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
      - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
+     - Build your agentic harness: how-tos/build-agentic-harness.md
   - Administrator how-tos:
      - Set up GitHub actions: how-tos/set-up-github-actions.md
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
@@ -49,6 +50,7 @@ nav:
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - Reference:
      - Client apps: reference/client-apps.md
+     - Agentic tools: reference/agentic-tools.md
      - GitHub integrations: reference/github-integrations.md
      - Claude Skills: reference/claude-skills.md
      - Clients:
