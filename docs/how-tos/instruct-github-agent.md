@@ -1,6 +1,6 @@
 # AI Instructors Guide: GitHub Agents
 
-This is a guide for instructing the [AI agent](../glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has [set up [GitHub actions](../glossary.md#github-actions)](set-up-github-actions) in your repo.
+This is a guide for instructing the [AI agent](../glossary.md#ai-agent) that lives in GitHub repo. This assumes your AI controller has set up [GitHub Actions](../glossary.md#github-actions). See the [setup guide](set-up-github-actions.md) for details.
 
 ## How it works
 
@@ -171,7 +171,7 @@ This section covers getting Education Benefits through GitHub Education for acad
 - Upload a photo of your institutional ID, if necessary,
 - Click "Submit Application"
 
-Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." *Important note*: it may take up to 72 hours for the information to propagate through GitHub's system; until your application has been fully approved (i.e. the apprival bar needs to be at 100% and you have gotten an email welcoming you), clicking the link will take you to the standard for-pay page. Be patient in this step.
+Once approved (this may vary from minutes to being denied), opening the "Approved" widget on https://github.com/settings/education/benefits will contain a link in the line "To redeem your Copilot Pro coupon, please sign up via this link." *Important note*: it may take up to 72 hours for the information to propagate through GitHub's system; until your application has been fully approved (i.e. the approval bar needs to be at 100% and you have gotten an email welcoming you), clicking the link will take you to the standard for-pay page. Be patient in this step.
 
 ## Learning More
 
