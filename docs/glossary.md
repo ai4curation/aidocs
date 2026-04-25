@@ -2,7 +2,15 @@
 
 ## AI Agent
 
-An agent is a program that allows AI models to call [tools](#tool) to achieve some objective. 
+An agent is a program that allows AI models to call [tools](#tool) to achieve some objective.
+
+## Tool
+
+A software capability or utility that an AI agent can invoke to perform a specific task, such as reading files, running code, or querying a service.
+
+## Agentic Coding Tool
+
+An environment or application that enables an AI system to modify code or other files using natural language commands.
 
 ## CBORG
 
