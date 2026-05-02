@@ -36,3 +36,34 @@ GitHub Copilot's coding agent includes a firewall that restricts internet access
 - ❌ Blocked: `http://purl.obolibrary.org/obo/ro/ro-base.owl`
 
 For more details, see the [GitHub Copilot](reference/clients/github-copilot.md) documentation and GitHub's guide on [customizing the agent firewall](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall).
+
+## Agent Harness and Infrastructure
+
+### What is an agent harness?
+
+An [agent harness](glossary.md#agent-harness) is the infrastructure that wraps around an AI agent to manage its execution — context management, tool orchestration, validation, provenance, and human-in-the-loop controls. It's the difference between an agent that sometimes works and one that's reliable and auditable.
+
+The same model behaves differently depending on the harness around it. Getting the harness right matters more than picking the "best" model.
+
+See [Build your agentic harness](how-tos/build-agentic-harness.md) for a practical guide.
+
+### What tools are available for validating agent outputs?
+
+Two key validators:
+
+- **[linkml-term-validator](https://github.com/linkml/linkml-term-validator)** — checks that ontology terms referenced in agent outputs actually exist and are used correctly
+- **[linkml-reference-validator](https://github.com/linkml/linkml-reference-validator)** — checks that cited references actually contain the claimed supporting text
+
+Both can be integrated into CI pipelines to automatically validate agent-generated pull requests. See [Agentic tools](reference/agentic-tools.md) for details.
+
+### How do I track which changes an AI agent made?
+
+Use **[ai-blame](https://github.com/ai4curation/ai-blame)**, which extracts provenance and audit trails from agent execution traces. It provides line-level attribution, so you can see exactly which changes the agent made, when, and in what context.
+
+### What MCP servers are available for ontology work?
+
+- **[noctua-mcp](https://github.com/geneontology/noctua-mcp)** — GO-CAM editing via Noctua/Barista
+- **[oak-mcp](https://github.com/monarch-initiative/oak-mcp)** — ontology search, traversal, and operations via OAK
+- **[owl-mcp](https://github.com/monarch-initiative/owl-mcp)** — general OWL ontology operations
+
+These give agents structured access to domain-specific operations instead of raw file manipulation.

@@ -146,5 +146,14 @@ I recommend trying experiments on this test repo. Also try experiments like havi
 - if you are using obo format as source, it's a slightly different workflow, see the odk-ai repo for details
 - if your ontology is set up to use [AI agents triggered by github actions](../how-tos/set-up-github-actions.md), then you don't actually need to run any AI tools locally. However, I strongly recommend learning how to do this, as this will empower you to do many more things than are possible with the GitHub agent.
 
+## Additional training materials
 
- 
+For more in-depth training, see these workshop materials from 2025-2026:
+
+- **[Accelerating Ontology Curation with Agentic AI and GitHub](https://go.lbl.gov/icbo-2025-ai)** — ICBO 2025 tutorial with practical guidance, exercises, and social coding patterns. [Recording](https://youtu.be/_9Re39yB7EE), [Zenodo](https://zenodo.org/records/18653147)
+- **[Gene Ontology Curators AI Workshop (Part 1)](https://zenodo.org/records/17993529)** — Practical AI support for GO curation workflows
+- **[Agentic AI and GO, Oct 2025 (Part 1)](https://zenodo.org/records/18333490)** — Foundational session on using coding agents in ontology workflows
+- **[Using Agentic AI to Review GO Standard Annotations (Part 2)](https://zenodo.org/records/17498090)** — Hands-on annotation review, evidence checks, and quality control patterns
+
+For building the infrastructure around your agents, see [Build your agentic harness](../how-tos/build-agentic-harness.md).
+
