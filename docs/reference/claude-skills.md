@@ -60,7 +60,7 @@ These skills are particularly valuable for:
 
 1. Choose your installation method above
 2. Explore the [full documentation](https://github.com/ai4curation/curation-skills) for detailed usage examples
-3. Review related guides in the [how-tos section](../how-tos/index.md) for integration strategies
+3. Review related guides such as [Integrate AI into your KB](../how-tos/integrate-ai-into-your-kb.md) for integration strategies
 
 ## Resources
 
