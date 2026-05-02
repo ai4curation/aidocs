@@ -48,6 +48,7 @@ nav:
      - Create an agentic curation pipeline: how-tos/create-agentic-curation-pipeline.md
      - PR reviews for agent improvement: how-tos/pr-reviews-for-agent-improvement.md
   - Tutorials:
+     - Training materials for curators: tutorials/tutorials-for-curators.md
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - Reference:
      - Client apps: reference/client-apps.md
