@@ -8,6 +8,9 @@ inputs:
   anthropic_api_key:
     description: "Anthropic API key"
     required: true
+  cborg_api_key:
+    description: "CBORG API key"
+    required: true
   prompt:
     description: "The prompt to send to Claude Code"
     required: false
@@ -32,10 +35,18 @@ inputs:
     description: "Whether to install the GitHub MCP server"
     required: false
     default: "false"
+  install_artl_mcp:
+    description: "Whether to install the ARTL MCP server"
+    required: false
+    default: "false"
+
 
 runs:
   using: "composite"
   steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+
     - name: Install Claude Code
       shell: bash
       run: npm install -g @anthropic-ai/claude-code
@@ -55,8 +66,19 @@ runs:
             "ghcr.io/github/github-mcp-server:sha-ff3036d"
           ],
           "env": {
-            "GITHUB_PERSONAL_ACCESS_TOKEN": "${{ inputs.GITHUB_TOKEN }}"
+            "GITHUB_PERSONAL_ACCESS_TOKEN": "${{ inputs.github_token }}"
           }
+        }'
+
+    - name: Install ARTL MCP Server
+      if: inputs.install_artl_mcp == 'true'
+      shell: bash
+      run: |
+        claude mcp add-json artl '{
+          "command": "uvx",
+          "args": [
+            "artl-mcp"
+          ]
         }'
 
     - name: Prepare Prompt File
@@ -131,6 +153,11 @@ runs:
 
           echo "Complete output saved to output.json, final response saved to ${{ inputs.output_file }}"
         fi
+
       env:
-        ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}
+        # CBORG uses ANTHROPIC_AUTH_TOKEN; Claude Code still expects ANTHROPIC_API_KEY.
+        ANTHROPIC_API_KEY: "."
+        ANTHROPIC_AUTH_TOKEN: ${{ inputs.cborg_api_key }}
         GITHUB_TOKEN: ${{ inputs.github_token }}
+        ANTHROPIC_BASE_URL: "https://api.cborg.lbl.gov"
+        DISABLE_NON_ESSENTIAL_MODEL_CALLS: "1"
