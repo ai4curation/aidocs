@@ -18,10 +18,10 @@ If you are doing this, always make sure you are using an up to date and highly c
 (e.g. latest claude code or codex), along with the most powerful model, and make sure you have the skill creator skill available.
 If you don't there is a danger the agent will guess as to format and conventions. It is still good to check against the guidelines here.
 
-**Further reading**
+!!! info "Further reading"
 
-- [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) (Anthropic Engineering, Oct 2025) — the canonical introduction to skills; its advice to "start with evaluation" and iterate from observed agent behavior is exactly the mindset to bring to a skill-creator session.
-- [anthropics/skills](https://github.com/anthropics/skills) (Anthropic) — the public repo that ships the `skill-creator` skill itself, plus worked examples you can read to learn conventions firsthand.
+    - [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) (Anthropic Engineering, Oct 2025) — the canonical introduction to skills; its advice to "start with evaluation" and iterate from observed agent behavior is exactly the mindset to bring to a skill-creator session.
+    - [anthropics/skills](https://github.com/anthropics/skills) (Anthropic) — the public repo that ships the `skill-creator` skill itself, plus worked examples you can read to learn conventions firsthand.
 
 ## Use standard layouts
 
@@ -36,9 +36,13 @@ I find these two docs the most useful
 - [https://agentskills.io/specification](https://agentskills.io/specification) --> the proposed standard
 - [https://code.claude.com/docs/en/skills](https://code.claude.com/docs/en/skills) --> de facto standard
 
-**Further reading**
+!!! info "Further reading"
 
-- [Anthropic launches enterprise 'Agent Skills' and opens the standard](https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard) (VentureBeat, Dec 2025) — context on why the layout was standardized and why following it matters: within weeks of the open-standard announcement it was adopted across 20+ platforms (OpenAI, Google, GitHub, Cursor), so a spec-conformant skill is increasingly portable rather than Claude-only.
+    - [Anthropic launches enterprise 'Agent Skills' and opens the standard](https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard) (VentureBeat, Dec 2025) — context on why the layout was standardized and why following it matters: within weeks of the open-standard announcement it was adopted across 20+ platforms (OpenAI, Google, GitHub, Cursor), so a spec-conformant skill is increasingly portable rather than Claude-only.
+
+!!! warning "Vet skills you didn't author"
+
+    A skill is executable instructions, so treat third-party skills like third-party code. The survey [*Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward*](https://arxiv.org/abs/2602.12430) (arXiv, Feb 2026) found that **26.1% of community-contributed skills contained vulnerabilities**, and proposes a provenance-based trust and lifecycle governance model. Conforming to the standard layout buys portability — it does not vouch for what a downloaded skill actually does.
 
 I'll first cover the claude de facto standard. Let's say I have two skills, I'll make the folder structure like this (always at the root of the GitHub repo):
 
@@ -98,10 +102,15 @@ You should also make sure you follow yaml syntax. Annoyingly, claude code can be
 
 The Claude docs give you the three levels cleanly: (1) name + description preloaded into the system prompt so the agent knows the skill exists; (2) the full SKILL.md body, loaded only when the skill is invoked; (3) bundled files (reference.md, scripts, examples) referenced from SKILL.md and loaded only when the agent decides it needs them. Worth adding the practical consequence: keep SKILL.md lean because once invoked it stays in context for the rest of the session, and push bulky reference material to level-3 files.
 
-**Further reading**
+!!! info "Further reading"
 
-- [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (Anthropic Engineering, 2025) — the "why" behind progressive disclosure: context is a finite, degrading resource, so loading only what's relevant is a first-class design constraint, not just a tidiness preference.
-- [Code execution with MCP: building more efficient agents](https://www.anthropic.com/engineering/code-execution-with-mcp) (Anthropic Engineering, Nov 2025) — takes the same idea further, showing how moving tool catalogs out of context and into on-demand code cut one workflow from ~150K tokens to ~2K; a useful intuition pump for how aggressively level-3 material should be deferred.
+    - [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (Anthropic Engineering, 2025) — the "why" behind progressive disclosure: context is a finite, degrading resource, so loading only what's relevant is a first-class design constraint, not just a tidiness preference.
+    - [Code execution with MCP: building more efficient agents](https://www.anthropic.com/engineering/code-execution-with-mcp) (Anthropic Engineering, Nov 2025) — takes the same idea further, showing how moving tool catalogs out of context and into on-demand code cut one workflow from ~150K tokens to ~2K; a useful intuition pump for how aggressively level-3 material should be deferred.
+
+??? abstract "What the research shows (with numbers)"
+
+    - [*SkillJuror: Measuring How Agent Skill Organization Changes Runtime Behavior*](https://arxiv.org/abs/2606.11543) (arXiv, Jun 2026) — across 82 tasks, progressive disclosure raised the distinct skill resources an agent accessed per run from **1.18 to 3.85** and produced **+4.1%** more verifier-passing trials than a flat layout. Gains were largest when bundled resources guide implementation, checking, or repair, and weakest for exact-format or numeric-threshold tasks — a good cue for *what* belongs in level-3 files.
+    - [*Evaluating Long-Context Reasoning in LLM-Based WebAgents*](https://arxiv.org/abs/2512.04307) (arXiv, Dec 2025) — agent success **fell from 40–50% to under 10%** as context grew from 25K to 150K tokens, with agents losing track of the original task. Concrete motivation for keeping SKILL.md lean: a bloated skill body doesn't just waste tokens, it degrades reasoning.
 
 ## Include wrapper scripts
 
@@ -138,16 +147,20 @@ Example: https://github.com/cmungall/lakehouse-skills/tree/main/kbase-query
 
 Ideally skills should be relatively standalone. Don't assume tacit knowledge beyond what is already documented in your `CLAUDE.md` or `AGENTS.md`.
 
+!!! note "Why a library of small, composable skills pays off"
+
+    The foundational evidence predates SKILL.md: [*Voyager: An Open-Ended Embodied Agent with Large Language Models*](https://arxiv.org/abs/2305.16291) (arXiv, 2023) built a growing library of reusable, independently-stored skills and reached milestones **3.3× faster** than agents that reasoned from scratch; ablating the skill library cost **15.3×** in tech-tree progression speed. The lesson carries over: modular skills that don't modify each other compose better and accumulate value over time.
+
 ## Favor skills over MCPs (mostly)
 
 MCPs are a good solution for giving agents capabilities in more constrained environments; an http MCP is good if you want people to use it in a web based chat.
 
 In general skills, provide more flexibility, and general fewer tokens and context flooding. However, if you already have MCPs for a particular capability and they work fine for you there may be no pressing reason to rewrite
 
-**Further reading**
+!!! info "Further reading"
 
-- [Claude Skills are awesome, maybe a bigger deal than MCP](https://simonwillison.net/2025/Oct/16/claude-skills/) (Simon Willison, Oct 2025) — argues skills are conceptually simpler than MCP (a markdown file plus optional scripts) and often the better default, which is the same trade-off this section describes.
-- [Code execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) (Anthropic Engineering, Nov 2025) — the counterpoint: rather than skills *vs* MCP, it shows how to keep MCP servers but stop flooding context with their tool definitions, so an existing MCP need not be rewritten.
+    - [Claude Skills are awesome, maybe a bigger deal than MCP](https://simonwillison.net/2025/Oct/16/claude-skills/) (Simon Willison, Oct 2025) — argues skills are conceptually simpler than MCP (a markdown file plus optional scripts) and often the better default, which is the same trade-off this section describes.
+    - [Code execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) (Anthropic Engineering, Nov 2025) — the counterpoint: rather than skills *vs* MCP, it shows how to keep MCP servers but stop flooding context with their tool definitions, so an existing MCP need not be rewritten.
 
 ## Consider not writing a skill
 
@@ -158,9 +171,9 @@ Even if your agent knows how to parse fasta files (for example), you may still w
 have particular conventions in your fasta files, or you may have particular environment considerations). I often tend to write skills not because the agent doesn't
 know how to do something, but because I have latent knowledge that overrides its defaults.
 
-**Further reading**
+!!! info "Further reading"
 
-- [Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) (Anthropic Engineering, Sep 2025) — though framed around tools rather than skills, its core lesson applies directly: don't build thin wrappers around things the agent can already do; reserve new capabilities for genuine, high-leverage gaps.
+    - [Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) (Anthropic Engineering, Sep 2025) — though framed around tools rather than skills, its core lesson applies directly: don't build thin wrappers around things the agent can already do; reserve new capabilities for genuine, high-leverage gaps.
 
 ## Test your skill
 
