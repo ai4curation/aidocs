@@ -80,8 +80,8 @@ description: Use this skill to do <some awesome thing>
 
 ```
 
-It may be possible to get away without writing frontmatter -- if you don't include it claude code will default to the directory name for `name` and the first paragraph of the markdown as `description`. But my including
-the frontmatter you make the separation clearer for other *humans* who come after you and edit the markdown..
+It may be possible to get away without writing frontmatter -- if you don't include it claude code will default to the directory name for `name` and the first paragraph of the markdown as `description`. But by including
+the frontmatter, you make the separation clearer for other *humans* who come after you and edit the markdown.
 
 ## Understand progressive disclosure
 
