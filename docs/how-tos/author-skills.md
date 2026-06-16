@@ -40,10 +40,6 @@ I find these two docs the most useful
 
     - [Anthropic launches enterprise 'Agent Skills' and opens the standard](https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard) (VentureBeat, Dec 2025) — context on why the layout was standardized and why following it matters: within weeks of the open-standard announcement it was adopted across 20+ platforms (OpenAI, Google, GitHub, Cursor), so a spec-conformant skill is increasingly portable rather than Claude-only.
 
-!!! warning "Vet skills you didn't author"
-
-    A skill is executable instructions, so treat third-party skills like third-party code. The survey [*Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward*](https://arxiv.org/abs/2602.12430) (arXiv, Feb 2026) found that **26.1% of community-contributed skills contained vulnerabilities**, and proposes a provenance-based trust and lifecycle governance model. Conforming to the standard layout buys portability — it does not vouch for what a downloaded skill actually does.
-
 I'll first cover the claude de facto standard. Let's say I have two skills, I'll make the folder structure like this (always at the root of the GitHub repo):
 
 ```
@@ -146,10 +142,6 @@ Example: https://github.com/cmungall/lakehouse-skills/tree/main/kbase-query
 ## Modularize your skills
 
 Ideally skills should be relatively standalone. Don't assume tacit knowledge beyond what is already documented in your `CLAUDE.md` or `AGENTS.md`.
-
-!!! note "Why a library of small, composable skills pays off"
-
-    The foundational evidence predates SKILL.md: [*Voyager: An Open-Ended Embodied Agent with Large Language Models*](https://arxiv.org/abs/2305.16291) (arXiv, 2023) built a growing library of reusable, independently-stored skills and reached milestones **3.3× faster** than agents that reasoned from scratch; ablating the skill library cost **15.3×** in tech-tree progression speed. The lesson carries over: modular skills that don't modify each other compose better and accumulate value over time.
 
 ## Favor skills over MCPs (mostly)
 
