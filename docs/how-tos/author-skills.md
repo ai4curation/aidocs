@@ -83,6 +83,8 @@ description: Use this skill to do <some awesome thing>
 It may be possible to get away without writing frontmatter -- if you don't include it claude code will default to the directory name for `name` and the first paragraph of the markdown as `description`. But by including
 the frontmatter, you make the separation clearer for other *humans* who come after you and edit the markdown.
 
+You should also make sure you follow yaml syntax. Annoyingly, claude code can be lenient on broken yaml, which can burn you when you try and use the skill with another agent harness.
+
 ## Understand progressive disclosure
 
 The Claude docs give you the three levels cleanly: (1) name + description preloaded into the system prompt so the agent knows the skill exists; (2) the full SKILL.md body, loaded only when the skill is invoked; (3) bundled files (reference.md, scripts, examples) referenced from SKILL.md and loaded only when the agent decides it needs them. Worth adding the practical consequence: keep SKILL.md lean because once invoked it stays in context for the rest of the session, and push bulky reference material to level-3 files.
@@ -118,9 +120,15 @@ My skills folder might end up looking like this:
 
 Example: https://github.com/cmungall/lakehouse-skills/tree/main/kbase-query
 
+## Modularize your skills
+
+Ideally skills should be relatively standalone. Don't assume tacit knowledge beyond what is already documented in your `CLAUDE.md` or `AGENTS.md`.
+
 ## Favor skills over MCPs (mostly)
 
-TODO
+MCPs are a good solution for giving agents capabilities in more constrained environments; an http MCP is good if you want people to use it in a web based chat.
+
+In general skills, provide more flexibility, and general fewer tokens and context flooding. However, if you already have MCPs for a particular capability and they work fine for you there may be no pressing reason to rewrite
 
 ## Consider not writing a skill
 
@@ -133,7 +141,16 @@ know how to do something, but because I have latent knowledge that overrides its
 
 ## Test your skill
 
-TODO
+The first thing to do is test if your agent is aware of your skill. You can list skills in most coding tools with the `/skills` command, which should show something like:
+
+```
+  ✔ on         annotation-reviewer · project · ~120 tok
+  ✔ on         bioinformatics-analyzer · project · ~160 tok
+```
+
+If you don't see your skill there then you may have a problem, e.g. something is in the wrong folder. Again it may not manifest as agents like to dig around folders and they may find your skills
+and use them... until they don't.
 
 ## Optional: Create a skills marketplace
 
+TODO
