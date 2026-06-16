@@ -1,6 +1,6 @@
 # How to create curation skills
 
-The behavior and capabilities of agents can easily be customized using [Agent skills](reference/claude-skills).
+The behavior and capabilities of agents can easily be customized using [Agent skills](../reference/claude-skills.md).
 Most of the time you will be working from GitHub repos that have a core set of skills predefined, and you might not need
 to write your own skill or even modify existing ones.
 
