@@ -179,6 +179,30 @@ The first thing to do is test if your agent is aware of your skill. You can list
 If you don't see your skill there then you may have a problem, e.g. something is in the wrong folder. Again it may not manifest as agents like to dig around folders and they may find your skills
 and use them... until they don't.
 
+## Case studies
+
+The principles above are easier to absorb from real, working skill sets. Both repos below keep their skills at the root of the repo in `.claude/skills/`, follow the de facto Claude layout, and are public, so you can read the actual `SKILL.md` files.
+
+### Monarch dismech
+
+[`monarch-initiative/dismech`](https://github.com/monarch-initiative/dismech) is a knowledge base of disease mechanisms, stored as LinkML-schema YAML files with bindings to ontologies like MONDO, HPO, and GO. It ships ~14 skills covering the full curation lifecycle, and is a good example of using skills as **standard operating procedures** rather than just capability shims.
+
+Patterns worth copying:
+
+- **Project-prefixed naming for related skills.** Several skills share a `dismech-` prefix ([`dismech-references`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-references), [`dismech-compliance`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-compliance), [`dismech-pr-review`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-pr-review)), which keeps them grouped and unambiguous in the `/skills` list.
+- **Wrapping a tool to enforce a guardrail.** [`dismech-references`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-references) drives a `linkml-reference-validator` tool to check that every quoted evidence snippet matches its PubMed/ClinicalTrials source verbatim, classifies each as SUPPORT / REFUTE / PARTIAL / etc., and deletes fabricated evidence outright. This is the "include wrapper scripts" pattern doing real work — constraining the agent and catching hallucinated citations.
+- **Skills that orchestrate other skills.** [`curate-next`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/curate-next) batches work: it filters GitHub issues assigned to the current user, runs a duplicate preflight check, and dispatches parallel `/curate` agents — with input validation (N between 1–8) baked into the SKILL.md. A skill is a natural home for this kind of workflow logic.
+
+### GO ontology
+
+[`geneontology/go-ontology`](https://github.com/geneontology/go-ontology) is the development repo for the Gene Ontology. Its eight skills (`design-pattern`, `taxon-constraint`, `term-obsoletion`, `external-term-lookup`, `mapping`, `reaction`, `chemical-entity`, `research`) are a clean illustration of the "[consider not writing a skill](#consider-not-writing-a-skill)" point inverted: the agent already knows ontology basics, so these skills exist to encode **latent, project-specific knowledge that overrides its defaults**.
+
+Patterns worth copying:
+
+- **Skills that teach your conventions, not the basics.** [`design-pattern`](https://github.com/geneontology/go-ontology/tree/master/.claude/skills/design-pattern) points the agent at GO's DOSDP patterns in `src/patterns/*.yaml`, tells it to check for similar existing terms with `obo-grep.pl` before writing a logical definition, and warns against over-specifying — exactly the kind of house style an agent won't guess.
+- **Domain SOPs with explicit judgement calls.** [`taxon-constraint`](https://github.com/geneontology/go-ontology/tree/master/.claude/skills/taxon-constraint) encodes when *not* to act: prefer parsimonious (broader) constraints, skip constraints already inherited from CL/UBERON, and remove them when a term is obsoleted.
+- **Cross-referencing skills for composition.** The `design-pattern` skill defers chemical terms to the `chemical-entity` skill rather than duplicating that knowledge — modular skills that point at each other instead of repeating content.
+
 ## Optional: Create a skills marketplace
 
 TODO
