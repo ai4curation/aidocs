@@ -9,6 +9,9 @@ inputs:
   anthropic_api_key:
     description: "Anthropic API key"
     required: true
+  cborg_api_key:
+    description: "CBORG API key"
+    required: true
   github_token:
     description: "GitHub token with repo and issues permissions"
     required: true
@@ -84,4 +87,5 @@ runs:
         install_github_mcp: "true"
         timeout_minutes: ${{ inputs.timeout_minutes }}
         anthropic_api_key: ${{ inputs.anthropic_api_key }}
+        cborg_api_key: ${{ inputs.cborg_api_key }}
         github_token: ${{ inputs.github_token }}
