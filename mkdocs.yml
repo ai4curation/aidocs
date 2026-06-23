@@ -36,6 +36,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
   - FAQ: faq.md
   - Examples: examples.md
   - Curator how-tos:
