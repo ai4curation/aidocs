@@ -19,9 +19,9 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
-      issues: read
+      contents: write
+      pull-requests: write
+      issues: write
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
@@ -30,18 +30,44 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+            
+      - name: Install python tools
+        run: |
+          uv sync
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@beta
+        
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          mcp_config: |
+            {
+              "mcpServers": {
+                "ols": {
+                  "command": "uvx",
+                  "args": [
+                    "ols-mcp"
+                  ]
+                },
+                "sequential-thinking": {
+                  "command": "npx",
+                  "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-sequential-thinking"
+                  ]
+                }
+              }
+            }
 
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
           
-          # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4)
-          # model: "claude-opus-4-20250514"
+          # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4.1)
+          # model: "claude-opus-4-1-20250805"
           
           # Optional: Customize the trigger phrase (default: @claude)
           # trigger_phrase: "/claude"
@@ -50,7 +76,7 @@ jobs:
           # assignee_trigger: "claude-bot"
           
           # Optional: Allow Claude to run specific commands
-          allowed_tools: "WebFetch,WebSearch,Edit,Replace,Bash(uv *),Bash(git*),Bash(gh*)"
+          allowed_tools: "Bash(*),FileEdit,Edit,MultiEdit,WebSearch,WebFetch,mcp__ols_mcp__search_all_ontologies,mcp__ols_mcp__get_terms_from_ontology"
           
           # Optional: Add custom instructions for Claude to customize its behavior for your project
           # custom_instructions: |

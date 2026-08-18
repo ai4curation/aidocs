@@ -4,7 +4,7 @@ url: https://github.com/google-gemini/gemini-cli
 logo: https://www.gstatic.com/ai/web/favicons/favicon-32x32.png
 models: Gemini 2.5 Pro, Vertex AI models
 ui_type: CLI
-ease_of_use_for_non_technical: 4
+ease_of_use_for_non_technical: 2
 github: https://github.com/google-gemini/gemini-cli
 ---
 

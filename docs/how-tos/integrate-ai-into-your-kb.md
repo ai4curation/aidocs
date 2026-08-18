@@ -45,10 +45,34 @@ As an example, this video shows how to configure:
   allowfullscreen>
 </iframe>
 
+## Tip 4: Validate agent outputs automatically
+
+Agents hallucinate ontology terms and fabricate citations. Add automated validation to catch these before review:
+
+- **[linkml-term-validator](https://github.com/linkml/linkml-term-validator)** — checks that ontology terms in agent outputs actually exist
+- **[linkml-reference-validator](https://github.com/linkml/linkml-reference-validator)** — checks that cited references contain the claimed supporting text
+
+These can run as CI checks on agent-generated pull requests.
+
+## Tip 5: Track what the agent changed
+
+Use **[ai-blame](https://github.com/ai4curation/ai-blame)** to extract [provenance](../glossary.md#provenance) from agent execution traces. This gives you line-level attribution — essential for understanding what the agent did and what a human did.
+
+## Tip 6: Use MCP servers for domain-specific tool access
+
+Rather than having agents manipulate ontology files as raw text, give them structured tool access through [MCP](../glossary.md#model-context-protocol-mcp) servers:
+
+- **[noctua-mcp](https://github.com/geneontology/noctua-mcp)** — GO-CAM editing via Noctua/Barista
+- **[oak-mcp](https://github.com/monarch-initiative/oak-mcp)** — ontology operations via OAK
+
+## Tip 7: Think in terms of a harness, not just an agent
+
+Effective AI curation isn't about picking the right model — it's about building the right infrastructure around it. This infrastructure is called an [agent harness](../glossary.md#agent-harness). For a complete guide to assembling one, see [Build your agentic harness](build-agentic-harness.md).
+
 ## Set up [GitHub actions](../glossary.md#github-actions)
 
 See some of the actions in this org. Again this works best if your content is managed
-according to O3 guidelines.
+according to O3 guidelines. See [Set up GitHub Actions](set-up-github-actions.md) for details.
 
 ## Document and Train
 

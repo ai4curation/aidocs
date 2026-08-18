@@ -36,22 +36,33 @@ plugins:
 
 nav:
   - Home: index.md
+  - FAQ: faq.md
+  - Examples: examples.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
+     - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
+     - Build your agentic harness: how-tos/build-agentic-harness.md
+     - Write your own skills: how-tos/author-skills.md
   - Administrator how-tos:
      - Set up GitHub actions: how-tos/set-up-github-actions.md
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md
+     - Create an agentic curation pipeline: how-tos/create-agentic-curation-pipeline.md
+     - PR reviews for agent improvement: how-tos/pr-reviews-for-agent-improvement.md
   - Tutorials:
+     - Training materials for curators: tutorials/tutorials-for-curators.md
      - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - Reference:
      - Client apps: reference/client-apps.md
+     - Agentic tools: reference/agentic-tools.md
+     - GitHub integrations: reference/github-integrations.md
+     - Claude Skills: reference/claude-skills.md
      - Clients:
         - Claude Desktop: reference/clients/claude-desktop.md
         - Claude Code: reference/clients/claude-code.md
         - Codex CLI: reference/clients/codex-cli.md
         - Gemini CLI: reference/clients/gemini-cli.md
+        - GitHub Copilot: reference/clients/github-copilot.md
         - Goose: reference/clients/goose.md
-  - FAQ: faq.md
   - Glossary: glossary.md
 
 site_url: https://ai4curation.github.io/aidocs/
