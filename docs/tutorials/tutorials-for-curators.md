@@ -44,6 +44,3 @@ See the full [OBO Academy training calendar](https://oboacademy.github.io/obook/
   series on using coding agents in GO development.
 - **[Staying in the Loop: A Biocurator's Guide to Agentic AI Developments](https://zenodo.org/records/18614836)** —
   overview talk for biocurators.
-- **[geneontology/go-jupyter](https://github.com/geneontology/go-jupyter)** —
-  the shared cloud environment used to run agent workshops, where each
-  participant gets a preconfigured workspace and no key of their own.

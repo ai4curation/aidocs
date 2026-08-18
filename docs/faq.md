@@ -64,7 +64,7 @@ Use **[ai-blame](https://github.com/ai4curation/ai-blame)**, which extracts prov
 
 - **[noctua-mcp](https://github.com/geneontology/noctua-mcp)** — GO-CAM editing via Noctua/Barista
 - **[oak-mcp](https://github.com/monarch-initiative/oak-mcp)** — ontology search, traversal, and operations via OAK
-- **[owl-mcp](https://github.com/monarch-initiative/owl-mcp)** — general OWL ontology operations
+- **[owl-mcp](https://github.com/ai4curation/owl-mcp)** — general OWL ontology operations
 
 These give agents structured access to domain-specific operations instead of raw file manipulation.
 

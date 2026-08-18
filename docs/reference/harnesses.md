@@ -45,7 +45,9 @@ configuration that new users find hardest.
 
 For a whole team at once, a shared hosted environment removes the account and
 key problem as well as the installation problem. The Gene Ontology consortium
-runs one at [geneontology/go-jupyter](https://github.com/geneontology/go-jupyter).
+runs a JupyterHub instance for its workshops, where each participant logs in
+with GitHub and gets a workspace with an agent already configured, on a central
+key they never see.
 
 ## Historic
 

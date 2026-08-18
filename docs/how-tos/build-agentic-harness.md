@@ -41,7 +41,7 @@ MCP servers give agents structured access to domain-specific operations instead 
 
 - **[noctua-mcp](https://github.com/geneontology/noctua-mcp)** — GO-CAM editing via Noctua/Barista
 - **[oak-mcp](https://github.com/monarch-initiative/oak-mcp)** — ontology operations via OAK
-- **[owl-mcp](https://github.com/monarch-initiative/owl-mcp)** — OWL ontology operations
+- **[owl-mcp](https://github.com/ai4curation/owl-mcp)** — OWL ontology operations
 
 Without proper tool access, agents resort to ad-hoc text manipulation of ontology files, which is error-prone.
 

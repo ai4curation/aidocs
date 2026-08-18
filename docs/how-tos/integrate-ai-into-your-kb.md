@@ -31,10 +31,9 @@ clones the repository, runs the session in a cloud container, and opens the pull
 request. A curator needs a paid Claude plan and write access to your repository.
 
 For a whole team at once, a shared hosted environment removes the account
-problem as well. The Gene Ontology consortium runs one at
-[geneontology/go-jupyter](https://github.com/geneontology/go-jupyter), where each
-participant gets a workspace with an agent already configured and no key of
-their own.
+problem as well. The Gene Ontology consortium runs a JupyterHub instance for its
+workshops, where each participant gets a workspace with an agent already
+configured and no key of their own.
 
 Whichever route you choose, write down the setup steps in your repository.
 DisMech's [`CONTRIBUTING.md`](https://github.com/monarch-initiative/dismech/blob/main/CONTRIBUTING.md)

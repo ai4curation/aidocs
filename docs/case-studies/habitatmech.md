@@ -27,7 +27,7 @@ The same habitat has a different name in every source:
 | Path | What it is |
 | --- | --- |
 | `data/habitats/` | One YAML file per habitat, about 3,200 records |
-| [Term requests page](https://culturebotai.github.io/HabitatMech/term-requests.html) | Gaps this project is asking ENVO to fill |
+| [Term requests page](https://culturebotai.github.io/HabitatMech/pages/term-requests.html) | Gaps this project is asking ENVO to fill |
 | `src/habitatmech/schema/` | The LinkML schema |
 
 ## What works
@@ -56,7 +56,7 @@ pressure to guess.
 ### Gaps are published as term requests
 
 The project renders the terms it needs and cannot find as a public
-[term requests page](https://culturebotai.github.io/HabitatMech/term-requests.html)
+[term requests page](https://culturebotai.github.io/HabitatMech/pages/term-requests.html)
 for the ontology community. Curation that finds a gap produces a request rather
 than a workaround.
 

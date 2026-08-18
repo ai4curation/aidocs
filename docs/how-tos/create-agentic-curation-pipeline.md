@@ -486,7 +486,7 @@ Once the baseline validation gate works, add optional GitHub Actions around it:
   [kgx-release.yaml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/kgx-release.yaml).
 - **Stale review follow-up**: reassigns old PRs with outstanding review feedback
   back to the agent queue, as in
-  [stale-pr-reassign.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/stale-pr-reassign.yml).
+  [pr-shepherd.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/pr-shepherd.yml).
 - **Copilot setup**: if you use GitHub Copilot coding agent, add
   [copilot-setup-steps.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/copilot-setup-steps.yml)
   so the agent has the right dependencies and firewall setup.

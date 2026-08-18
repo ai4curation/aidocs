@@ -41,6 +41,8 @@ jobs:
             --accept 200,206,429
             --exclude-path docs/overrides
             --exclude 'github\.com/ai4curation/agent-watcher'
+            --exclude 'claude\.ai'
+            --exclude 'learn\.deeplearning\.ai'
             'docs/**/*.md'
             'README.md'
           fail: true
