@@ -4,14 +4,14 @@
 
 ### What is AI4Curators?
 
-AI4Curators is a project focused on providing practical guides for curators and maintainers of knowledge bases to integrate AI into their workflows. Rather than theoretical discussions, we emphasize immediate, actionable integration strategies that work with existing GitHub-based workflows.
+AI4Curators provides practical guides for curators and maintainers of knowledge
+bases who want to use AI agents in the workflows they already have.
 
-Our core mission includes:
-- Helping curators integrate AI agents into existing GitHub-based workflows
-- Providing plugins and tools for existing chat UIs  
-- Supporting ontology editing and curation workflows with AI assistance
+We do not centralize guidance. We point at repositories that run agents on real
+curation work and explain what they do, so you can copy a working setup. See
+[Case studies](case-studies/index.md).
 
-The project serves both as documentation and a practical example of AI agent integration, where GitHub agents can directly contribute to documentation and examples demonstrate real-world AI-assisted curation workflows.
+This repository is itself run this way. Agents contribute to it directly.
 
 ## GitHub Copilot Integration
 
@@ -35,7 +35,7 @@ GitHub Copilot's coding agent includes a firewall that restricts internet access
 - ✅ Works: `https://raw.githubusercontent.com/oborel/obo-relations/refs/heads/master/ro-base.owl`
 - ❌ Blocked: `http://purl.obolibrary.org/obo/ro/ro-base.owl`
 
-For more details, see the [GitHub Copilot](reference/clients/github-copilot.md) documentation and GitHub's guide on [customizing the agent firewall](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall).
+For more details, see the [GitHub Copilot](reference/github-copilot.md) documentation and GitHub's guide on [customizing the agent firewall](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall).
 
 ## Agent Harness and Infrastructure
 
@@ -67,3 +67,33 @@ Use **[ai-blame](https://github.com/ai4curation/ai-blame)**, which extracts prov
 - **[owl-mcp](https://github.com/monarch-initiative/owl-mcp)** — general OWL ontology operations
 
 These give agents structured access to domain-specific operations instead of raw file manipulation.
+
+### Which harness should I use?
+
+Claude Code or Codex. Both work. Your repository setup matters more than the
+choice between them. See [Harnesses](reference/harnesses.md).
+
+We previously recommended Goose for curators who were not comfortable at the
+command line. We no longer do for new setups.
+
+### Do I have to install anything?
+
+No. [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web)
+runs the session in a cloud container, clones the repository, and opens the pull
+request for you. See [Your first curation session](tutorials/first-curation-session.md).
+
+### Who is responsible for checking what my agent wrote?
+
+Your project has to answer this, and write the answer down.
+
+[DisMech](case-studies/dismech.md) states in its `CONTRIBUTING.md` that
+contributors are not assumed to have verified everything their agent produced,
+and that review is the process that catches problems. Other projects hold the
+contributor responsible. Either works. Leaving it unstated does not. See
+[Regulate the loop](patterns/human-regulating-the-loop.md).
+
+### Does validation mean the content is correct?
+
+No. Validation proves that a cited paper exists, that a quoted sentence is
+exact, and that an ontology term is real. It does not prove that a claim is
+scientifically correct. Say so where your readers can see it.

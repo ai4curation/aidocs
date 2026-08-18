@@ -1,213 +1,140 @@
-# How to create an AI agent for GitHub actions
+# Set up GitHub Actions
 
-This assumes that you are already using GitHub as your source of truth for
-content, O3-guidelines style.
+This guide adds an agent to a repository you already manage on GitHub. It
+assumes your content is in the repository and that you have basic quality
+control actions running.
 
-It also assumes you have some familiarity with GitHub actions, and
-have basic QC actions set up. If you are managing an ODK-compliant
-repo this is certainly the case.
+By the end you will have three workflows, which is the setup
+[GO](../case-studies/go-ontology.md) and [Uberon](../case-studies/uberon.md)
+both run.
 
-## IMPORTANT - GitHub repo configuration
-When using AI agents, ensure that your `main` repository branch has [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) enabled. Specifically, the `main` branch should have at least these settings configured:
-- Require pull request reviews before merging
-- Require at least one PR reviewer to approve the PR
-- Do not allow bypassing the above settings
+## Protect the main branch first
 
-## Quick setup with Claude Code
+Do this before anything else. Once an agent can open pull requests, your branch
+protection is what stops unreviewed content reaching your product.
 
-If you have [Claude Code](../reference/clients/claude-code.md) installed, you can use the `install-github-app` command for a streamlined setup process. This command will authenticate you and create a pull request with GitHub Actions configuration:
+Set these rules on `main` or `master`:
+
+* Require a pull request before merging.
+* Require at least one approving review.
+* Do not allow anyone to bypass these settings.
+
+## Add the workflows
+
+The quickest route is to let Claude Code do it:
 
 ```bash
 claude install-github-app
 ```
 
-This approach automatically handles authentication and creates the necessary GitHub Actions workflow for you. For more details, see the [Claude Code GitHub Actions documentation](https://docs.anthropic.com/en/docs/claude-code/github-actions).
+This authenticates you and opens a pull request that adds the workflow files.
+See the
+[Claude Code GitHub Actions documentation](https://docs.claude.com/en/docs/claude-code/github-actions)
+for what it creates.
 
-If you prefer manual setup or need more customization, continue with the manual configuration steps below.
+To do it by hand, copy from a repository that already works. All three of these
+run [`anthropics/claude-code-action`](https://github.com/anthropics/claude-code-action):
 
-## Set up `ai.yml`
+| Workflow | What it does | Copy from |
+| --- | --- | --- |
+| `ai-agent.yml` | Runs an agent when someone mentions it in an issue or comment | [GO](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/ai-agent.yml) |
+| `claude-code-review.yml` | Reviews every pull request | [GO](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/claude-code-review.yml) |
+| `copilot-setup-steps.yml` | Prepares the environment for the GitHub Copilot coding agent | [Uberon](https://github.com/obophenotype/uberon/blob/master/.github/workflows/copilot-setup-steps.yml) |
 
-This might look something like this:
+## Add the secrets
 
-https://github.com/monarch-initiative/mondo/blob/master/.github/workflows/ai-agent.yml
+Set these at `https://github.com/OWNER/REPO/settings/secrets/actions`.
 
-```yaml
-name: Dragon AI Agent GitHub Mentions
+| Secret | What it is for |
+| --- | --- |
+| `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` | Lets the action call the model. You need one of the two. |
+| `PAT_FOR_PR` | A token that lets the agent open pull requests, if the default token is not enough. |
 
-on:
-  issues:
-    types: [opened, edited]
-  issue_comment:
-    types: [created, edited]
-  pull_request:
-    types: [opened, edited]
-  pull_request_review_comment:
-    types: [created, edited]
+Agent runs cost money. Set a spending limit on the account that owns the key
+before you turn on anything that runs on a schedule.
 
-jobs:
-  check-mention:
-    runs-on: ubuntu-latest
-    outputs:
-      qualified-mention: ${{ steps.detect.outputs.qualified-mention }}
-      prompt: ${{ steps.detect.outputs.prompt }}
-      user: ${{ steps.detect.outputs.user }}
-      item-type: ${{ steps.detect.outputs.item-type }}
-      item-number: ${{ steps.detect.outputs.item-number }}
-      controllers: ${{ steps.detect.outputs.controllers }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      - name: Detect AI mention
-        id: detect
-        uses: dragon-ai-agent/github-mention-detector@v1.0.0
-        with:
-          github-token: ${{ secrets.PAT_FOR_PR }}
-          fallback-controllers: 'cmungall'
+## Write the instructions file
 
-  respond-to-mention:
-    needs: check-mention
-    if: needs.check-mention.outputs.qualified-mention == 'true'
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.PAT_FOR_PR }}
+Create `CLAUDE.md` in the repository root. Tell the agent:
 
-      - name: Respond with AI Agent
-        uses: dragon-ai-agent/run-goose-obo@v1.0.4
-        with:
-          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
-          openai-api-key: ${{ secrets.CBORG_API_KEY }}
-          github-token: ${{ secrets.PAT_FOR_PR }}
-          prompt: ${{ needs.check-mention.outputs.prompt }}
-          user: ${{ needs.check-mention.outputs.user }}
-          item-type: ${{ needs.check-mention.outputs.item-type }}
-          item-number: ${{ needs.check-mention.outputs.item-number }}
-          controllers: ${{ needs.check-mention.outputs.controllers }}
-          agent-name: 'Dragon-AI Agent'
-          branch-prefix: 'dragon_ai_agent'
-          robot-version: 'v1.9.7'
+* Which file is the editable product, and which files are generated.
+* How to search that file, with worked commands.
+* Your identifier rules, including the range for new terms.
+* The validation command to run before opening a pull request.
+
+[Cell Ontology's `CLAUDE.md`](https://github.com/obophenotype/cell-ontology/blob/master/CLAUDE.md)
+is a good short example of the search and identifier sections.
+
+Keep one authoritative file. If you also need `AGENTS.md` or
+`.github/copilot-instructions.md`, make them pointers rather than copies. See
+[One source of instructions](../patterns/one-source-of-instructions.md).
+
+## Declare your MCP servers in the repository
+
+Add `.mcp.json` so every session gets the same tools without the curator
+configuring anything. [EFO](../case-studies/efo.md) declares two:
+
+```json
+{
+  "mcpServers": {
+    "OLS-MCP": {
+      "type": "http",
+      "url": "http://www.ebi.ac.uk/ols4/api/mcp"
+    },
+    "artl-mcp": {
+      "command": "uvx",
+      "args": ["artl-mcp"]
+    }
+  }
+}
 ```
 
-This assumes using [goose-ai-obo-action](https://github.com/ai4curation/goose-ai-obo-action/)
+Ontology term lookup is the one to add first. It is the most common source of
+fabricated identifiers, and a lookup tool removes the need to guess. See
+[Make identifiers hard to fake](../patterns/ground-identifiers.md).
 
-## Set up repository secrets
+## Control who can start a run
 
-The URL should be something like `https://github.com/monarch-initiative/mondo/settings/secrets/actions`
+A mention in an issue comment starts an agent run, and on a public repository
+anyone can write that comment. Restrict who can summon the agent before you turn
+the workflow on. See
+[Guard the untrusted surface](../patterns/guard-untrusted-input.md).
 
-A typical setup might include:
+Note also that GitHub does not give repository secrets to workflows triggered
+from a fork. Pull requests from forks get no automated review. Decide now
+whether you will grant contributors branch access on the origin repository, as
+[DisMech](../case-studies/dismech.md) does, or accept that fork contributions
+are reviewed by humans only.
 
-* `ANTHROPIC_API_KEY`
-* `CBORG_API_KEY`
-* `PAT_FOR_PR`
+## Enable the GitHub Copilot coding agent
 
-The key names will correspond to what you have in the action.yml above
+Copilot works from issues and produces pull requests inside GitHub, without a
+local session. Uberon's
+[pull request 3580](https://github.com/obophenotype/uberon/pull/3580) shows the
+two files you need to change.
 
-## Configure the agent, including default MCPs
+Copilot's agent runs behind a firewall that blocks most external hosts by
+default, including `purl.obolibrary.org`. See
+[GitHub Copilot](../reference/github-copilot.md) for how to allowlist the hosts
+your workflows need.
 
-Create a folder `.config/[goose](../glossary.md#goose)` with a file `config.yaml`.
+## Then add validation
 
-Examples:
+Workflows that run agents are the easy half. The half that decides whether this
+works is the checking that happens afterwards.
 
-- [.config/goose for Mondo](https://github.com/monarch-initiative/mondo/tree/master/.config/goose)
+Add term and reference validation to continuous integration before you let
+agents open many pull requests. See
+[Make identifiers hard to fake](../patterns/ground-identifiers.md) and
+[Fast and slow validation](../patterns/fast-and-slow-validation.md).
 
-Here is an example:
+## Historic: dragon-ai-agent and Goose
 
-```yaml
-OPENAI_HOST: https://api.cborg.lbl.gov
-OPENAI_BASE_PATH: v1/chat/completions
-GOOSE_MODEL: anthropic/[claude-sonnet](../glossary.md#claude)
-GOOSE_PROVIDER: openai
-extensions:
-  developer:
-    bundled: true
-    display_name: Developer
-    enabled: true
-    name: developer
-    timeout: 300
-    type: builtin
-  git:
-    args:
-    - mcp-server-git
-    bundled: null
-    cmd: uvx
-    description: Git version control system integration
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: git
-    timeout: 300
-    type: stdio
-  memory:
-    bundled: true
-    display_name: Memory
-    enabled: true
-    name: memory
-    timeout: 300
-    type: builtin
-  owlmcp:
-    args:
-    - owl-mcp
-    bundled: null
-    cmd: uvx
-    description: ''
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: owlmcp
-    timeout: 300
-    type: stdio
-  pdfreader:
-    args:
-    - mcp-read-pdf
-    bundled: null
-    cmd: uvx
-    description: Read large and complex PDF documents
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: pdfreader
-    timeout: 300
-    type: stdio
-```
+Several OBO repositories run an older setup, in which `ai-agent.yml` calls
+`dragon-ai-agent` and the agent itself is Goose, configured in
+`.config/goose/config.yaml` with a `.goosehints` file for instructions.
+[Mondo](../case-studies/mondo.md) still runs this way.
 
-The `extensions` section defines the default MCP plugins.
-
-This setup is configured to use Anthropic claude-sonnet via a LiteLLM proxy (CBORG):
-
-```yaml
-OPENAI_HOST: https://api.cborg.lbl.gov
-OPENAI_BASE_PATH: v1/chat/completions
-GOOSE_MODEL: anthropic/claude-sonnet
-GOOSE_PROVIDER: openai
-```
-
-You can use a similar setup for your own LiteLLM proxy if you have one. Note: if you find this complex, please upvote [this issue](https://github.com/block/goose/issues/2507).
-
-Things are easier if you just want to talk straight to a provider like Anthropic, no proxy, all you need is `GOOSE_MODEL`. But note that this likely means you are using a personal API key. Be aware that agentic AI usage can be costly.
-
-## Set up .goosehints
-
-For many of my repos, I have a `CLAUDE.md` and I symlink `.goosehints` to that, because I am too lazy to write different instructions for different agents. In practice it might be better to tune instructions.
-
-What you put in there depends on your own use case. Do careful evaluations if you can't, but otherwise do vibe tests and iterate.
-
-Some examples here:
-
-- [CLAUDE.md on Mondo](https://github.com/monarch-initiative/mondo/blob/master/CLAUDE.md)
-
-
-## NEW: enable GitHub copilot to do reviews and PRs
-
-Change two files, as documented here:
-
-https://github.com/obophenotype/uberon/pull/3580
-
-
+Keep it working where it is deployed. Do not start there. One consequence is
+visible in Mondo: subagents defined under `.claude/agents/` are Claude Code
+features, so an agent started by a Goose-based workflow cannot reach them.

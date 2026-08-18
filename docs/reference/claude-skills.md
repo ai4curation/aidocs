@@ -66,4 +66,4 @@ These skills are particularly valuable for:
 
 - **Full Documentation**: [https://github.com/ai4curation/curation-skills](https://github.com/ai4curation/curation-skills)
 - **Related Guides**: [Integrate AI into your KB](../how-tos/integrate-ai-into-your-kb.md)
-- **Client Setup**: [Claude Code](clients/claude-code.md)
+- **Client Setup**: [Claude Code](harnesses.md)

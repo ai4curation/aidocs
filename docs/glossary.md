@@ -49,12 +49,15 @@ An automation platform provided by GitHub that allows users to automate software
 
 ## Goose
 
-An AI application and host environment that that allows you to interact with an AI model while also accessing local files, running local code, or using [MCPs](#model-context-protocol-mcp)
+An AI application and host environment that lets you interact with a model while
+also accessing local files, running local code, or using
+[MCPs](#model-context-protocol-mcp). It comes as a desktop app and a command
+line app.
 
-Goose is actually two separate programs
-
-* A Desktop app (recommended for non-technical tasks)
-* A Terminal / Command Line app, similar to Claude Code.
+Goose is historic on this site. Earlier guidance recommended it for curators who
+were not comfortable at the command line. We no longer recommend it for new
+setups, though it is still deployed in some repositories. See
+[Harnesses](reference/harnesses.md).
 
 ## OBO Format
 A standardized file format used for creating and exchanging ontologies, particularly prevalent in the biomedical and life sciences domains. For more details, see the [OBO Flat File Format Specification](http://owlcollab.github.io/oboformat/doc/GO.format.obo-1_4.html).
@@ -123,3 +126,30 @@ Here the community can be conceived of as containing both humans and AI agents.
 ## Tool
 
 In the context of AI agents, a tool refers to a specific function or capability that an AI model can access to perform actions beyond text generation, such as reading files, executing code, making API calls, or interacting with external systems.
+
+## Mech
+
+An informal name for a knowledge base built on the pattern established by
+[DisMech](case-studies/dismech.md): one YAML file per record, a LinkML schema,
+ontology-grounded terms, evidence with citations that are checked
+automatically, and curation carried out mostly by agents. Used by
+[several knowledge bases](case-studies/communitymech.md) beyond the original.
+
+## Scanner
+
+A scheduled job that looks for curation work and creates it, rather than waiting
+for a human to ask. Examples are literature scans, gap scans, and sweeps for
+stalled issues. See [Scanners find the work](patterns/scanners.md).
+
+## Skill
+
+A folder holding a `SKILL.md` file that describes one job for an agent. The
+agent loads it when that job comes up and ignores it otherwise. See
+[Break work into skills](patterns/skills-before-automation.md).
+
+## Subagent
+
+A separate agent run started by the main session, with its own context. Useful
+for jobs that read a great deal and report a little, because the reading does
+not stay in the main session. See
+[Break work into skills](patterns/skills-before-automation.md).

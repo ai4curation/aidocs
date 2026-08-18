@@ -12,7 +12,7 @@ This guide documents the different approaches for integrating AI agents with Git
 
 ## Dragon-AI Agent
 
-The Dragon-AI Agent approach uses custom GitHub Actions to deploy headless AI coding assistants (Claude Code or Goose) in response to issue/PR comments.
+The Dragon-AI Agent approach uses custom GitHub Actions to deploy headless AI coding assistants (Claude Code or Goose) in response to issue/PR comments. New repositories should use a Claude Code Action workflow instead. See [Set up GitHub Actions](../how-tos/set-up-github-actions.md).
 
 ### How It Works
 
@@ -153,7 +153,7 @@ Regardless of which approach you use, these files help guide AI behavior:
 | File | Purpose |
 |------|---------|
 | `CLAUDE.md` | System instructions for Claude-based agents |
-| `.goosehints` | Instructions for Goose (often symlinked to CLAUDE.md) |
+| `.goosehints` | Instructions for Goose. Historic; see [Harnesses](harnesses.md) |
 | `.github/copilot-instructions.md` | Instructions for GitHub Copilot |
 | `.github/ai-controllers.json` | Authorized users for Dragon-AI |
 

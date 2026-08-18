@@ -26,7 +26,7 @@ The ai4curation ecosystem already provides the building blocks. Here's how they 
 
 ### 1. Prompt preset management — System instructions
 
-Every repository should have a `CLAUDE.md` (for Claude Code / GitHub agents) and/or `.goosehints` (for Goose) checked into the root. These files tell the agent what the repository is, what conventions to follow, and what tools to use.
+Every repository should have a `CLAUDE.md` checked into the root. It tells the agent what the repository is, what conventions to follow, and what tools to use. If you also need `AGENTS.md` for Codex or `.github/copilot-instructions.md` for GitHub Copilot, make them pointers rather than copies. See [One source of instructions](../patterns/one-source-of-instructions.md).
 
 **Examples:**
 
@@ -84,7 +84,7 @@ GitHub branch protection rules ensure agents can't merge directly to main. Every
 │                                                     │
 │  ┌──────────────┐  ┌──────────────┐                 │
 │  │  CLAUDE.md   │  │  curation-   │   System        │
-│  │  .goosehints │  │  skills      │   Instructions  │
+│  │  AGENTS.md   │  │  skills      │   Instructions  │
 │  └──────────────┘  └──────────────┘                 │
 │                                                     │
 │  ┌──────────────┐  ┌──────────────┐                 │
@@ -108,7 +108,7 @@ GitHub branch protection rules ensure agents can't merge directly to main. Every
 │  └─────────────────────────────────┘                │
 │                                                     │
 │  ┌─────────────────────────────────┐                │
-│  │    AI Agent (Claude, Goose)     │   The Agent    │
+│  │    AI Agent (Claude, Codex)     │   The Agent    │
 │  └─────────────────────────────────┘                │
 └─────────────────────────────────────────────────────┘
 ```
@@ -131,5 +131,5 @@ As you mature your setup, add:
 ## Further reading
 
 - [Agentic tools reference](../reference/agentic-tools.md) — detailed documentation for each tool
-- [Example repositories](../examples.md) — see harnesses in action
+- [Example repositories](../case-studies/index.md) — see harnesses in action
 - [Agentic tooling on GitHub](https://github.com/topics/ai4curation)
