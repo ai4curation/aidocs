@@ -35,10 +35,13 @@ jobs:
       - name: Check links in Markdown
         uses: lycheeverse/lychee-action@v2
         with:
+          # 203: PubMed answers automated clients with "Non-Authoritative
+          # Information" rather than 200. The links resolve fine in a browser.
+          # 429: rate limiting, not a broken link.
           args: >-
             --no-progress
             --max-retries 2
-            --accept 200,206,429
+            --accept 200,203,206,429
             --exclude-path docs/overrides
             --exclude 'github\.com/ai4curation/agent-watcher'
             --exclude 'claude\.ai'
