@@ -12,8 +12,9 @@ ontology repository we track.
 | Path | What it is |
 | --- | --- |
 | [`.claude/skills/`](https://github.com/geneontology/go-ontology/tree/master/.claude/skills) | Ten skills, one per recurring job |
-| [`.github/workflows/ai-agent.yml`](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/ai-agent.yml) | Runs an agent when someone mentions it in an issue |
-| [`.github/workflows/claude-code-review.yml`](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/claude-code-review.yml) | Reviews pull requests |
+| [`.github/workflows/ai-agent.yml`](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/ai-agent.yml) | Runs the [ai4c-agent](../reference/bots/ai4c-agent.md) bot on a trigger keyword |
+| [`.github/workflows/claude-code-review.yml`](https://github.com/geneontology/go-ontology/blob/master/.github/workflows/claude-code-review.yml) | Runs the [ai4c-reviewer](../reference/bots/ai4c-reviewer.md) bot on pull requests |
+| `.github/ai-controllers.json` | Who is allowed to trigger the agent |
 | [`CLAUDE.md`](https://github.com/geneontology/go-ontology/blob/master/CLAUDE.md) | Repository instructions |
 
 The ten skills are `chemical-entity`, `design-pattern`, `external-term-lookup`,
@@ -33,6 +34,24 @@ because the detail lives in the skill that needs it. See
 `odk-make` is worth a look on its own. It wraps the Ontology Development Kit
 commands so the agent runs the same build steps an editor runs, instead of
 inventing its own.
+
+### The workflows explain themselves
+
+GO's two agent workflows carry long header comments saying what each choice is
+for: why the review skips `ontobot` pull requests but not agent-authored ones,
+why the app id and the bot user id are different numbers, why the review rubric
+lives in a skill rather than the prompt. If you are setting up your own
+[bots](../reference/bots/index.md), read these two files before anything else on
+this site.
+
+### Two bots, not one
+
+GO runs [ai4c-agent](../reference/bots/ai4c-agent.md) for editing and
+[ai4c-reviewer](../reference/bots/ai4c-reviewer.md) for review. The split exists
+because GitHub does not let an identity approve its own pull request. GO
+deliberately reviews the editing bot's own pull requests, which its workflow
+calls the highest-value case, since that is where fabricated identifiers get
+caught.
 
 ## What to copy first
 

@@ -14,7 +14,7 @@ This guide documents the different approaches for integrating AI agents with Git
 
 The Dragon-AI Agent approach uses custom GitHub Actions to deploy headless AI coding assistants (Claude Code or Goose) in response to issue/PR comments. New repositories should use a Claude Code Action workflow instead. See [Set up GitHub Actions](../how-tos/set-up-github-actions.md).
 
-The `dragon-ai-agent` machine account itself is semi-retired. Mondo still runs it; DisMech keeps the mention as a trigger keyword only. For which identity actually does the work, see [Bots](bots.md).
+The `dragon-ai-agent` machine account itself is semi-retired. Mondo still runs it; DisMech keeps the mention as a trigger keyword only. For which identity actually does the work, see [Bots](bots/index.md).
 
 ### How It Works
 

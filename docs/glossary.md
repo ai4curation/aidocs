@@ -159,7 +159,7 @@ not stay in the main session. See
 The GitHub identity that agent work appears under: the name in the byline on an
 issue, commit, or pull request. Distinct from the agent, which is the software
 doing the work. A bot is either a GitHub App or a machine account. See
-[Bots](reference/bots.md).
+[Bots](reference/bots/index.md).
 
 ## GitHub App
 

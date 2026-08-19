@@ -91,7 +91,7 @@ the approving review that branch protection requires.
 
 The split exists because GitHub does not let an identity approve its own pull
 request. One bot doing both jobs would mean every agent pull request needed a
-human approval, which would undo the whole model. See [Bots](../reference/bots.md).
+human approval, which would undo the whole model. See [Bots](../reference/bots/index.md).
 
 The `dragon-ai-agent` machine account is retired here. The
 `@dragon-ai-agent please ...` mention survives as a trigger keyword only.

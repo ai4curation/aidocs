@@ -75,7 +75,13 @@ nav:
      - Training materials for curators: tutorials/tutorials-for-curators.md
   - Reference:
      - Harnesses: reference/harnesses.md
-     - Bots: reference/bots.md
+     - Bots:
+        - Overview: reference/bots/index.md
+        - ai4c-agent: reference/bots/ai4c-agent.md
+        - ai4c-reviewer: reference/bots/ai4c-reviewer.md
+        - claude: reference/bots/claude.md
+        - copilot-swe-agent: reference/bots/copilot.md
+        - dragon-ai-agent: reference/bots/dragon-ai-agent.md
      - Agentic tools: reference/agentic-tools.md
      - GitHub integrations: reference/github-integrations.md
      - GitHub Copilot: reference/github-copilot.md

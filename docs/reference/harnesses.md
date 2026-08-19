@@ -63,13 +63,13 @@ OBO repositories. Semi-retired: [Mondo](../case-studies/mondo.md) still runs the
 machine account, while [DisMech](../case-studies/dismech.md) has retired it and
 keeps only the mention as a trigger keyword, with the work done by the
 `ai4c-agent` App. New repositories should use a Claude Code Action workflow
-instead. See [Bots](bots.md) and
+instead. See [Bots](bots/index.md) and
 [GitHub integrations](github-integrations.md).
 
 ## The agent is not the identity
 
 The harness is the software. The identity the work appears under is a separate
-choice, and it is the one that controls permissions. See [Bots](bots.md).
+choice, and it is the one that controls permissions. See [Bots](bots/index.md).
 
 ## Give every session the same tools
 
