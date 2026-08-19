@@ -81,6 +81,21 @@ entries, and move stalled issues and pull requests forward. Low-risk scanners
 may use cheaper models. A `low_effort` label lets a human assign a task to a
 cheaper model by hand. See [Scanners](../patterns/scanners.md).
 
+### Two bots, so review counts
+
+DisMech runs two GitHub Apps of its own.
+[`ai4c-agent`](https://github.com/apps/ai4c-agent) does the work. It responds to
+mentions and moves stalled pull requests forward.
+[`ai4c-reviewer`](https://github.com/apps/ai4c-reviewer) reviews and supplies
+the approving review that branch protection requires.
+
+The split exists because GitHub does not let an identity approve its own pull
+request. One bot doing both jobs would mean every agent pull request needed a
+human approval, which would undo the whole model. See [Bots](../reference/bots.md).
+
+The `dragon-ai-agent` machine account is retired here. The
+`@dragon-ai-agent please ...` mention survives as a trigger keyword only.
+
 ### The untrusted surface is guarded
 
 Pull requests from forks are closed, because GitHub does not give fork workflows

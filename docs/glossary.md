@@ -153,3 +153,23 @@ A separate agent run started by the main session, with its own context. Useful
 for jobs that read a great deal and report a little, because the reading does
 not stay in the main session. See
 [Break work into skills](patterns/skills-before-automation.md).
+
+## Bot
+
+The GitHub identity that agent work appears under: the name in the byline on an
+issue, commit, or pull request. Distinct from the agent, which is the software
+doing the work. A bot is either a GitHub App or a machine account. See
+[Bots](reference/bots.md).
+
+## GitHub App
+
+An application installed into a repository or organization, with its own
+identity and its own permissions. Workflows mint a short-lived token for it per
+run. GitHub shows App bylines with a `[bot]` suffix, as in `ai4c-agent[bot]`.
+
+## Machine account
+
+An ordinary GitHub user account that a program logs in as, sometimes called a
+machine user. It looks like a person in the interface, uses a seat, and
+authenticates with a long-lived personal access token. `dragon-ai-agent` is one.
+Prefer a [GitHub App](#github-app) for anything new.

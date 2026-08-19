@@ -44,6 +44,11 @@ subagents under `.claude/agents/` are Claude Code features. An agent triggered
 by `ai-agent.yml` therefore cannot reach them. They are available in local
 Claude Code sessions only.
 
+Mondo is also the last repository we track that still runs the
+`dragon-ai-agent` machine account. It authenticates with a personal access token
+held in the `PAT_FOR_PR` secret. DisMech has moved the same job to a GitHub App
+with a token minted per run. See [Bots](../reference/bots.md).
+
 This is not necessarily wrong, but it is undocumented. If you have both, say in
 `CLAUDE.md` which surface each one serves. If you want the subagents reachable
 from GitHub, add a workflow that runs Claude Code the way

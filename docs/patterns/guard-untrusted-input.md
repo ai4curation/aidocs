@@ -31,6 +31,10 @@ documenting the keyword does not summon the agent every time someone reads it.
 production. Give the watcher read access, not write. Instructions are guidance;
 credentials are the control.
 
+**Pick the identity deliberately.** What a bot may do is set by its permissions,
+not by what you told it. A reviewer bot needs to read code and write reviews; it
+does not need to push branches. See [Bots](../reference/bots.md).
+
 ## Separate reading from writing
 
 Agents that only read are far less risky than agents that write. If your agent

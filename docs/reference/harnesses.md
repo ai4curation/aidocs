@@ -59,9 +59,17 @@ Goose, and Goose configuration remains in a few repositories. Keep it working
 where it is deployed. Do not start there.
 
 **dragon-ai-agent.** The agent behind the `@dragon-ai-agent` mention in several
-OBO repositories. Still running in Mondo and elsewhere. New repositories should
-use a Claude Code Action workflow instead. See
+OBO repositories. Semi-retired: [Mondo](../case-studies/mondo.md) still runs the
+machine account, while [DisMech](../case-studies/dismech.md) has retired it and
+keeps only the mention as a trigger keyword, with the work done by the
+`ai4c-agent` App. New repositories should use a Claude Code Action workflow
+instead. See [Bots](bots.md) and
 [GitHub integrations](github-integrations.md).
+
+## The agent is not the identity
+
+The harness is the software. The identity the work appears under is a separate
+choice, and it is the one that controls permissions. See [Bots](bots.md).
 
 ## Give every session the same tools
 
