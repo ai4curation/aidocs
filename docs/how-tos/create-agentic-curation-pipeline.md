@@ -5,11 +5,15 @@ repository where the canonical knowledge base is a set of YAML files, validated
 by LinkML and reviewed through GitHub pull requests.
 
 The main example is
-[DisMech](https://github.com/monarch-initiative/dismech), a disorder mechanisms
-knowledge base. The same pattern is also used in derived mechanism repositories
-such as `community-mech`, and in
-[ai-gene-review](https://github.com/ai4curation/ai-gene-review), where each YAML
-file is an AI-assisted gene review rather than a disease mechanism record.
+[DisMech](../case-studies/dismech.md), a disorder mechanisms knowledge base. The
+same pattern is used in
+[AI Gene Review](../case-studies/ai-gene-review.md), where each YAML file is a
+gene review, and in the six
+[CultureBot mechs](../case-studies/communitymech.md), which cover microbial
+communities, habitats, traits, culture media, and media ingredients.
+
+Read the case studies first if you want to see the finished result before you
+build one.
 
 This page assumes you already have the basic GitHub agent wiring from
 [How to create an AI agent for GitHub actions](set-up-github-actions.md). For
@@ -404,8 +408,8 @@ Before opening a PR:
 ```
 
 Do not put every detailed workflow in the top-level instructions. Use
-[skills](../reference/claude-skills.md) for task-specific procedures that agents
-can load when relevant. DisMech has skills for
+[skills](../patterns/skills-before-automation.md) for task-specific procedures
+that agents can load when relevant. DisMech has skills for
 [ontology term work](https://github.com/monarch-initiative/dismech/blob/main/.claude/skills/dismech-terms/SKILL.md),
 [reference validation and repair](https://github.com/monarch-initiative/dismech/blob/main/.claude/skills/dismech-references/SKILL.md),
 [compliance improvement](https://github.com/monarch-initiative/dismech/blob/main/.claude/skills/dismech-compliance/SKILL.md),
@@ -482,7 +486,7 @@ Once the baseline validation gate works, add optional GitHub Actions around it:
   [kgx-release.yaml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/kgx-release.yaml).
 - **Stale review follow-up**: reassigns old PRs with outstanding review feedback
   back to the agent queue, as in
-  [stale-pr-reassign.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/stale-pr-reassign.yml).
+  [pr-shepherd.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/workflows/pr-shepherd.yml).
 - **Copilot setup**: if you use GitHub Copilot coding agent, add
   [copilot-setup-steps.yml](https://github.com/monarch-initiative/dismech/blob/main/.github/copilot-setup-steps.yml)
   so the agent has the right dependencies and firewall setup.
@@ -555,7 +559,7 @@ pattern is:
 - records remain fully explicit
 - validation and review check whether a claimed conformance is plausible
 
-This is a good way to derive repositories such as `community-mech` from the
+This is a good way to derive repositories such as [CommunityMech](../case-studies/communitymech.md) from the
 DisMech pattern while changing the domain model and content.
 
 ## 13. Touching Ontology Workflows

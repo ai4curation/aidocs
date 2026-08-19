@@ -4,9 +4,9 @@ This repository contains documentation about using AI to assist with curation, p
 
 ## Documentation
 
-📖 **[Visit the full documentation](https://ai4curation.github.io/aidocs/)**
+📖 **[Visit the full documentation](https://ai4curation.io/aidocs/)**
 
-The complete guides, tutorials, and reference materials are available on our [GitHub Pages site](https://ai4curation.github.io/aidocs/).
+The complete guides, tutorials, and reference materials are available on our [GitHub Pages site](https://ai4curation.io/aidocs/).
 
 ## About
 

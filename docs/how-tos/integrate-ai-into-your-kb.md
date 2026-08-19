@@ -21,29 +21,27 @@ Examples:
 
  - [CLAUDE.md in Uberon repo](https://github.com/obophenotype/uberon/blob/master/CLAUDE.md)
 
-## Tip 3: Train curators to use simple tool-enabled AI applications (e.g [Goose](../glossary.md#goose))
+## Tip 3: Let curators run agents in the cloud
 
-Many AI hosts such as Claude Code or various VS code plugins are suboptimal for non-technical users. AI applications such as Claude Desktop may be better, but currently it's hard to configure.
+The two things that stop curators are installing software and getting access to
+a model. Both go away if you point them at a browser.
 
-At the time of writing, we recommend Goose as an AI app/host, due to these features:
+[Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web)
+clones the repository, runs the session in a cloud container, and opens the pull
+request. A curator needs a paid Claude plan and write access to your repository.
 
-- Ease of configuring MCPs
-- Choice of either Desktop version (for non-devs) or Command Line (for devs)
-- Ability to use multiple models including proxies.
+For a whole team at once, a shared hosted environment removes the account
+problem as well. The Gene Ontology consortium runs a JupyterHub instance for its
+workshops, where each participant gets a workspace with an agent already
+configured and no key of their own.
 
-See the [Installation Guide](https://block.github.io/goose/docs/getting-started/installation/)
+Whichever route you choose, write down the setup steps in your repository.
+DisMech's [`CONTRIBUTING.md`](https://github.com/monarch-initiative/dismech/blob/main/CONTRIBUTING.md)
+is a good model: it covers the environment configuration, the network access
+setting, and the environment variables its tools need.
 
-As an example, this video shows how to configure:
-
-<iframe 
-  width="500" 
-  height="560" 
-  src="https://www.youtube.com/embed/509qVPEbv0Q" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-  allowfullscreen>
-</iframe>
+We previously recommended Goose here. We no longer do for new setups. See
+[Harnesses](../reference/harnesses.md).
 
 ## Tip 4: Validate agent outputs automatically
 

@@ -36,8 +36,10 @@ but check with your repo maintainer first for local procedures.
 ### AI system instructions
 
 See the file `~/CLAUDE.md` in the top level of the repo. Other AI
-applications may use different files -- for example, [goose](../glossary.md#goose) uses
-`~/.goosehints`, but these will typically be symlinked.
+applications may use different files. Codex reads `AGENTS.md` and GitHub
+Copilot reads `.github/copilot-instructions.md`. Keep one file authoritative and
+make the others pointers to it, rather than maintaining copies. See
+[One source of instructions](../patterns/one-source-of-instructions.md).
 
 The instructions are in natural language and should be equally
 readable by humans or AI.
@@ -50,7 +52,7 @@ Depending on what AI host runner is used, the configuration file that
 controls which agents are available may be in different places.
 
 - For claude code, this will be in `.claude/settings.json`
-- For goose, this will be in `.config/goose/config.yaml`
+- For Goose, which is [historic](../reference/harnesses.md), this is in `.config/goose/config.yaml`
 
 ## Prompting guide
 

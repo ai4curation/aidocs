@@ -185,7 +185,7 @@ The principles above are easier to absorb from real, working skill sets. Both re
 
 ### Monarch dismech
 
-[`monarch-initiative/dismech`](https://github.com/monarch-initiative/dismech) is a knowledge base of disease mechanisms, stored as LinkML-schema YAML files with bindings to ontologies like MONDO, HPO, and GO. It ships ~14 skills covering the full curation lifecycle, and is a good example of using skills as **standard operating procedures** rather than just capability shims.
+[`monarch-initiative/dismech`](https://github.com/monarch-initiative/dismech) is a knowledge base of disease mechanisms, stored as LinkML-schema YAML files with bindings to ontologies like MONDO, HPO, and GO. It ships seventeen skills covering the full curation lifecycle, and is a good example of using skills as **standard operating procedures** rather than just capability shims.
 
 Patterns worth copying:
 
@@ -195,7 +195,7 @@ Patterns worth copying:
 
 ### GO ontology
 
-[`geneontology/go-ontology`](https://github.com/geneontology/go-ontology) is the development repo for the Gene Ontology. Its eight skills (`design-pattern`, `taxon-constraint`, `term-obsoletion`, `external-term-lookup`, `mapping`, `reaction`, `chemical-entity`, `research`) are a clean illustration of the "[consider not writing a skill](#consider-not-writing-a-skill)" point inverted: the agent already knows ontology basics, so these skills exist to encode **latent, project-specific knowledge that overrides its defaults**.
+[`geneontology/go-ontology`](https://github.com/geneontology/go-ontology) is the development repo for the Gene Ontology. Its ten skills (`design-pattern`, `taxon-constraint`, `term-obsoletion`, `external-term-lookup`, `mapping`, `reaction`, `chemical-entity`, `research`, `odk-make`, `pr-review`) are a clean illustration of the "[consider not writing a skill](#consider-not-writing-a-skill)" point inverted: the agent already knows ontology basics, so these skills exist to encode **latent, project-specific knowledge that overrides its defaults**.
 
 Patterns worth copying:
 
@@ -203,6 +203,28 @@ Patterns worth copying:
 - **Domain SOPs with explicit judgement calls.** [`taxon-constraint`](https://github.com/geneontology/go-ontology/tree/master/.claude/skills/taxon-constraint) encodes when *not* to act: prefer parsimonious (broader) constraints, skip constraints already inherited from CL/UBERON, and remove them when a term is obsoleted.
 - **Cross-referencing skills for composition.** The `design-pattern` skill defers chemical terms to the `chemical-entity` skill rather than duplicating that knowledge — modular skills that point at each other instead of repeating content.
 
-## Optional: Create a skills marketplace
+For more on both repositories, see the
+[DisMech](../case-studies/dismech.md) and [GO](../case-studies/go-ontology.md)
+case studies.
 
-TODO
+## Optional: create a skills marketplace
+
+Once several repositories in your organization need the same skill, stop copying
+it. A marketplace is a repository of skills that others install from, so a fix
+lands in one place.
+
+[curation-skills](https://github.com/ai4curation/curation-skills) holds the
+shared ontology and biocuration skills for this organization. The CultureBot
+mechs keep a shared `culturebot-skills` repository and use it the same way
+across their six knowledge bases.
+
+Use a marketplace when a skill is genuinely general, such as term lookup or
+reference validation. Keep skills that encode one project's conventions in that
+project. A shared skill that has to describe five projects' conventions helps
+none of them.
+
+Whichever you choose, record where a skill came from. The main risk with copied
+skills is silent divergence: [Uberon](../case-studies/uberon.md) and
+[Mondo](../case-studies/mondo.md) share four subagent names, and neither
+repository says whether the shared ones are kept in sync. See
+[One source of instructions](../patterns/one-source-of-instructions.md).

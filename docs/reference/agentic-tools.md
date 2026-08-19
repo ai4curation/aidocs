@@ -60,9 +60,15 @@ MCP server for ontology operations via the Ontology Access Kit ([OAK](../glossar
 
 ## System Instructions
 
-### CLAUDE.md / .goosehints
+### CLAUDE.md and AGENTS.md
 
-Configuration files checked into the root of your repository that provide system-level instructions to AI agents. These serve as prompt preset management — different repositories can have different instructions tailored to their domain and workflows.
+Files checked into the root of your repository that tell agents what the
+repository is, which files are editable, and what conventions to follow.
+Different agents read different files: Claude Code reads `CLAUDE.md`, Codex
+reads `AGENTS.md`, and GitHub Copilot reads `.github/copilot-instructions.md`.
+
+Keep one of them authoritative and make the others pointers to it. See
+[One source of instructions](../patterns/one-source-of-instructions.md).
 
 - **When to use**: Always. Every repository that uses AI agents should have system instructions.
 - See [Instruct the GitHub agent](../how-tos/instruct-github-agent.md)
@@ -70,6 +76,8 @@ Configuration files checked into the root of your repository that provide system
 
 ## Further Reading
 
+- [Case studies](../case-studies/index.md) — these tools in the repositories that use them
+- [Patterns](../patterns/index.md) — the practices they support
 - [Build your agentic harness](../how-tos/build-agentic-harness.md) — how these tools compose into a harness
 - [Browse agentic tooling on GitHub](https://github.com/topics/ai4curation)
 - [ai4curation GitHub org](https://github.com/ai4curation)

@@ -154,8 +154,8 @@ While it's possible to disable the firewall entirely, **this is not recommended*
 
 - [GitHub Copilot documentation](https://docs.github.com/en/copilot)
 - [Customizing the agent firewall](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall)
-- [Set up GitHub actions](../../how-tos/set-up-github-actions.md)
-- [Instruct the GitHub agent](../../how-tos/instruct-github-agent.md)
+- [Set up GitHub actions](../how-tos/set-up-github-actions.md)
+- [Instruct the GitHub agent](../how-tos/instruct-github-agent.md)
 
 ## Example: Configuring Copilot for OBO Workflows
 

@@ -1,0 +1,51 @@
+name: Docs checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    # Weekly, to catch links that rot in the repos this site points at.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --all-extras
+      - name: Build with MkDocs
+        run: uv run mkdocs build --strict
+
+  links:
+    name: Check links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links in Markdown
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 203: PubMed answers automated clients with "Non-Authoritative
+          # Information" rather than 200. The links resolve fine in a browser.
+          # 429: rate limiting, not a broken link.
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200,203,206,429
+            --exclude-path docs/overrides
+            --exclude 'github\.com/ai4curation/agent-watcher'
+            --exclude 'claude\.ai'
+            --exclude 'learn\.deeplearning\.ai'
+            'docs/**/*.md'
+            'README.md'
+          fail: true

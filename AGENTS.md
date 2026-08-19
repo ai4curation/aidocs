@@ -68,3 +68,28 @@ curation workflows.
 - Follow existing documentation structure instead of creating new sections
   unnecessarily.
 - Emphasize how AI improves existing workflows rather than replacing curators.
+
+## Site structure
+
+The site has two sections that carry most of its value:
+
+- `docs/case-studies/`: one page per repository that runs agents on real
+  curation. Each page follows the same shape: what to look at, what works, what
+  to copy first, and gaps.
+- `docs/patterns/`: practices that appear in more than one repository. Each page
+  names at least two repositories that use it.
+
+Do not centralize material that belongs in another repository. Link to the file
+or folder instead. If a page disagrees with the repository it describes, the
+repository is right.
+
+Counts of skills, subagents, and workflows come from
+[agent-watcher](https://github.com/ai4curation/agent-watcher). Cite the dated
+report you took them from, as `docs/evidence.md` does.
+
+## Checks
+
+Run `uv run mkdocs build --strict` before committing. The `docs-checks.yml`
+workflow runs the same build and a link check on every pull request, and the
+link check also runs weekly to catch links that rot in the repositories this
+site points at.

@@ -36,8 +36,30 @@ plugins:
 
 nav:
   - Home: index.md
-  - FAQ: faq.md
-  - Examples: examples.md
+  - Case studies:
+     - Overview: case-studies/index.md
+     - Ontologies:
+        - GO: case-studies/go-ontology.md
+        - Uberon: case-studies/uberon.md
+        - Mondo: case-studies/mondo.md
+        - Cell Ontology: case-studies/cell-ontology.md
+        - EFO: case-studies/efo.md
+     - The mechs:
+        - DisMech: case-studies/dismech.md
+        - AI Gene Review: case-studies/ai-gene-review.md
+        - CommunityMech: case-studies/communitymech.md
+        - HabitatMech: case-studies/habitatmech.md
+  - Patterns:
+     - Overview: patterns/index.md
+     - Make identifiers hard to fake: patterns/ground-identifiers.md
+     - Regulate the loop: patterns/human-regulating-the-loop.md
+     - Break work into skills: patterns/skills-before-automation.md
+     - One source of instructions: patterns/one-source-of-instructions.md
+     - Fast and slow validation: patterns/fast-and-slow-validation.md
+     - Scanners find the work: patterns/scanners.md
+     - One review checklist: patterns/review-checklists.md
+     - Shared control: patterns/shared-control.md
+     - Guard the untrusted surface: patterns/guard-untrusted-input.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
      - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
@@ -49,21 +71,24 @@ nav:
      - Create an agentic curation pipeline: how-tos/create-agentic-curation-pipeline.md
      - PR reviews for agent improvement: how-tos/pr-reviews-for-agent-improvement.md
   - Tutorials:
+     - Your first curation session: tutorials/first-curation-session.md
      - Training materials for curators: tutorials/tutorials-for-curators.md
-     - Ontology editing with AI: tutorials/ontology-editing-with-ai.md
   - Reference:
-     - Client apps: reference/client-apps.md
+     - Harnesses: reference/harnesses.md
+     - Bots:
+        - Overview: reference/bots/index.md
+        - ai4c-agent: reference/bots/ai4c-agent.md
+        - ai4c-reviewer: reference/bots/ai4c-reviewer.md
+        - claude: reference/bots/claude.md
+        - copilot-swe-agent: reference/bots/copilot.md
+        - dragon-ai-agent: reference/bots/dragon-ai-agent.md
      - Agentic tools: reference/agentic-tools.md
      - GitHub integrations: reference/github-integrations.md
+     - GitHub Copilot: reference/github-copilot.md
      - Claude Skills: reference/claude-skills.md
-     - Clients:
-        - Claude Desktop: reference/clients/claude-desktop.md
-        - Claude Code: reference/clients/claude-code.md
-        - Codex CLI: reference/clients/codex-cli.md
-        - Gemini CLI: reference/clients/gemini-cli.md
-        - GitHub Copilot: reference/clients/github-copilot.md
-        - Goose: reference/clients/goose.md
+  - Evidence: evidence.md
+  - FAQ: faq.md
   - Glossary: glossary.md
 
-site_url: https://ai4curation.github.io/aidocs/
+site_url: https://ai4curation.io/aidocs/
 repo_url: https://github.com/ai4curation/aidocs/
