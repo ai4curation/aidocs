@@ -49,6 +49,8 @@ nav:
         - AI Gene Review: case-studies/ai-gene-review.md
         - CommunityMech: case-studies/communitymech.md
         - HabitatMech: case-studies/habitatmech.md
+     - Pipelines:
+        - Gemma curation agents: case-studies/gemma-curation.md
   - Patterns:
      - Overview: patterns/index.md
      - Make identifiers hard to fake: patterns/ground-identifiers.md

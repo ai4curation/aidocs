@@ -41,6 +41,16 @@ Four more repositories in the CultureBot family follow the same shape:
 [proteintraitsmech](https://github.com/CultureBotAI/proteintraitsmech) (protein
 traits). See [CommunityMech](communitymech.md) for how the family fits together.
 
+## Block C: pipelines
+
+Not a Git-native knowledge base. The product is a database, agents run as a
+batch job, and review happens outside GitHub. Included for how it is built and
+measured, not for its workflow shape.
+
+| Repository | What it curates | Read this first |
+| --- | --- | --- |
+| [Gemma curation agents](gemma-curation.md) | Sample and experiment metadata for transcriptomic studies | `docs/curation_rules/` |
+
 ## How to read a case study
 
 Each page has the same four sections:
