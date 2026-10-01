@@ -95,6 +95,15 @@ agent completes with a given success rate. The method is set out in
 and where they stop applying. With newer models the doubling has sped up to
 roughly every three to four months
 ([METR, January 2026](https://metr.org/blog/2026-1-29-time-horizon-1-1/)).
+
+![Log-scale chart of the length of task AI agents complete with 50% success, rising from seconds for GPT-2 in 2019 to about two hours for o3 in 2025, with a doubling time of 207 days](../images/explanations/metr-time-horizon.png)
+
+*The length of tasks, measured by how long they take human professionals, that
+frontier agents complete with 50% reliability, 2019 to early 2025. Figure 1 of
+[Kwa et al., 2025](https://arxiv.org/abs/2503.14499), METR,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Models released since
+then sit above the dashed extrapolation; see METR's
+[current chart](https://metr.org/time-horizons/).*
 For the strongest model on its
 [current chart](https://metr.org/time-horizons/), the task length completed half
 the time is around 17 hours, but the length completed 80% of the time is around
