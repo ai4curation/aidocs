@@ -1,14 +1,14 @@
 # How agents change curation work
 
-Our position is that, with agents, a curation team can do roughly ten times
-more work **and** do it better, because every piece of work can get a second
-pair of eyes. Until now, curators could rarely afford that.
+Our position is that agents can make biocuration roughly ten times more
+efficient **and** better at the same time, because every piece of curation can
+get a second pair of eyes. Until now, curators could rarely afford that.
 
-That is a claim, not a measurement. Nobody has yet measured a tenfold gain in
-end-to-end curation. This page sets out why we think it is achievable, what the
-evidence from other fields says for and against it, and what would have to be
-true for it to hold. It draws on [How agents changed software development](software-development.md),
-because software is a year or two ahead of curation on the same path.
+We do not have end-to-end numbers for this yet. This page sets out why we think
+it, the first results from GO groups, what other expert fields show, and what
+has to be true for it to hold. The companion page,
+[How agents changed software development](software-development.md), covers the
+same change in software.
 
 ## Radiology: the replacement that did not happen
 
@@ -76,91 +76,105 @@ detected with no increase in recalls
 
 Two caveats. Pooled across the three large European studies, the gain in
 detection is real but modest, about one more cancer per thousand women
-([Ferre et al., 2026](https://pubmed.ncbi.nlm.nih.gov/42617468/)). And the
-gain in efficiency is 44%, not tenfold. Screening was already highly optimised,
-with two expert readers on every exam. Curation is not, which is why we think
-the multiple can be larger.
+([Ferre et al., 2026](https://pubmed.ncbi.nlm.nih.gov/42617468/)). Screening
+was already highly optimised, with two expert readers on every exam. Most
+curation has one.
 
 ## Second eyes in curation
 
 Agents make review cheap in both directions.
 
-**AI reviews human work.** A retrieval-assisted model checking annotations in
-the Gemma gene expression database found manual curation errors in more than
-200 experiments, about 2% of the total. Because it quoted the supporting text
-verbatim, curators could check each finding quickly
-([Rogic et al., *Database*, 2026](https://pubmed.ncbi.nlm.nih.gov/42483875/)).
-[AI Gene Review](../case-studies/ai-gene-review.md) does the same for existing
-GO annotations, gene by gene, and asks experts to vote on its suggestions.
+**AI reviews human work.** In the GO ontology, an AI reviewer now checks nearly
+every pull request: whether the right references are cited, whether the
+statements in a definition are correct, whether cross-references are right, and
+whether the change addresses the issue and nothing else. Over two months it
+reviewed 172 pull requests and caught real errors in biology, axioms, and
+provenance that passed the automated checks. Those included errors in pull
+requests written by curators as well as by the editing agent, which now authors
+about a quarter of them (GO ontology team report, GO Consortium meeting,
+autumn 2026). See [GO ontology](../case-studies/go-ontology.md).
 
-**Humans review AI work.** GOFlowLLM drafted GO annotations from 6,996
-uncurated microRNA papers in 58 hours, producing 2,538 candidate annotations.
-Curators agreed with 87% of the terms and 93% of the evidence it chose. For
-comparison, about 1,400 microRNA papers were curated by hand over the previous
-decade ([Green et al., *Bioinformatics*, 2026](https://pubmed.ncbi.nlm.nih.gov/41495476/)).
+The same holds outside GO. A model checking annotations in the Gemma gene
+expression database found manual curation errors in more than 200
+experiments, about 2% of the total. Because it quoted the supporting text, a
+curator could check each finding quickly
+([Rogic et al., *Database*, 2026](https://pubmed.ncbi.nlm.nih.gov/42483875/)).
+[AI Gene Review](../case-studies/ai-gene-review.md) does this for existing GO
+annotations, gene by gene.
+
+**Humans review AI work.** At PomBase, an agent curates a whole paper and the
+author and a curator review the result. In a pilot of nine papers it came close
+to curator recall and accuracy, with "no gross errors, only minor disagreements
+about specificity/interpretation", in line with normal agreement between
+curators (PomBase, GO Consortium meeting, autumn 2026). GOFlowLLM drafted
+2,538 candidate microRNA annotations from 6,996 papers, and curators agreed
+with 87% of the terms and 93% of the evidence
+([Green et al., *Bioinformatics*, 2026](https://pubmed.ncbi.nlm.nih.gov/41495476/)).
 
 **Both, for the same item.** Evidence synthesis has its own version of double
-reading: two people screen every paper independently. A 2026 meta-analysis of
-18 studies found LLM screening reached a pooled sensitivity of 0.92 and
-specificity of 0.94 at the abstract stage, with workload reductions of 50% to
-99% ([Xie et al., *J Evid Based Med*, 2026](https://pubmed.ncbi.nlm.nih.gov/42499245/)).
-Cochrane and its partner organisations permit it, with a condition: "AI and
-automation in evidence synthesis should be used with human oversight," and the
-authors remain responsible
+reading: two people screen every paper independently. LLM screening now
+reaches a pooled sensitivity of 0.92 and specificity of 0.94, with workload
+reductions of 50% to 99%
+([Xie et al., *J Evid Based Med*, 2026](https://pubmed.ncbi.nlm.nih.gov/42499245/)),
+and Cochrane permits it on condition of human oversight
 ([joint position statement, 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC12603384/)).
 
 ## Where a tenfold gain would come from
 
-Not from typing faster. Tenfold comes from changing what curators spend time on.
-We first put the "10x curator" forward in October 2025 as an opportunity with a
-"reimagined role", alongside covering more biology in more depth
+Not from typing faster. Tenfold comes from changing what curators spend time
+on. We first put the "10x curator" forward in October 2025 as an opportunity
+with a "reimagined role", alongside covering more biology in more depth
 ([Mungall, Global Core Biodata Resource Forum, 2025](https://zenodo.org/records/17311281)).
 
-**Aim at the right tasks.** Traditional AI for curation targeted what we have
-called *Tasks 1.0*: named entity recognition, adding terms, filling in
-metadata. Agents do these easily. What curators actually need help with are
-*Tasks 2.0*: literature review and evidence synthesis, applying design
-patterns, bulk changes, database-wide quality control, and building
-consensus. These have much higher return, and they are where we still need to
-map the [jagged frontier](software-development.md#the-jagged-frontier) for
-biology ([Mungall, AIBIO-UK, February 2026](https://zenodo.org/records/18720291)).
-One example: asked to assess the impact of obsoleting a term, an agent
-re-reviewed hundreds of affected annotations and produced a detailed report
-([Mungall, AIBIO-UK, February 2026](https://zenodo.org/records/18720291)).
-Another: going back over existing annotations to fix over-annotation "would be
-a monumental task" by hand, and is routine for an agent that reviews them gene
-by gene ([Mungall, GO Consortium meeting, October 2025](https://zenodo.org/records/17498090)).
+**Most curation time goes on work an agent can draft.** Curating a paper means
+reading it, finding the right terms and identifiers, and entering the
+annotations: about 45 per paper for PomBase's community curation. An agent does
+the reading, lookup, and entry; the curator decides. The difference in
+throughput is large. GOFlowLLM produced 2,538 candidate annotations in 58 hours;
+about 1,400 microRNA papers had been curated by hand in the previous decade
+([Green et al., 2026](https://pubmed.ncbi.nlm.nih.gov/41495476/)).
 
-**Drafting becomes nearly free; review becomes the work.** If an agent drafts a
-GO-CAM model or a set of annotations, and checking a good draft takes a tenth of
-the time building it from scratch would, that ratio is the multiplier. The
-GOFlowLLM numbers suggest the ratio can be that large for well-defined tasks.
+**Review is fast when the draft carries its evidence.** In lipid transport
+curation, a GO-CAM of six to eight activities with 40 to 50 evidenced
+statements was built in one session, and a batch of 16 existing GO-CAMs was
+quality-checked in one sitting. The same review produced a new GO term within
+48 hours, a new Rhea reaction, and UniProtKB updates (UniProt, GO Consortium
+meeting, autumn 2026). What made review fast was a report per model with the
+evidence for each statement, so the curator checked rather than searched.
 
-**Review capacity caps the gain.** Software has already shown what happens when
-drafting outruns review. In a company that doubled its developers' output, each
-reviewer's load roughly doubled too
-([He et al., 2026](https://arxiv.org/abs/2607.01904)). In a study of more than
-500,000 developers, a 240% increase in commits became a 30% increase in
-releases ([Demirer et al., NBER, 2026](https://www.nber.org/papers/w35275)).
-A curation team that generates ten times more drafts without changing how it
-reviews will get a backlog, not a tenfold gain.
+**Aim at the high-value tasks.** Traditional AI for curation targeted what we
+have called *Tasks 1.0*: named entity recognition, adding terms, filling in
+metadata. What curators need help with are *Tasks 2.0*: literature review and
+evidence synthesis, applying design patterns, bulk changes, database-wide
+quality control, and building consensus. These have much higher return, and
+they are where we still need to map the
+[jagged frontier](software-development.md#the-jagged-frontier) for biology
+([Mungall, AIBIO-UK, February 2026](https://zenodo.org/records/18720291)). Asked
+to assess the impact of obsoleting a term, an agent re-reviewed hundreds of
+affected annotations and wrote a report. Fixing over-annotation across existing
+annotations "would be a monumental task" by hand
+([Mungall, GO Consortium meeting, October 2025](https://zenodo.org/records/17498090)).
+Comparing GO-CAMs of the same pathway across species exposed
+inconsistencies in how curators record location.
 
-**Quality has to be built in, not checked in.** Deterministic checks make review
-cheaper: a validator that confirms every identifier exists and every quoted
-sentence is in the cited paper means the curator does not have to. See
+**Review capacity caps the gain.** PomBase's community curation is limited not
+by how fast authors submit but by how fast curators can check their sessions,
+and that capacity fell with staff cuts. Ten times more drafts with the same
+review process gives a backlog, not a tenfold gain. The gain comes from making
+each review cheaper: the author checks first, the agent's draft carries its
+evidence, validators catch the mechanical errors, and an AI reviewer flags what
+to look at. Software teams learned the same lesson
+([Writing code got cheap; shipping it did not](software-development.md#writing-code-got-cheap-shipping-it-did-not)).
+
+**Quality has to be built in, not checked in.** A validator that confirms every
+identifier exists and every quoted sentence is in the cited paper means the
+curator does not have to. See
 [Make identifiers hard to fake](../patterns/ground-identifiers.md) and
 [Fast and slow validation](../patterns/fast-and-slow-validation.md).
 
 **Count what ships.** The measure is curated knowledge that passes review and
-reaches users, not drafts produced. METR's warning applies: when work gets
-cheap, people do more of it, and a large speedup on tasks can coexist with a
-small gain in value
-([Cunningham and Whitfill, METR, 2026](https://metr.org/blog/2026-05-08-task-substitution-and-uplift/)).
-
-For calibration, measured gains in other knowledge work range from 14% (customer
-support, with 34% for novices) through 25% faster (consulting, inside the
-frontier) to 44% fewer reads (mammography). Tenfold is a design target, and
-reaching it means redesigning the work, not speeding up the old one.
+reaches users, not drafts produced. A project that measures drafts will find a
+tenfold gain that is not there.
 
 ## The costs of keeping a human in the loop
 
@@ -207,7 +221,7 @@ items most likely to be wrong.
 
 ## Where to look: output most likely to be wrong
 
-From the studies above, from the [GO AI Hub workshop](../case-studies/go-ai-hub.md),
+From the studies above, from the [GO AI Hub workshop](https://arxiv.org/abs/2608.27675),
 and from the repositories in our [case studies](../case-studies/index.md),
 these are the places errors cluster.
 
@@ -290,7 +304,9 @@ agents, and less writing code. For curators, the equivalents are:
 * **Modelling the hard cases** that agents get wrong, and adjudicating
   disagreements.
 * **Managing several sessions.** Two or three at once is a realistic limit for
-  most people. See
+  most people. GO's ontology editors report the same problems developers do:
+  getting lost in the agent's verbiage, and staying focused while switching
+  between sessions. See
   [What we do in practice](software-development.md#what-we-do-in-practice).
 
 New curators need to build judgment somewhere. Junior developers who learned
@@ -314,7 +330,9 @@ only to do.
 | Reports, dashboards, one-off scripts | Write them | Check the output looks right; throw away when done |
 
 **Share what works.** Many curators on the GO AI Hub converged on the same
-problems without knowing it. A regular call where curators show each other
+problems without knowing it: the agent's pull toward generic binding terms,
+the need for a clear rule on which molecular functions are worth annotating,
+papers it could not get the full text of. A regular call where curators show each other
 their workflows, and a habit of turning what works into a shared skill, spreads
 lessons faster than documentation does. See
 [Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter#writing-and-sharing-skills).

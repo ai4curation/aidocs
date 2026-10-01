@@ -284,7 +284,7 @@ discussion, not a standard.
 * Look hardest at what the agent did *not* say: skipped steps, silenced errors,
   fallbacks. The GO AI Hub workshop's worst failure was an agent that quietly
   filled in missing data after a tool failed. See
-  [GO AI Hub](../case-studies/go-ai-hub.md).
+  the [workshop paper](https://arxiv.org/abs/2608.27675).
 * When you see the same mistake twice, fix the instructions or the skill, not
   the output. See [Regulate the loop](../patterns/human-regulating-the-loop.md).
 
