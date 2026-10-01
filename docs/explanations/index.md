@@ -1,13 +1,13 @@
 # Explanations
 
 The rest of this site says *how*. These pages say *why*: what agents are
-changing about the work, what the evidence shows, and where we think it leads.
-They take positions, and say where the evidence is thin.
+changing about the work, what the evidence shows, and what it might mean for
+curation. They say where the evidence is thin.
 
 | Page | Question it answers |
 | --- | --- |
 | [How agents changed software development](software-development.md) | What happened to developers' roles and processes in 2026, the jagged frontier, and which components to craft by hand versus generate |
-| [How agents change curation work](curation-work.md) | Whether curation can be much more efficient *and* better, the radiology precedent, second eyes on everything, and the real costs of human review |
+| [What other fields suggest about curation](curation-work.md) | What radiology and evidence synthesis show about second readers and the costs of human review, and what that might mean for biocuration |
 
 ## A guide for discussion
 
@@ -19,7 +19,7 @@ with the section that addresses each.
 | Is adoption too slow or too fast? Expectations versus reality | [Felt speed and measured speed differ](software-development.md#felt-speed-and-measured-speed-differ); [The jagged frontier](software-development.md#the-jagged-frontier) |
 | The developers' perspective | [How roles change](software-development.md#how-roles-change) |
 | Project management, information overload, multitasking | [Supervision is tiring](software-development.md#supervision-is-tiring-and-it-has-a-limit); [What we do in practice](software-development.md#what-we-do-in-practice) |
-| Are we more efficient? Can we do more with less? | [Where a tenfold gain would come from](curation-work.md#where-a-tenfold-gain-would-come-from) |
+| Are we more efficient? Can we do more with less? | [Could it be much more efficient?](curation-work.md#could-it-be-much-more-efficient) |
 | Is the code and data we produce of higher quality? | [Craft the core, generate the periphery](software-development.md#no-one-size-fits-all-craft-the-core-generate-the-periphery); [Second eyes in curation](curation-work.md#second-eyes-in-curation) |
 | What does a human in the loop cost? Do experts have to be hypervigilant? | [The costs of keeping a human in the loop](curation-work.md#the-costs-of-keeping-a-human-in-the-loop) |
 | How do we spot the output most likely to be wrong? | [Where to look](curation-work.md#where-to-look-output-most-likely-to-be-wrong) |

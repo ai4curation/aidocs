@@ -3,7 +3,8 @@
 This page is about software, because software is where agents arrived first
 and where the evidence is best. What happened to developers in 2026 is a
 reasonable preview of what is happening to curators. The companion page,
-[How agents change curation](curation-work.md), applies it to curation.
+[What other fields suggest about curation](curation-work.md), looks at
+radiology and evidence synthesis and asks what they mean for curation.
 
 We use only evidence published in 2026. Earlier studies measured tools that no
 longer exist in the same form.
