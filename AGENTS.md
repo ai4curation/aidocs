@@ -53,8 +53,6 @@ not introduce warnings.
 - `docs/how-tos/`: task-oriented implementation guides.
 - `docs/tutorials/`: comprehensive walkthroughs for learning.
 - `docs/reference/`: technical reference material and tool descriptions.
-- `docs/explanations/`: why, not how. Positions on how agents change the work,
-  backed by cited evidence. Say where the evidence is thin.
 - `docs/glossary.md`: domain-specific terminology.
 
 ## Target audience
