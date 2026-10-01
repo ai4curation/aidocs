@@ -88,6 +88,10 @@ nav:
      - GitHub integrations: reference/github-integrations.md
      - GitHub Copilot: reference/github-copilot.md
      - Claude Skills: reference/claude-skills.md
+  - Explanations:
+     - Overview: explanations/index.md
+     - Software development: explanations/software-development.md
+     - Curation work: explanations/curation-work.md
   - Evidence: evidence.md
   - FAQ: faq.md
   - Glossary: glossary.md

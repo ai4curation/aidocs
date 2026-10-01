@@ -6,13 +6,6 @@ to write your own skill or even modify existing ones.
 
 But if you are defining a new SOP or adding a new capability, it can be useful to know the procedure for making skills.
 
-!!! tip "On the GO AI Hub?"
-
-    This page covers writing a good skill anywhere. For what is particular to the
-    [GO AI Hub](../case-studies/go-ai-hub.md) (your `~/go-skills` clone, trying a
-    change in your own session, and opening the pull request), read
-    [Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md).
-
 Making skills is deceptively easy, and no matter what you do, it will likely "work" to some degree, because agents are generally
 somewhat smart and resilient. But it's worth taking care to do it right to get the best results.
 
@@ -207,7 +200,7 @@ On the [GO AI Hub](../case-studies/go-ai-hub.md), skills live in
 curator's home holds an editable clone with Claude's skills linked into it. A
 curator can change a skill, try it in their own session, and open a pull
 request; a merge reaches every curator within minutes. See
-[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md).
+[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter#writing-and-sharing-skills).
 
 ### GO ontology
 

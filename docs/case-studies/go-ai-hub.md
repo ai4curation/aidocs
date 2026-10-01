@@ -112,7 +112,7 @@ every curator without anyone reinstalling anything. See
 Edit a skill on a branch and the change is live in your session at once; the
 automatic update leaves a branch alone. Push it and open a pull request, and
 once it is merged everyone has it. See
-[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md).
+[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter#writing-and-sharing-skills).
 
 **Lookups instead of memory.** The second most used tool in the workshop, after
 the shell, was the Ontology Lookup Service. Curators reached for it on their
