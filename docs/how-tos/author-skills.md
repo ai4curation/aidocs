@@ -6,6 +6,13 @@ to write your own skill or even modify existing ones.
 
 But if you are defining a new SOP or adding a new capability, it can be useful to know the procedure for making skills.
 
+!!! tip "On the GO AI Hub?"
+
+    This page covers writing a good skill anywhere. For what is particular to the
+    [GO AI Hub](../case-studies/go-ai-hub.md) (your `~/go-skills` clone, trying a
+    change in your own session, and opening the pull request), read
+    [Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md).
+
 Making skills is deceptively easy, and no matter what you do, it will likely "work" to some degree, because agents are generally
 somewhat smart and resilient. But it's worth taking care to do it right to get the best results.
 
@@ -192,6 +199,15 @@ Patterns worth copying:
 - **Project-prefixed naming for related skills.** Several skills share a `dismech-` prefix ([`dismech-references`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-references), [`dismech-compliance`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-compliance), [`dismech-pr-review`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-pr-review)), which keeps them grouped and unambiguous in the `/skills` list.
 - **Wrapping a tool to enforce a guardrail.** [`dismech-references`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-references) drives a `linkml-reference-validator` tool to check that every quoted evidence snippet matches its PubMed/ClinicalTrials source verbatim, classifies each as SUPPORT / REFUTE / PARTIAL / etc., and deletes fabricated evidence outright. This is the "include wrapper scripts" pattern doing real work — constraining the agent and catching hallucinated citations.
 - **Skills that orchestrate other skills.** [`curate-next`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/curate-next) batches work: it filters GitHub issues assigned to the current user, runs a duplicate preflight check, and dispatches parallel `/curate` agents — with input validation (N between 1–8) baked into the SKILL.md. A skill is a natural home for this kind of workflow logic.
+
+### GO AI Hub
+
+On the [GO AI Hub](../case-studies/go-ai-hub.md), skills live in
+[geneontology/go-skills](https://github.com/geneontology/go-skills), and every
+curator's home holds an editable clone with Claude's skills linked into it. A
+curator can change a skill, try it in their own session, and open a pull
+request; a merge reaches every curator within minutes. See
+[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md).
 
 ### GO ontology
 

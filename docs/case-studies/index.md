@@ -41,6 +41,15 @@ Four more repositories in the CultureBot family follow the same shape:
 [proteintraitsmech](https://github.com/CultureBotAI/proteintraitsmech) (protein
 traits). See [CommunityMech](communitymech.md) for how the family fits together.
 
+## Block C: environments
+
+This is not a knowledge base but the place curators work on them: a hosted
+workspace with the agent, skills and credentials already set up.
+
+| Repository | What it provides | Read this first |
+| --- | --- | --- |
+| [GO AI Hub](go-ai-hub.md) | A JupyterHub workspace with Claude Code for every GO curator | `README.md` |
+
 ## How to read a case study
 
 Each page has the same four sections:

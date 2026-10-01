@@ -66,4 +66,6 @@ These skills are particularly valuable for:
 
 - **Full Documentation**: [https://github.com/ai4curation/curation-skills](https://github.com/ai4curation/curation-skills)
 - **Related Guides**: [Integrate AI into your KB](../how-tos/integrate-ai-into-your-kb.md)
+- **Writing skills**: [Write your own skills](../how-tos/author-skills.md)
+- **GO curators**: [Writing and sharing skills on the GO AI Hub](https://github.com/geneontology/go-jupyter/blob/main/docs/writing-skills.md)
 - **Client Setup**: [Claude Code](harnesses.md)
