@@ -62,6 +62,37 @@ nav:
      - One review checklist: patterns/review-checklists.md
      - Shared control: patterns/shared-control.md
      - Guard the untrusted surface: patterns/guard-untrusted-input.md
+  - Risks:
+     - Overview: risks/index.md
+     - Instruction manipulation:
+        - Prompt injection: risks/prompt-injection.md
+        - Tool poisoning: risks/tool-poisoning.md
+        - Poisoned instructions and memory: risks/poisoned-instructions.md
+        - Data poisoning: risks/data-poisoning.md
+     - Agency and action:
+        - Excessive agency: risks/excessive-agency.md
+        - Destructive actions: risks/destructive-actions.md
+        - Unsafe code execution: risks/unsafe-code-execution.md
+        - Agents in CI: risks/ci-agent-injection.md
+        - Reported success that did not happen: risks/fake-success.md
+     - Secrets and data exposure:
+        - Secret exposure: risks/secret-exposure.md
+        - Data exfiltration: risks/data-exfiltration.md
+        - Unprotected agent endpoints: risks/unprotected-endpoints.md
+     - Supply chain:
+        - Supply chain: risks/supply-chain.md
+     - Output integrity:
+        - Fabricated identifiers and citations: risks/fabricated-content.md
+        - Improper output handling: risks/improper-output-handling.md
+        - Cascading errors: risks/cascading-errors.md
+     - Oversight and accountability:
+        - Review fatigue: risks/review-fatigue.md
+        - Untraceable agent actions: risks/untraceable-actions.md
+        - Licensing and attribution: risks/licensing-and-attribution.md
+     - Resources and sustainability:
+        - Runaway consumption: risks/runaway-consumption.md
+        - Load on open infrastructure: risks/infrastructure-load.md
+        - Energy cost without benefit: risks/energy-cost.md
   - Curator how-tos:
      - Instruct the GitHub agent: how-tos/instruct-github-agent.md
      - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md

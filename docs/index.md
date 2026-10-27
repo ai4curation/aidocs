@@ -33,6 +33,7 @@ setups instead of designing your own from scratch.
 | --- | --- |
 | [Case studies](case-studies/index.md) | One page per repository that runs agents on real curation |
 | [Patterns](patterns/index.md) | Practices that appear in more than one of them |
+| [Risks](risks/index.md) | What can go wrong with agents, and which patterns help |
 | [How-tos](how-tos/instruct-github-agent.md) | Step-by-step tasks |
 | [Reference](reference/harnesses.md) | Harnesses, tools, and GitHub integrations |
 | [Explanations](explanations/index.md) | Why: how agents changed software, and what other fields suggest for curation |

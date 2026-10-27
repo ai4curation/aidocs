@@ -1,0 +1,228 @@
+id: https://ai4curation.io/aidocs/schema/ai_risk
+name: ai_risk
+title: AI agent risk catalog
+description: >-
+  Schema for the frontmatter of the risk pages under docs/risks/. Each risk page
+  is the source of truth; this schema only checks its metadata. The project
+  profile and incident classes are for projects that record their own posture
+  and incidents privately, pointing at the public risk identifiers.
+license: CC0
+prefixes:
+  linkml: https://w3id.org/linkml/
+  airisk: https://ai4curation.io/aidocs/risks/
+default_prefix: airisk
+default_range: string
+imports:
+  - linkml:types
+
+classes:
+  Risk:
+    description: One risk an agent-using project should consider.
+    slots:
+      - id
+      - title
+      - threat_class
+      - agent_specific
+      - taxonomy_gap
+      - contexts
+      - patterns
+      - related
+      - sources
+
+  TaxonomySources:
+    description: >-
+      Identifiers of the matching entries in published risk taxonomies. Use the
+      identifiers exactly as each taxonomy writes them.
+    attributes:
+      owasp_llm_2025:
+        description: OWASP Top 10 for LLM Applications 2025 (LLM01 to LLM10).
+        multivalued: true
+        pattern: "^LLM(0[1-9]|10)$"
+      owasp_llm_2026:
+        description: OWASP Top 10 for LLM Applications 2026 (renumbered).
+        multivalued: true
+        pattern: "^LLM(0[1-9]|10)$"
+      owasp_agentic_top10:
+        description: OWASP Top 10 for Agentic Applications 2026 (ASI01 to ASI10).
+        multivalued: true
+        pattern: "^ASI(0[1-9]|10)$"
+      owasp_agentic_threats:
+        description: OWASP Agentic AI Threats and Mitigations v1.1 (T1 to T17).
+        multivalued: true
+        pattern: "^T([1-9]|1[0-7])$"
+      owasp_mcp_top10:
+        description: OWASP MCP Top 10 (MCP01 to MCP10).
+        multivalued: true
+        pattern: "^MCP(0[1-9]|10)$"
+      cosai_mcp:
+        description: CoSAI Model Context Protocol security threat categories.
+        multivalued: true
+        pattern: "^MCP-T([1-9]|1[0-2])$"
+      mitre_atlas:
+        description: MITRE ATLAS technique or tactic identifiers.
+        multivalued: true
+        pattern: "^AML\\.T(A)?[0-9]{4}(\\.[0-9]{3})?$"
+      nist_ai_600_1:
+        description: NIST AI 600-1 section number, for example "2.2".
+        multivalued: true
+        pattern: "^2\\.([1-9]|1[0-2])$"
+      mit_ai_risk:
+        description: MIT AI Risk Repository domain subdomain, for example "3.1".
+        multivalued: true
+        pattern: "^[1-7]\\.[1-6]$"
+      google_saif:
+        description: Google SAIF risk name.
+        multivalued: true
+
+  ProjectProfile:
+    description: >-
+      One project's posture against the catalog. Kept in the project's own
+      repository, which may be private.
+    attributes:
+      id:
+        identifier: true
+      name:
+        required: true
+      assessments:
+        range: RiskAssessment
+        multivalued: true
+        inlined_as_list: true
+
+  RiskAssessment:
+    attributes:
+      risk:
+        description: A risk identifier from this catalog.
+        required: true
+        pattern: "^airisk:[a-z0-9-]+$"
+      applicability:
+        range: Applicability
+        required: true
+      responses:
+        range: ContextResponse
+        multivalued: true
+        inlined_as_list: true
+      contact:
+        description: Point of contact for this risk.
+      willing_to_demo:
+        range: boolean
+
+  ContextResponse:
+    attributes:
+      context:
+        range: LifecycleContext
+        required: true
+      status:
+        range: MitigationStatus
+        required: true
+      practices:
+        description: What the project does, in a sentence or two.
+      patterns:
+        multivalued: true
+        description: Pattern pages (slugs under docs/patterns/) the project follows.
+
+  IncidentOrFinding:
+    description: >-
+      One incident, near miss or finding. Kept in a private repository; only a
+      sanitized lesson, if any, appears on the public risk page.
+    attributes:
+      id:
+        identifier: true
+      date:
+        range: date
+        required: true
+      project:
+        required: true
+      kind:
+        range: IncidentKind
+        required: true
+      risks:
+        multivalued: true
+        required: true
+        pattern: "^airisk:[a-z0-9-]+$"
+      summary:
+        required: true
+      evidence:
+        multivalued: true
+      status:
+        range: IncidentStatus
+      public_lesson:
+        description: Optional one-line lesson safe to publish.
+
+slots:
+  id:
+    identifier: true
+    pattern: "^airisk:[a-z0-9-]+$"
+  title:
+    required: true
+  threat_class:
+    range: ThreatClass
+    required: true
+  agent_specific:
+    description: True if the risk needs an agent (tools, autonomy) to arise.
+    range: boolean
+    required: true
+  taxonomy_gap:
+    description: True if no published taxonomy covers the risk adequately.
+    range: boolean
+  contexts:
+    description: Settings in which the risk arises.
+    range: LifecycleContext
+    multivalued: true
+    required: true
+  patterns:
+    description: Slugs of pattern pages under docs/patterns/ that mitigate the risk.
+    multivalued: true
+  related:
+    description: Slugs of related risk pages under docs/risks/.
+    multivalued: true
+  sources:
+    range: TaxonomySources
+    inlined: true
+
+enums:
+  ThreatClass:
+    permissible_values:
+      instruction-manipulation:
+        description: Untrusted text or tools steer what the agent does.
+      agency-and-action:
+        description: The agent can do more, or worse, than intended.
+      secrets-and-data-exposure:
+        description: Credentials or data reach people who should not have them.
+      supply-chain:
+        description: Components the agent runs are not what you think they are.
+      output-integrity:
+        description: What the agent writes is wrong but looks right.
+      oversight-and-accountability:
+        description: People cannot see, check or attribute what agents did.
+      resources-and-sustainability:
+        description: Agents cost more than they return, for you or for others.
+  LifecycleContext:
+    permissible_values:
+      development:
+        description: Your own agents, in your own repositories, CI and machines.
+      production-adversary:
+        description: Someone deliberately attacking a service you run.
+      production-unintentional:
+        description: A legitimate user's agent causing harm by accident.
+  Applicability:
+    permissible_values:
+      applies:
+      not-applicable:
+      deferred:
+  MitigationStatus:
+    permissible_values:
+      in-place:
+      planned:
+      gap:
+      not-applicable:
+  IncidentKind:
+    permissible_values:
+      incident:
+      near-miss:
+      finding:
+      false-positive:
+  IncidentStatus:
+    permissible_values:
+      open:
+      mitigated:
+      closed:
