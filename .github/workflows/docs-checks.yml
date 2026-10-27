@@ -24,6 +24,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: uv sync --all-extras
+      - name: Check risk pages
+        run: uv run aidocs risks validate
+      - name: Run tests
+        run: uv run pytest && uv run pytest --doctest-modules src
       - name: Build with MkDocs
         run: uv run mkdocs build --strict
 

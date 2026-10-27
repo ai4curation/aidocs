@@ -4,6 +4,8 @@ Practices that appear in more than one repository. Each page is short, and
 each one names the repositories that use it so you can go and read the real
 version.
 
+For what these patterns protect against, see [Risks](../risks/index.md).
+
 | Pattern | Use it when |
 | --- | --- |
 | [Make identifiers hard to fake](ground-identifiers.md) | Agents write ontology terms, citations, or quotes |

@@ -8,13 +8,21 @@ authors = [
 ]
 requires-python = ">=3.9"
 dependencies = [
+    "linkml>=1.9.6",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.14",
+    "pyyaml>=6.0.2",
+    "typer>=0.23.2",
 ]
 
 [project.scripts]
-aidocs = "aidocs:main"
+aidocs = "aidocs.cli:app"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]

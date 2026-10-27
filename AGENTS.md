@@ -80,6 +80,11 @@ The site has two sections that carry most of its value:
   to copy first, and gaps.
 - `docs/patterns/`: practices that appear in more than one repository. Each page
   names at least two repositories that use it.
+- `docs/risks/`: one page per risk, with YAML frontmatter (threat class,
+  settings, mitigating patterns, matching entries in published taxonomies). The
+  frontmatter is checked against `schema/ai_risk.yaml`. Keep pages generic: name
+  no project with an open gap, and give no account, token or ticket details.
+  Run `just risks-table` after adding or retitling a page.
 
 Do not centralize material that belongs in another repository. Link to the file
 or folder instead. If a page disagrees with the repository it describes, the
@@ -91,7 +96,7 @@ report you took them from, as `docs/evidence.md` does.
 
 ## Checks
 
-Run `uv run mkdocs build --strict` before committing. The `docs-checks.yml`
+Run `just test`, `just risks-validate` and `just docs` before committing. The `docs-checks.yml`
 workflow runs the same build and a link check on every pull request, and the
 link check also runs weekly to catch links that rot in the repositories this
 site points at.
