@@ -69,6 +69,7 @@ nav:
      - Make identifiers hallucination-resistant: how-tos/make-ids-hallucination-resistant.md
      - Build your agentic harness: how-tos/build-agentic-harness.md
      - Write your own skills: how-tos/author-skills.md
+     - Ask for a visual explainer: how-tos/ask-for-visual-explainers.md
   - Administrator how-tos:
      - Set up GitHub actions: how-tos/set-up-github-actions.md
      - Integrate AI into your KB: how-tos/integrate-ai-into-your-kb.md

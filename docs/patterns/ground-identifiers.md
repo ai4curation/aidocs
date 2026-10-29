@@ -67,3 +67,8 @@ readers can see it. DisMech puts this on its front page.
 ## Read more
 
 * [Make identifiers hallucination-resistant](../how-tos/make-ids-hallucination-resistant.md)
+* [Put each check in the right layer](../how-tos/author-skills.md#put-each-check-in-the-right-layer):
+  what a skill should say and what a validator should enforce
+* [Show me the receipts: patterns for verification in agentic knowledge generation](https://chrismungall.substack.com/p/show-me-the-receipts-patterns-for)
+  (Chris Mungall, October 2026): why to ask agents for checkable receipts,
+  and how deterministic checks, classifiers and people divide the checking

@@ -14,6 +14,7 @@ voting interface for feedback.
 | --- | --- |
 | [`.claude/skills/`](https://github.com/ai4curation/ai-gene-review/tree/main/.claude/skills) | Fifteen skills, including `annotation-reviewer`, `core-function-synthesizer`, `gocam-curation`, and `aigr-pr-review` |
 | [`.claude/hooks/`](https://github.com/ai4curation/ai-gene-review/tree/main/.claude/hooks) | Hooks that run around agent actions |
+| [`src/ai_gene_review/validation/`](https://github.com/ai4curation/ai-gene-review/tree/main/src/ai_gene_review/validation) | Validators for review files, from quote checks to annotation policy. See [Put each check in the right layer](../how-tos/author-skills.md#a-worked-example-ai-gene-review) |
 | `genes/` | One directory per gene, holding the review and its cached references |
 | `src/ai_gene_review/schema/` | The LinkML schema |
 
