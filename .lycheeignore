@@ -1,0 +1,3 @@
+# Substack returns 403 to GitHub Actions runners (bot protection), though the
+# links work in a browser. Skip it rather than fail every run.
+substack\.com
