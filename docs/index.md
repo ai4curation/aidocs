@@ -35,6 +35,7 @@ setups instead of designing your own from scratch.
 | [Patterns](patterns/index.md) | Practices that appear in more than one of them |
 | [How-tos](how-tos/instruct-github-agent.md) | Step-by-step tasks |
 | [Reference](reference/harnesses.md) | Harnesses, tools, and GitHub integrations |
+| [Explanations](explanations/index.md) | Why: how agents changed software, and what other fields suggest for curation |
 | [Evidence](evidence.md) | What we measure across these repositories |
 | [Glossary](glossary.md) | Terms used on this site |
 

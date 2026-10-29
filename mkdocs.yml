@@ -51,6 +51,8 @@ nav:
         - HabitatMech: case-studies/habitatmech.md
      - Pipelines:
         - Gemma curation agents: case-studies/gemma-curation.md
+     - Environments:
+        - GO AI Hub: case-studies/go-ai-hub.md
   - Patterns:
      - Overview: patterns/index.md
      - Make identifiers hard to fake: patterns/ground-identifiers.md
@@ -88,6 +90,10 @@ nav:
      - GitHub integrations: reference/github-integrations.md
      - GitHub Copilot: reference/github-copilot.md
      - Claude Skills: reference/claude-skills.md
+  - Explanations:
+     - Overview: explanations/index.md
+     - Software development: explanations/software-development.md
+     - Other fields and curation: explanations/curation-work.md
   - Evidence: evidence.md
   - FAQ: faq.md
   - Glossary: glossary.md

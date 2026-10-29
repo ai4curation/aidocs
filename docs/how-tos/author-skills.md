@@ -193,6 +193,15 @@ Patterns worth copying:
 - **Wrapping a tool to enforce a guardrail.** [`dismech-references`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/dismech-references) drives a `linkml-reference-validator` tool to check that every quoted evidence snippet matches its PubMed/ClinicalTrials source verbatim, classifies each as SUPPORT / REFUTE / PARTIAL / etc., and deletes fabricated evidence outright. This is the "include wrapper scripts" pattern doing real work — constraining the agent and catching hallucinated citations.
 - **Skills that orchestrate other skills.** [`curate-next`](https://github.com/monarch-initiative/dismech/tree/main/.claude/skills/curate-next) batches work: it filters GitHub issues assigned to the current user, runs a duplicate preflight check, and dispatches parallel `/curate` agents — with input validation (N between 1–8) baked into the SKILL.md. A skill is a natural home for this kind of workflow logic.
 
+### GO AI Hub
+
+On the [GO AI Hub](../case-studies/go-ai-hub.md), skills live in
+[geneontology/go-skills](https://github.com/geneontology/go-skills), and every
+curator's home holds an editable clone with Claude's skills linked into it. A
+curator can change a skill, try it in their own session, and open a pull
+request; a merge reaches every curator within minutes. See
+[Writing and sharing skills on the hub](https://github.com/geneontology/go-jupyter#writing-and-sharing-skills).
+
 ### GO ontology
 
 [`geneontology/go-ontology`](https://github.com/geneontology/go-ontology) is the development repo for the Gene Ontology. Its ten skills (`design-pattern`, `taxon-constraint`, `term-obsoletion`, `external-term-lookup`, `mapping`, `reaction`, `chemical-entity`, `research`, `odk-make`, `pr-review`) are a clean illustration of the "[consider not writing a skill](#consider-not-writing-a-skill)" point inverted: the agent already knows ontology basics, so these skills exist to encode **latent, project-specific knowledge that overrides its defaults**.

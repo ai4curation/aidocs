@@ -50,6 +50,14 @@ measured, not for its workflow shape.
 | Repository | What it curates | Read this first |
 | --- | --- | --- |
 | [Gemma curation agents](gemma-curation.md) | Sample and experiment metadata for transcriptomic studies | `docs/curation_rules/` |
+## Block C: environments
+
+This is not a knowledge base but the place curators work on them: a hosted
+workspace with the agent, skills and credentials already set up.
+
+| Repository | What it provides | Read this first |
+| --- | --- | --- |
+| [GO AI Hub](go-ai-hub.md) | A JupyterHub workspace with Claude Code for every GO curator | `README.md` |
 
 ## How to read a case study
 

@@ -85,6 +85,12 @@ A validator that checks whether supporting text in structured records is actuall
 
 A validator that checks [LinkML](https://linkml.io/) schemas and datasets for correct use of external ontologies and controlled terms, improving consistency for agent-generated outputs. See [GitHub](https://github.com/linkml/linkml-term-validator), [Docs](https://linkml.io/linkml-term-validator/), [PyPI](https://pypi.org/project/linkml-term-validator/)
 
+## Jagged Frontier
+
+The uneven boundary of what AI can do well. A model may handle a task that looks hard and fail one that looks easy, and the boundary is not visible to the person using it. The term comes from a study of consultants using AI ([Dell'Acqua et al., 2026](https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf)).
+
+See also: [How agents changed software development](explanations/software-development.md#the-jagged-frontier)
+
 ## Knowledge Base (KB)
 A centralized repository for storing and managing complex information, both structured and unstructured. In the context of AI and curation, KBs often refer to curated collections of domain-specific knowledge that AI systems can utilize and help maintain.
 
@@ -166,6 +172,12 @@ doing the work. A bot is either a GitHub App or a machine account. See
 An application installed into a repository or organization, with its own
 identity and its own permissions. Workflows mint a short-lived token for it per
 run. GitHub shows App bylines with a `[bot]` suffix, as in `ai4c-agent[bot]`.
+
+## Vibe Coding
+
+Building software by describing what you want to an agent and accepting what it produces, with little or no reading of the code. Reasonable for throwaway or peripheral software such as dashboards and one-off reports; not for components other code and data depend on.
+
+See also: [Craft the core, generate the periphery](explanations/software-development.md#no-one-size-fits-all-craft-the-core-generate-the-periphery)
 
 ## Machine account
 
