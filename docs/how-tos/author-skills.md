@@ -330,6 +330,50 @@ agent repairs the record from the error message alone.
 [go-skills](https://github.com/geneontology/go-skills/tree/main/tests) keeps
 tests for the checks script behind `gocam-review`, for example.
 
+### A worked example: AI Gene Review
+
+[AI Gene Review](../case-studies/ai-gene-review.md) reviews existing GO
+annotations, and has more validation tooling than most repositories on this
+site. Most of it lives in
+[`src/ai_gene_review/validation/`](https://github.com/ai4curation/ai-gene-review/tree/main/src/ai_gene_review/validation)
+and [`.claude/hooks/`](https://github.com/ai4curation/ai-gene-review/tree/main/.claude/hooks).
+Things to look at:
+
+* **A gate before the edit lands.** A `PreToolUse` hook works out what a
+  review file would look like after the agent's edit, validates that, and
+  blocks the edit if it fails. Another hook stops the agent editing its
+  sources: cached publications, GOA tables, and deep research files. CI then
+  validates the changed reviews on every pull request, so the hooks are not
+  the only gate.
+* **A skill rule that became a check.** The `annotation-reviewer` skill says
+  how to handle generic protein binding (`GO:0005515`). The
+  [`protein_binding_policy`](https://github.com/ai4curation/ai-gene-review/blob/main/src/ai_gene_review/validation/protein_binding_policy.py)
+  module explains why it exists: nothing enforced the rule, and reviews that
+  broke it were merged. It reports a warning rather than an error, because
+  the policy exempts thousands of older rows and an error would have failed
+  every full run. Choosing a severity is part of rolling a rule out.
+* **Biological policy kept as data.** Contradictory actions on annotations to
+  the same term, such as accepting the IBA row and removing the NAS row, are
+  listed in `schema/action_consistency.yaml`, with a severity for each
+  combination. A review can claim an exception, but only with a reason.
+* **Checks on what counts as evidence.** A quote can be verbatim and still be
+  poor support. One check rejects citing the GOA file under review as support
+  for its own annotations. Another warns when a quoted UniProt statement is an
+  unvetted prediction or a label that restates the annotation. These encode
+  curator policy deterministically; they narrow scientific review but do not
+  replace it.
+* **No silent skips.** The reference validator is configured to skip `file:`
+  and `Reactome` references, so a separate check compares those quotes with
+  the source on disk. Quotes that already failed when it was introduced sit in
+  a baseline that is only allowed to shrink.
+* **Cached references.** Fetched references are committed under
+  `publications/`, and a weekly workflow fills in new ones, so validation in
+  CI runs against the cache rather than depending on PubMed being up.
+
+Each validator has its own tests, for example `tests/test_protein_binding_policy.py`
+and `tests/test_goa_support.py`, and issues carry a severity and a suggested
+fix.
+
 ### What GO has in place today
 
 Tools that exist are not the same as tools wired into a workflow. As of
@@ -354,8 +398,10 @@ October 2026:
   agent-facing validator for PAINT annotations.
 
 linkml-term-validator and linkml-reference-validator are available to any of
-these. [DisMech](../case-studies/dismech.md) runs both as CI gates, which is
-the arrangement to copy.
+these. [DisMech](../case-studies/dismech.md) runs both as CI gates, and AI Gene
+Review, which reviews GO annotations outside GO's own workflows, builds the
+checks above on top of the reference validator. Those are the arrangements to
+copy.
 
 ### Author checklist
 
