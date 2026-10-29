@@ -167,6 +167,219 @@ know how to do something, but because I have latent knowledge that overrides its
 
     - [Writing effective tools for AI agents](https://www.anthropic.com/engineering/writing-tools-for-agents) (Anthropic Engineering, Sep 2025) — though framed around tools rather than skills, its core lesson applies directly: don't build thin wrappers around things the agent can already do; reserve new capabilities for genuine, high-leverage gaps.
 
+## Put each check in the right layer
+
+A skill is instructions. The agent reads them and usually follows them, but
+nothing guarantees it. A model that has seen every GO evidence code in training
+can still write one in the wrong field. Anything that must always hold belongs
+in something that runs and can say no.
+
+Split the work into four layers:
+
+| Layer | What it decides | Examples | Where it lives |
+| --- | --- | --- | --- |
+| **Skill** | Biological judgment, how to read evidence, the order of work | Whether an experiment supports IDA or IMP; when a binding term is too generic; when to stop and ask | `SKILL.md` and its reference files |
+| **Validation** | Constraints a machine can check | Required fields and cardinality; allowed evidence codes; term exists and its label matches; taxon constraints; ontology logic | Schema, rules, scripts, the write API, CI |
+| **Reference verification** | Whether the receipt is real | The identifier resolves; the title matches; the quoted text appears in the source | [linkml-reference-validator](../reference/agentic-tools.md#linkml-reference-validator), run by the skill and again in CI |
+| **Scientific review** | Whether the evidence supports the claim | A curator, a second-pass review agent, or a classifier that triages for a curator | Pull request review, review skills |
+
+The last two are easy to confuse. A PMID that resolves, with a title that
+matches and a quote that appears verbatim in the paper, shows that the agent
+did not invent the citation. It does not show that the paper supports the
+annotation. The quote may describe a paralog, a different species, or an
+overexpression artifact. That call is scientific review, and no validator
+makes it.
+
+Not every biological judgment stays in the skill. Some biological policies can
+be stated precisely enough to check. GO's taxon constraints are an example:
+editors record which taxa a term can apply to, and
+[GORULE:0000013](https://github.com/geneontology/go-site/blob/master/metadata/rules/gorule-0000013.md)
+checks annotations against them in GO's annotation pipeline. Even that rule
+encodes a policy, not just a test: experimental annotations that fail are
+reported, and non-experimental ones are filtered out. Other judgments, such as
+whether an assay was direct, resist this. Leave those in the skill and in
+review.
+
+### An example: evidence codes
+
+Three statements about evidence belong in three different places:
+
+* **"Each annotation has exactly one evidence code, from the allowed set."**
+  This is a validation rule. Put it in the schema as an enum and a
+  cardinality, so a record with `IDAA` or with two codes fails.
+* **"Is this IDA or IMP?"** This is domain guidance. A kinase assay on purified
+  protein is a direct assay; a knockout whose phenotype implicates the gene in
+  a process is a mutant phenotype. Edge cases need judgment, so the skill
+  explains how to decide and review checks the decision.
+* **"`IDA` and `ECO:0000314` are not interchangeable."** GO evidence codes are
+  short codes such as `IDA`. The [Evidence and Conclusion
+  Ontology](https://www.evidenceontology.org/) (ECO) has its own identifiers,
+  and ECO publishes a
+  [mapping](https://github.com/evidenceontology/evidenceontology/blob/master/gaf-eco-mapping.txt)
+  in which `IDA` corresponds by default to `ECO:0000314`. Validation should
+  reject an ECO ID in a field that expects a code, and the reverse. The skill
+  only needs to say which one the format uses.
+
+### Who writes the rules
+
+Curators know which constraints matter and what they mean. Engineers know how
+to make a check fast, testable, and hard to bypass. Design rules together. A
+good working split is that curators state the rule in plain language and supply
+examples that must pass and examples that must fail, and engineers turn them
+into a validator with those examples as tests. Curators then review the error
+messages, because they are the ones who will read them.
+
+Do not treat validators as engineering territory that curators cannot touch.
+GO's rules are a model here: each one is a short page with a prose description,
+a status, and a link to its implementation, so a curator can propose or
+question a rule without reading the code.
+
+### Skills orient; they do not enforce
+
+A skill may tell the agent briefly what the format looks like, where the schema
+is, and which command validates it. That saves wasted attempts. For example:
+
+```markdown
+Records follow `src/schema/kb.yaml`. After every edit, run
+`just validate <file>` and fix what it reports before moving on.
+The most common failure is a term ID whose label does not match.
+```
+
+Do not copy the schema's enums, required fields, or patterns into the skill.
+The schema changes and the copy will not, and an agent following a stale copy
+will argue with the validator. Point to the source instead. See
+[One source of instructions](../patterns/one-source-of-instructions.md).
+
+### Make invalid edits impossible to accept
+
+The gate has to sit where every edit passes, not in one tool or one user
+interface. A rule enforced only by an editor's form does nothing when an agent
+writes through the API, and a rule enforced only in a skill does nothing when a
+curator edits by hand. There are two common places for it:
+
+* **Transactions.** When edits go through a script, an API, or an MCP server,
+  that write path can check the edit and refuse it. The
+  [noctua-py](https://github.com/geneontology/noctua-py) client for GO-CAM
+  supports this: a caller gives each class ID with its expected label, and
+  if the result does not match, the change is rolled back
+  ([docs](https://github.com/geneontology/noctua-py/blob/main/docs/validation.md)).
+  Read its note on `ok` versus `succeeded`: a response can report a working API
+  call even though validation failed.
+* **Files under version control.** An agent can write anything to a file, so
+  the gate is acceptance. Make validation a required status check on the pull
+  request, so nothing merges until it passes. Hooks and pre-commit checks give
+  faster feedback but can be skipped, so treat them as a convenience, not the
+  gate. See [Fast and slow validation](../patterns/fast-and-slow-validation.md).
+
+### Write errors the agent can act on
+
+The agent reads the error and tries again, so the error is part of the
+interface. Compare:
+
+```text
+Validation failed.
+```
+
+```text
+annotations[3].evidence_code: "ECO:0000314" is not an allowed value.
+This field takes a GO evidence code such as IDA or IMP.
+ECO:0000314 corresponds to IDA. See src/schema/kb.yaml (EvidenceCodeEnum).
+```
+
+A useful error names the location, the value, what was expected, and where the
+rule is defined. It does not suggest the agent change the evidence to make the
+error go away.
+
+### Separate "failed" from "could not check"
+
+Reference verification has three outcomes, not two:
+
+* **Verified**: the reference resolved and the quote was found.
+* **Failed**: the reference does not exist, the title does not match, or the
+  quote is not in the text. The agent should fix or remove the evidence.
+* **Not checked**: the service was down, the request was rate-limited, or only
+  the abstract was available. The agent should not change the citation. The
+  record stays unverified until a later run succeeds.
+
+Tools do not always tell a failure from a missed check.
+linkml-reference-validator reports "Could not fetch reference" both for a
+PMID that does not exist and for a network or NCBI outage
+([troubleshooting](https://github.com/linkml/linkml-reference-validator#troubleshooting)).
+Its `skip_prefixes` setting makes skipped references pass with severity INFO;
+that is meant for reference types you have decided not to check, and a skipped
+reference has not been verified. Whatever wrapper or CI step calls the
+validator should retry outages, report them separately, and never count them
+as passes. The GO `gocam-review` skill states the same rule for people: a
+finding that rests on a paper read only in abstract is "not verified (abstract
+only)", not "wrong".
+
+### Test with examples that must fail
+
+For each rule, keep at least one fixture that must fail, and assert both that
+it fails and what the message says. Useful negative cases for annotation data:
+
+* an evidence code that is not in the allowed set, or an ECO ID in the code field;
+* a term ID with the label of a different term, or an obsolete term;
+* a PMID whose title does not match the one recorded;
+* a quote that is not in the paper;
+* two evidence codes where the schema allows one.
+
+Then test the skill and the gate together. Give the agent a task where the
+tempting answer breaks a rule, and check that the gate catches it and that the
+agent repairs the record from the error message alone.
+[go-skills](https://github.com/geneontology/go-skills/tree/main/tests) keeps
+tests for the checks script behind `gocam-review`, for example.
+
+### What GO has in place today
+
+Tools that exist are not the same as tools wired into a workflow. As of
+October 2026:
+
+* **Ontology edits** ([go-ontology](https://github.com/geneontology/go-ontology)):
+  pull requests run the ODK quality-control build in CI. The `research` skill
+  tells the agent to cache references and validate its supporting text with
+  linkml-reference-validator, and the agent workflow installs it. That check
+  is run by the agent, not required on every pull request.
+* **GO-CAM**: noctua-py provides label-checked writes with rollback, and
+  [noctua-mcp](https://github.com/geneontology/noctua-mcp) exposes the Noctua
+  API to agents. The go-skills `gocam-review` skill is read-only and runs a
+  tested checks script; it states that the GO AI Hub has no write access to
+  production Noctua.
+* **Standard annotations**: the go-skills `annotate-function` skill proposes
+  annotations as a table with terms, evidence codes and references. It never
+  creates them, so a curator is the gate. GO's rules check annotations in the
+  release pipeline, after submission.
+* **PAINT**: on the [GO AI Hub](../case-studies/go-ai-hub.md), agents have
+  prepared literature reviews for PAINT curators to read. This site knows of no
+  agent-facing validator for PAINT annotations.
+
+linkml-term-validator and linkml-reference-validator are available to any of
+these. [DisMech](../case-studies/dismech.md) runs both as CI gates, which is
+the arrangement to copy.
+
+### Author checklist
+
+Before you share a skill that produces curated content:
+
+- Each rule that must always hold is enforced by a schema, script, API or
+  required CI check, not only by the skill text.
+- The skill explains the judgment calls and points to the schema rather
+  than copying it.
+- Every rule has a fixture that must fail, and a test checks the message.
+- Error messages name the field, the value, what was expected, and where
+  the rule lives.
+- "Could not check" is reported separately from "failed" and never counts
+  as a pass.
+- Identifiers are recorded with labels, and citations with quotes, so they
+  can be verified.
+- Someone reviews whether the evidence supports the claim, and the skill
+  does not imply that passing validation settles it.
+- Curators helped write the rules and have read the error messages.
+
+!!! info "Further reading"
+
+    - [Show me the receipts: patterns for verification in agentic knowledge generation](https://chrismungall.substack.com/p/show-me-the-receipts-patterns-for) (Chris Mungall, Oct 2026) — the reasoning behind these layers: ask the agent for a checkable receipt, check it deterministically where possible, use fast classifiers to triage whether evidence aligns with the claim, and keep people on the cases that matter.
+
 ## Test your skill
 
 The first thing to do is test if your agent is aware of your skill. You can list skills in most coding tools with the `/skills` command, which should show something like:
