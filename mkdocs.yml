@@ -49,6 +49,8 @@ nav:
         - AI Gene Review: case-studies/ai-gene-review.md
         - CommunityMech: case-studies/communitymech.md
         - HabitatMech: case-studies/habitatmech.md
+     - Pipelines:
+        - Gemma curation agents: case-studies/gemma-curation.md
      - Environments:
         - GO AI Hub: case-studies/go-ai-hub.md
   - Patterns:
